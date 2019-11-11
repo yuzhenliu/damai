@@ -1,7 +1,7 @@
 <template>
   <div class="page" id="home">
     <app-header title="首页" > 
-      <van-icon name="search" />
+      <span name="right-btn"><van-icon name="search" /></span>
     </app-header>
   </div>
 </template>
