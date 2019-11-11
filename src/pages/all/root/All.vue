@@ -2,7 +2,7 @@
   <div class="page-wrap">
     <!-- 首页 -->
     <div class="page" id="all">
-      <app-header title="全部"></app-header>
+      <app-header title="全部" hasBack></app-header>
       <app-scroll class="content">
       </app-scroll>
     </div>
