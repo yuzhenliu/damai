@@ -1,6 +1,9 @@
 <template>
   <div class="page" id="home">
-    <h1>首页</h1>
+    
+    <app-header>
+      <h1>首页</h1>
+    </app-header>
   </div>
 </template>
 
