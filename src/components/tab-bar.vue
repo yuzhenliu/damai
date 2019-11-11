@@ -31,22 +31,27 @@ export default {
   bottom: 0;
   display: flex;
   width: 100%;
-  height: 49px;
+  height: 172px;
   .tab-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex: 1;
     text-align: center;
+    font-size: 29px;
+    color: #333;
+
     .icon {
-      font-size: 24px;
-      margin-bottom: 5px;
+      font-size: 64px;
+      height: 100px;
+      line-height: 100px;
     }
-    .title {
-      font-size: 12px;
+    &.router-link-active .icon{
+      color: #556df2;
+      font-size: 80px;
     }
     &.router-link-active {
-      color: #f5053d;
+      color: #556df2;
     }
   }
 }
