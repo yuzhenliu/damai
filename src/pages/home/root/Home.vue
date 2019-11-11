@@ -1,8 +1,7 @@
 <template>
   <div class="page" id="home">
-    
-    <app-header>
-      <h1>首页</h1>
+    <app-header title="首页" > 
+      <van-icon name="search" />
     </app-header>
   </div>
 </template>
