@@ -9,10 +9,21 @@
 
 <script>
 import TabBar from "./components/tab-bar";
+import commonService from './services/commonService'
 export default {
   components: {
     [TabBar.name]: TabBar
   },
+  methods: {
+    async initData(){
+      // 请求初始化数据
+      const result = await commonService.requestCityList();
+      console.log(result);
+    }
+  },
+  created() {
+    this.initData()
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 const Mock = require("mockjs");
 
-// const citylist = require('./cities.json');
+const citylist = require('./cities.json');
 
 // 配置拦截 ajax 的请求时的行为，支持的配置项目有 timeout。
 Mock.setup({
@@ -8,7 +8,11 @@ Mock.setup({
 });
 
 Mock.mock("/api/citylist", {
-  // citylist
+  code: 0,
+  message: 'ok',
+  data: {
+    citylist
+  }
 });
 
 Mock.mock("/api/brand/by_keyword", {
