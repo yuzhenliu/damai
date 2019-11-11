@@ -33,22 +33,22 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 44px;
+    height: 154px;
     .title{
       width: 70%;
       margin: 0 auto;
-      height: 44px;
-      line-height: 44px;
+      height: 154px;
+      line-height: 154px;
       text-align: center;
-      font-size: 16px;
+      font-size: 56px;
     }
     .back-btn{
       position: absolute;
       left: 0;
       top: 0;
-      padding: 0 10px;
-      font-size: 20px;
-      line-height: 44px;
+      padding: 0 35px;
+      font-size: 70px;
+      line-height: 154px;
     }
   }
 </style>
