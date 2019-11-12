@@ -13,7 +13,7 @@
 
 ### 类名 D Y H 
 
-### 定位 z-index 范围约束: 普通层级 10    中等50   蒙版 90
+### 定位 z-index
 ### 内容: 0 -100
 ### 界面: 100 - 200
 ### 遮罩层: 200 - 300
@@ -51,7 +51,23 @@ Vue.component('组件名', {
 
 ```
 
+master 分支上需要修改的
+## 头部的样式
+```
+ .right-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 35px;
+    font-size: 70px;
+    line-height: 154px;
+  }
+```
 
+### api 
+```
+api
 
+```
 
 

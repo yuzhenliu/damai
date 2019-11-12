@@ -15,17 +15,18 @@ export default {
     [TabBar.name]: TabBar
   },
   methods: {
-    async initData(){
-      // 请求初始化数据
-      const result = await commonService.requestCityList();
-      console.log(result);
-    }
+    // async initData(){
+    //   // 请求初始化数据
+    //   const result = await commonService.requestCityList();
+    //   console.log(result);
+    // }
   },
   created() {
-    this.initData()
+    // this.initData()
   }
 };
 </script>
 
-<style>
+<style lang="scss">
+  $mainColor: #ff1268;
 </style>
