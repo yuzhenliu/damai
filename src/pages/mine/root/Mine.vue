@@ -6,6 +6,7 @@
 
 <script>
 import store from "../../../store";
+import router from "../../../router";
 export default {
   name: "",
   components: {},
@@ -16,13 +17,18 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-  beforeRouteEnter(to, from, next) {
-    console.log(store.state.isLogin);
-    //没有进入登录界面
+  // beforeRouteEnter(to, from, next) {
+  //   console.log(store.state.isLogin);
+  //   if (!store.state.isLogin) {
+  //     router.push("/mine/login");
+  //   } else {
+  //     next();
+  //   }
+  // },
+  created() {
     if (!store.state.isLogin) {
-      next("/login");
+      router.push("/mine/login");
     } else {
-      next();
     }
   }
 };
