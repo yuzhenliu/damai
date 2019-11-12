@@ -1,5 +1,5 @@
 <template>
-  <h1>登陆</h1>
+  <h1>登陆baba</h1>
 </template>
 
 <script>
