@@ -1,14 +1,35 @@
 <template>
   <div class="page" id="home">
-    <app-header title="首页" > 
-      <span name="right-btn"><van-icon name="search" /></span>
-    </app-header>
+    <HomeTop />
+      <app-scroll class="content">
+        <banner />
+        <classifyList />
+        <recommendList />
+      </app-scroll>
   </div>
 </template>
 
 <script>
-export default {};
+import HomeTop from "./children/home-top";
+import banner from "./children/banner";
+import classifyList from "./children/classify-list";
+import recommendList from "./children/recommend-list";
+// import { } from '../../../services/homeService'
+export default {
+  name: "home",
+  components: {
+    HomeTop,
+    banner,
+    classifyList,
+    recommendList
+  }
+};
 </script>
   
 <style>
+#home .content {
+  width: 1000px;
+  transform: translateX(-50%);
+  left: 50%;
+}
 </style>
