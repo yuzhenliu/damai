@@ -19,8 +19,37 @@
 ### 遮罩层: 200 - 300
 
 
+### 组件顺序
+```
+Vue.component('组件名', {
+  name
+  components
+  directives
+  filters
+  template
+  props
+  data
+  computed
+  watch
+  methods
+  beforeRouteEnter
+  beforeRouteUpdate
+  beforeRouteLeave
+  10个生命周期方法
+  errorCaptured
+});
 
+ name: '',
+  components: {},
+  props: {},
+  data() {
+    return {}
+  },
+  computed: {},
+  watch: {},
+  methods: {}
 
+```
 
 
 
