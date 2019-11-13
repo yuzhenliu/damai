@@ -5,6 +5,7 @@ import allRouter from './all-routes'
 import findRoutes from './find-routes'
 import mineRoutes from './mine-routes'
 import walletRoutes from './wallet-routes'
+import loginRoutes from './login-routes'
 
 
 Vue.use(VueRouter)
@@ -18,6 +19,7 @@ const routes = [{
   findRoutes,
   mineRoutes,
   walletRoutes,
+  loginRoutes,
   {
     path: '/404',
     component: () => import('../pages/common/not-find/notFind')
