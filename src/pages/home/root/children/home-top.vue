@@ -1,6 +1,6 @@
 <template>
   <header class="home-top">
-       <div class="home-top-city">
+       <div class="home-top-city" @click="toCityAction">
       <van-icon name="location" class="home-top-city-icon"/>
       <span>全国</span>
     </div>
@@ -13,7 +13,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data(){
+        return{
+
+        }
+    },
+    methods:{
+        toCityAction(){
+            this.$router.push('/home/city');
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
