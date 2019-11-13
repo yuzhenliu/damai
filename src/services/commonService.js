@@ -9,7 +9,8 @@ export const requestCityList = async () => {
   // 判断请求的结果
   if (result.code === 0) {
     // 成功
-    return result.data
+
+    return result.data.citylist.data.areas
 
   } else {
     // 失败了

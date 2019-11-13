@@ -1,12 +1,19 @@
 <template>
-  <div class="page" id="home">
+  <div class="page-warp">
+    <div class="page" id="home">
     <HomeTop />
       <app-scroll class="content">
         <banner />
         <classifyList />
         <recommendList />
-      </app-scroll>
+      </app-scroll> 
   </div>
+  <!-- 子页面 -->
+  <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+  <router-view></router-view>
+  </transition>
+  </div>
+      
 </template>
 
 <script>
@@ -14,7 +21,6 @@ import HomeTop from "./children/home-top";
 import banner from "./children/banner";
 import classifyList from "./children/classify-list";
 import recommendList from "./children/recommend-list";
-// import { } from '../../../services/homeService'
 export default {
   name: "home",
   components: {
