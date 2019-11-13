@@ -99,7 +99,7 @@ Mock.mock("/api/brand/submit_comment", {
   data: null
 });
 
-Mock.mock("/api/brand/submit_comment", {
+Mock.mock("/api/home/banner_list", {
   code: 0,
   message: "ok",
   data: {
@@ -110,12 +110,12 @@ Mock.mock("/api/brand/submit_comment", {
   }
 });
 
-Mock.mock("/api/brand/submit_comment", {
+Mock.mock(RegExp("/api/home/classify" + ".*"), {
   code: 0,
   message: "ok",
   data: {
-    "list|8": [{
-      name: "@ctitle",
+    "list|10": [{
+      name: "@ctitle(3,4)",
       picUrl: "@image(100x100',@color)",
       "classify_id|+1": 0
     }]
@@ -139,7 +139,9 @@ Mock.mock("/api/goods/recommend_list", {
   }
 });
 
-Mock.mock("/api/goods/more_list", {
+
+
+Mock.mock(RegExp("/api/goods/more_list" + ".*"), {
   code: 0,
   message: "ok",
   data: {
@@ -159,11 +161,11 @@ Mock.mock("/api/goods/more_list", {
   }
 });
 
-Mock.mock("/api/goods/goods_list/by_classify_id", {
+Mock.mock(RegExp("/api/goods/goods_list/by_classify_id" + ".*"), {
   code: 0,
   message: "ok",
   data: {
-    list: [{
+    "list|10": [{
       "id|+1": 0,
       title: "@ctitle()",
       time: "@datetime(yyyy.MM.dd HH:mm)",
@@ -179,7 +181,7 @@ Mock.mock("/api/goods/goods_list/by_classify_id", {
 
 
 
-Mock.mock("/api/goods/goods_detail", {
+Mock.mock(RegExp("/api/goods/goods_detail" + ".*"), {
   code: 0,
   message: "ok",
   data: {
@@ -226,20 +228,24 @@ Mock.mock("/api/goods/goods_detail", {
   }
 });
 
-Mock.mock("/api/goods/goods_detail/toSee", {
+
+
+Mock.mock(RegExp("/api/goods/goods_detail/toSee" + ".*"), {
   code: 0,
   message: "ok",
   data: null
 });
 
 
-Mock.mock("/api/goods/order_submit", {
+Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
   code: 0,
   message: "ok",
   data: null
 });
 
-Mock.mock("/api/user/send_code", {
+
+
+Mock.mock(RegExp("/api/user/send_code"+ ".*"), {
   code: 0,
   message: "ok",
   data: {
@@ -248,35 +254,9 @@ Mock.mock("/api/user/send_code", {
 });
 
 
-Mock.mock("/api/user/regiester", {
-  code: 0,
-  message: "ok",
-  data: null
-});
 
 
-Mock.mock("/api/user/login", {
-  code: 0,
-  message: "ok",
-  data: null
-});
-
-
-Mock.mock("/api/user/check_login", {
-  code: 0,
-  message: "ok",
-  data: null
-});
-
-
-Mock.mock("/api/user/logout", {
-  code: 0,
-  message: "ok",
-  data: null
-});
-
-
-Mock.mock("/api/address/add", {
+Mock.mock(RegExp("/api/user/regiester" + ".*"), {
   code: 0,
   message: "ok",
   data: null
@@ -284,35 +264,8 @@ Mock.mock("/api/address/add", {
 
 
 
-Mock.mock("/api/address/modify", {
-  code: 0,
-  message: "ok",
-  data: null
-});
 
-
-Mock.mock("/api/address/find_by_user", {
-  code: 0,
-  message: "ok",
-  data: null
-});
-
-
-Mock.mock("/api/order/add", {
-  code: 0,
-  message: "ok",
-  data: null
-});
-
-
-Mock.mock(" /api/order/delete", {
-  code: 0,
-  message: "ok",
-  data: null
-});
-
-
-Mock.mock("/api/order/modify", {
+Mock.mock(RegExp("/api/user/login" + ".*"), {
   code: 0,
   message: "ok",
   data: null
@@ -320,7 +273,67 @@ Mock.mock("/api/order/modify", {
 
 
 
-Mock.mock("/api/order/find_by_user", {
+Mock.mock(RegExp("/api/user/check_login" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+
+Mock.mock(RegExp("/api/user/logout" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+
+Mock.mock(RegExp("/api/address/add" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+
+Mock.mock(RegExp("/api/address/modify" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+Mock.mock(RegExp("/api/address/find_by_user" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+Mock.mock(RegExp("/api/order/add" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+Mock.mock(RegExp(" /api/order/delete" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+Mock.mock(RegExp(" /api/order/modify" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
+
+
+
+Mock.mock(RegExp("/api/order/find_by_user" + ".*"), {
   code: 0,
   message: "ok",
   data: null

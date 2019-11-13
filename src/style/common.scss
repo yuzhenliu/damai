@@ -96,7 +96,7 @@ html, body, #app{
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 49px;
+  bottom: 172px;
   width: 100%;
   background: #fff;
   &.subpage {
@@ -109,7 +109,7 @@ html, body, #app{
   }
   .content {
     position: absolute;
-    top: 44px;
+    top: 154px;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -119,9 +119,9 @@ html, body, #app{
   position: absolute;
   right: 0;
   top: 0;
-  padding: 0 10px;
-  font-size: 20px;
-  line-height: 44px;
+  padding: 0 35px;
+  font-size: 70px;
+  line-height: 154px;
 }
 
 .text-overflow {
@@ -133,31 +133,31 @@ html, body, #app{
 .form-group{
   @extend .border-bottom;
   background: #fff;
-  line-height: 40px;
-  height: 40px;
+  line-height: 140px;
+  height: 140px;
   display: flex;
   align-items: center;
   .form-contrl{
     padding: 0;
-    padding: 0 10px;
-    line-height: 40px;
-    height: 40px;
+    padding: 0 35px;
+    line-height: 140px;
+    height: 140px;
     outline: none;
     border: none;
     flex: 1;
-    font-size: 14px;
+    font-size: 49px;
     color: #333;
   }
   .form-tip{
-    height: 30px;
-    width: 100px;
+    height: 105px;
+    width: 350px;
     background: #F5053D;
-    margin-right: 10px;
+    margin-right: 35px;
     border: 1px solid #ddd;
     color: #fff;
     text-align: center;
-    line-height: 30px;
-    border-radius: 5px;
+    line-height: 105px;
+    border-radius: 17px;
     &.disabled{
       background: rgba($color: #F5053D, $alpha: 0.7);
     }
@@ -165,19 +165,19 @@ html, body, #app{
 }
 
 .confirm-btn{
-  margin: 20px 10px;
+  margin: 70px 35px;
   background: #F5053D;
-  height: 40px;
+  height: 140px;
   text-align: center;
-  line-height: 40px;
+  line-height: 140px;
   color: #fff;
-  font-size: 16px;
-  border-radius: 5px;
+  font-size: 56px;
+  border-radius: 17px;
 }
 .alert-info{
   text-align: center;
-  margin: 10px;
-  font-size: 14px;
+  margin: 35px;
+  font-size: 49px;
   color: #1989fa;
-  padding: 10px;
+  padding: 35px;
 }
