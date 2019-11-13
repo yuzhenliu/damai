@@ -1,14 +1,12 @@
 <template>
   <div class="page" id="mine">
-    <app-header title="个人主页"></app-header>
     <!-- 页面过度 -->
-    <transition
-      name="custom-classes-transition"
-      enter-active-class="animated tada"
-      leave-active-class="animated bounceOutRight"
-    >
+    <!-- 子页面 -->
+    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
       <router-view></router-view>
     </transition>
+
+    <app-header title="个人主页"></app-header>
 
     <app-scroll class="d-center">
       <div class="d-iphoto">
@@ -56,7 +54,49 @@
         </div>
       </div>
       <!-- 个人信息列表部分 -->
-      <div></div>
+      <div class="d-adress">
+        <div class="indent border-bottom" @click="btnAction">
+          <div class="d-indent">我的订单</div>
+          <div class="indentIcont">
+            <van-icon name="arrow" />
+          </div>
+        </div>
+        <!-- 常用观演人 -->
+        <div class="watch border-bottom" @click="btnAction">
+          <div class="d-watch">常用观演人</div>
+          <div class="indentIcont">
+            <van-icon name="arrow" />
+          </div>
+        </div>
+        <!-- 我的地址 -->
+        <div class="d-address border-bottom" @click="btnAction">
+          <div class="dd-address">收货地址</div>
+          <div class="indentIcont">
+            <van-icon name="arrow" />
+          </div>
+        </div>
+        <!-- 在线客服 -->
+        <div class="d-service border-bottom" @click="btnAction">
+          <div>在线客服</div>
+          <div class="indentIcont">
+            <van-icon name="arrow" />
+          </div>
+        </div>
+        <!-- 电子钱包 -->
+        <div class="d-service border-bottom" @click="btnAction">
+          <div>电子钱包</div>
+          <div class="indentIcont">
+            <van-icon name="arrow" />
+          </div>
+        </div>
+        <!-- 公益三小时 -->
+        <div class="d-service border-bottom" @click="btnAction">
+          <div>公益三小时</div>
+          <div class="indentIcont">
+            <van-icon name="arrow" />
+          </div>
+        </div>
+      </div>
     </app-scroll>
   </div>
 </template>
@@ -74,11 +114,21 @@ export default {
   },
   computed: {},
   watch: {},
-  methods: {}
+  methods: {
+    btnAction() {
+      this.$router.push("/mine/address");
+    },
+    adAction() {
+      this.$router.push("/mine/address");
+    }
+  }
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
+#mine {
+  height: 100%;
+}
 .d-center {
   position: absolute;
   width: 100%;
@@ -158,6 +208,46 @@ export default {
         }
       }
     }
+  }
+  .indent {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    font-size: 60px;
+    line-height: 200px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .watch {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    font-size: 60px;
+    line-height: 200px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .d-address {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    font-size: 60px;
+    line-height: 200px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .d-service {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    font-size: 60px;
+    line-height: 200px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>
