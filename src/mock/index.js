@@ -172,7 +172,7 @@ Mock.mock(RegExp("/api/goods/goods_list/by_classify_id" + ".*"), {
       address: "@city() | @ctitle",
       tags: "@ctitle()",
       "price|10-1000": 0,
-      picUrl: "@image('300x100',@color)",
+      picUrl: "@image('300x300',@color)",
       flag: '@ctitle(3,4)'
     }]
   }

@@ -5,7 +5,8 @@
       <app-header title="全部" hasBack>
         <van-icon name="search" slot="right-btn" class="right-btn" />
       </app-header>
-      <app-scroll class="content">
+      <!-- <div class="content"> -->
+        <app-scroll class="content">
         <van-tabs
           color="#ff1268"
           title-inactive-color="#111"
@@ -21,16 +22,19 @@
             :key="item.classify_id"
             :border="false"
           >
-            <!-- <h1>城市选择</h1> -->
+          <!-- <h1>城市选择</h1> -->
+          <!-- <app-scroll class="scrollContent"> -->
             <app-good-item
               v-for="good in goodsListArr"
               :key="good.id"
               :good="good"
               class="app-good-item"
             />
+            <!-- </app-scroll> -->
           </van-tab>
         </van-tabs>
       </app-scroll>
+      <!-- </div> -->
     </div>
 
     <!-- 子页面 -->
@@ -94,6 +98,7 @@ export default {
 
 <style lang="scss">
 $mainColor: #ff1268;
+
 .van-tabs--line .van-tabs__wrap {
   height: 165px;
   span {
@@ -102,6 +107,14 @@ $mainColor: #ff1268;
     font-size: 46px;
   }
 }
+// .scrollContent {
+//   position: absolute;
+//   // top: 165px;
+//   // bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   overflow: hidden;
+// }
 .app-good-item {
   margin: 39px 0;
 }
