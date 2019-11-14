@@ -32,6 +32,8 @@ export default {
   display: flex;
   width: 100%;
   height: 172px;
+  z-index: 50;
+  background: #fff;
   .tab-item {
     display: flex;
     flex-direction: column;
@@ -46,7 +48,7 @@ export default {
       height: 100px;
       line-height: 100px;
     }
-    &.router-link-active .icon{
+    &.router-link-active .icon {
       color: #556df2;
       font-size: 80px;
     }

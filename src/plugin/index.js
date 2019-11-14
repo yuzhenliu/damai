@@ -11,5 +11,7 @@ export default {
     // 使用自定义的滚动组件
     Vue.component(AppScroll.name, AppScroll);
     Vue.component(AppHeader.name, AppHeader);
+
+    Vue.prototype.$centr = new Vue();
   }
 }
