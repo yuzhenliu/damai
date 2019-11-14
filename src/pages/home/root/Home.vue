@@ -1,19 +1,18 @@
 <template>
   <div class="page-warp">
     <div class="page" id="home">
-    <HomeTop />
+      <HomeTop />
       <app-scroll class="content">
         <banner />
         <classifyList />
         <recommendList />
-      </app-scroll> 
+      </app-scroll>
+    </div>
+    <!-- 子页面 -->
+    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+      <router-view></router-view>
+    </transition>
   </div>
-  <!-- 子页面 -->
-  <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
-  <router-view></router-view>
-  </transition>
-  </div>
-      
 </template>
 
 <script>
