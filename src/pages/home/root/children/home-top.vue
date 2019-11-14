@@ -2,13 +2,13 @@
   <header class="home-top">
        <div class="home-top-city" @click="toCityAction">
       <van-icon name="location" class="home-top-city-icon"/>
-      <span>全国</span>
+      <span>{{selectCity}}</span>
     </div>
-    <div class="home-top-inp">
+    <div class="home-top-inp" @click="toSearchAction">
         <van-icon name="search" class="home-top-inp-icon"/>
         <input placeholder="搜索明星、演出比赛、场馆" />
     </div>
-    <van-icon name="contact" class="home-top-userinfo" />
+    <van-icon name="contact" class="home-top-userinfo" @click="toMineAction"/>
   </header>
 </template>
 
@@ -19,10 +19,28 @@ export default {
 
         }
     },
+    props:{
+        city:{
+            type:String,
+            default:"全国"
+        }
+    },
     methods:{
         toCityAction(){
             this.$router.push('/home/city');
+        },
+        toMineAction(){
+            this.$router.push('/mine');
+        },
+        toSearchAction(){
+            this.$router.push('/home/search');
         }
+    },
+    computed:{
+        selectCity(){
+            return this.city?this.city:"全国";
+        }
+         
     }
 };
 </script>

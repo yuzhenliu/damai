@@ -5,6 +5,10 @@ export default {
         {
             path:'city',
             component:()=>import('../pages/home/city/City')
+        },
+        {
+            path:'search',
+            component:()=>import('../pages/home/search/Search')
         }
     ]
 }

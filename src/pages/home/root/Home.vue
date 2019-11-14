@@ -1,7 +1,7 @@
 <template>
   <div class="page-warp">
     <div class="page" id="home">
-    <HomeTop />
+    <HomeTop :city='city' />
       <app-scroll class="content">
         <banner />
         <classifyList />
@@ -21,6 +21,7 @@ import HomeTop from "./children/home-top";
 import banner from "./children/banner";
 import classifyList from "./children/classify-list";
 import recommendList from "./children/recommend-list";
+import { mapState } from 'vuex'
 export default {
   name: "home",
   components: {
@@ -28,6 +29,11 @@ export default {
     banner,
     classifyList,
     recommendList
+  },
+  computed:{
+    ...mapState({
+       city: state => state.city,
+    })
   }
 };
 </script>

@@ -5,9 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    city:''
   },
-  mutations: {},
+  mutations: {
+    selectCityAction(state,val){
+      state.city=val
+    }
+  },
   actions: {},
   modules: {}
 })
