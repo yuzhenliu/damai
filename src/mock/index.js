@@ -161,6 +161,7 @@ Mock.mock(RegExp("/api/goods/more_list" + ".*"), {
   }
 });
 
+// 根据分类拿数据
 Mock.mock(RegExp("/api/goods/goods_list/by_classify_id" + ".*"), {
   code: 0,
   message: "ok",
@@ -180,19 +181,22 @@ Mock.mock(RegExp("/api/goods/goods_list/by_classify_id" + ".*"), {
 
 
 
-
+// 详情页面的数据
 Mock.mock(RegExp("/api/goods/goods_detail" + ".*"), {
   code: 0,
   message: "ok",
   data: {
-    imgUrl: "@image('300x100',@color)",
+    imgUrl: "@image('300x300',@color)",
     title: '@ctitle()',
+    bgColor: '@color',
     "tag|2-3": ["@ctitle(2,3)"],
     "minPrice|10-500": 0,
     "maxPrice|500-1000": 0,
     serverDesc: '@csentence()',
-    city: '@city() | @ctitle',
+    city: '@city()',
     location: '@csentence',
+    date: "@datetime(yyyy.MM.dd HH:mm)",
+    dateDesc: '@csentence',
     "selectOption|1-2": {
       siteName: [{
         "id|+1": 0,

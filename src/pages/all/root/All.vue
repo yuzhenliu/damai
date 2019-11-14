@@ -27,13 +27,12 @@
         <app-scroll class="scrollContent">
           <good-list :goodsListArr="goodsListArr" />
         </app-scroll>
-
-        <!-- 子页面 -->
-        <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
-          <router-view></router-view>
-        </transition>
       </div>
     </div>
+    <!-- 子页面 -->
+    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -91,6 +90,7 @@ export default {
 
 <style lang="scss">
 $mainColor: #ff1268;
+$padding: 40px;
 
 .van-tabs--line .van-tabs__wrap {
   height: 165px;

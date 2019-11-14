@@ -26,7 +26,8 @@ export default {
       tap: true,
       click: true,
       scrollY:this.scrollY,
-      scrollX:this.scrollX
+      scrollX:this.scrollX,
+      probeType: 3
     });
     // 如果需要滚动，先刷新滚动视图，就可以在可滚动范围内滚动
     this.scroll.on("beforeScrollStart", () => {
