@@ -1,0 +1,243 @@
+<template>
+  <div class="page-wrap">
+    <div class="page subpage" id="detail">
+      <app-header title="详情" hasBack :titleOpacity="titleOpacity">
+        <van-icon name="share" slot="right-btn" class="right-btn" />
+      </app-header>
+      <!-- 头部固定定位的商品详情 -->
+      <div
+        class="goodDetail"
+        :style="{backgroundColor: goodDetail.bgColor, opacity: opacity}"
+        :class="{disable: disable}"
+      >
+        <div class="left">
+          <img :src="goodDetail.imgUrl" />
+        </div>
+        <div class="right">
+          <h3 class="title">{{goodDetail.title}}</h3>
+          <p class="price">
+            <span class="minPrice">￥{{goodDetail.minPrice}}</span>-
+            <span class="maxPrice">￥{{goodDetail.maxPrice}}</span>
+          </p>
+          <p class="tagsWrap" @click="getTagAction">
+            <span class="tag" v-for="(item, index) in goodDetail.tag" :key="index">{{item}}</span>
+            <span class="get">
+              <i>领取</i>
+              <van-icon name="arrow" />
+            </span>
+          </p>
+        </div>
+      </div>
+      <!-- 滚动内容区域 -->
+      <app-scroll class="content" ref="IScroll">
+        <div class="mask"></div>
+        <div class="detailContent">
+          <p class="serverDesc">{{goodDetail.serverDesc}}</p>
+
+          <!-- 票信息 -->
+          <ticket-info class="ticketInfo" :title="goodDetail.date" :info="goodDetail.dateDesc" />
+          <ticket-info class="ticketInfo" :title="goodDetail.city" :info="goodDetail.location">
+            <van-icon name="location" slot="icon"/>
+          </ticket-info>
+
+          <!-- 少了一个跳到歌手页面的组件和数据 -->
+        </div>
+      </app-scroll>
+
+      <!-- 固定在底部的 tabbar -->
+      <tabbar />
+    </div>
+  </div>
+</template>
+
+<script>
+import commonService from "../../../services/commonService";
+import allService from "../../../services/allService";
+import Tabbar from "./children/Tabbar";
+import TicketInfo from "./children/TicketInfo";
+export default {
+  name: "detail",
+  components: {
+    [Tabbar.name]: Tabbar,
+    [TicketInfo.name]: TicketInfo
+  },
+  props: {
+    id: {
+      type: [String, Number]
+    }
+  },
+  data() {
+    return {
+      goodDetail: {},
+      disable: false,
+      scrollY: 0
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    // 请求数据
+    async requestGoodsDetail(id) {
+      const result = await allService.requestGoodsDetail(id);
+      console.log(result);
+      this.goodDetail = result;
+    },
+    // 点击 tag
+    getTagAction() {
+      console.log("点击了 tagWrap");
+    }
+  },
+  computed: {
+    // 根据this.$refs.IScroll.scroll.y 来改变 opacity
+    // Math.abs(-566px / this.$refs.IScroll.scroll.y) == 1  opacity == 0
+    // 0 - -566  ---> 1 - 0  我也不知道为什么变成了 160
+    opacity() {
+      return 1 - Math.abs(this.scrollY / 300);
+    },
+    // 标题的透明度
+    titleOpacity() {
+      return 1 - this.opacity;
+    }
+  },
+  created() {
+    // 初始化数据
+    this.requestGoodsDetail(this.id);
+  },
+  mounted() {
+    // 监听滚动条的滚动事件
+    this.$refs.IScroll.scroll.on("scroll", () => {
+      this.scrollY = this.$refs.IScroll.scroll.y;
+      // 当滚动条滚动的 y 小于 0 时 disable 为 true
+      // 当滚动条滚动的 y 大于 0 时 disable 为 false
+      if (this.$refs.IScroll.scroll.y < 0) {
+        this.disable = true;
+      } else {
+        this.disable = false;
+      }
+    });
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+$mainColor: #ff1268;
+$padding: 40px;
+
+#detail {
+  .goodDetail.disable {
+    z-index: 0;
+  }
+  .goodDetail {
+    position: fixed;
+    top: 154px;
+    left: 0;
+    width: 100%;
+    height: 566px;
+    box-sizing: border-box;
+    padding: 42px;
+    display: flex;
+    z-index: 33;
+
+    .left {
+      width: 360px;
+      height: 482px;
+      border-radius: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+      }
+    }
+
+    .right {
+      margin-left: 32px;
+      flex: 1;
+
+      .title {
+        position: relative;
+        font-size: 44px;
+        color: #fff;
+        font-weight: bold;
+        height: 192px;
+        line-height: 64px;
+        overflow: hidden;
+        text-align: 20px;
+      }
+      .price {
+        margin-top: 90px;
+        padding: 26px 0;
+        border-bottom: 1px solid #9cb886;
+        font-size: 38px;
+        color: #fff;
+        font-weight: bold;
+
+        span {
+          font-size: 38px;
+          color: #fff;
+        }
+      }
+      .tagsWrap {
+        padding: 24px 0;
+        position: relative;
+
+        .tag {
+          font-size: 26px;
+          color: #fff;
+          padding: 12px;
+          background-color: $mainColor;
+          margin: 0 10px;
+          border-radius: 40px;
+        }
+        .get {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+
+          i {
+            font-size: 34px;
+            color: #9cb886;
+          }
+          .van-icon {
+            font-size: 34px;
+            color: #9cb886;
+          }
+        }
+      }
+    }
+  }
+  .content {
+    .mask {
+      width: 100%;
+      height: 566px;
+      background-color: transparent;
+    }
+    .detailContent {
+      width: 100%;
+      height: 2000px;
+      background-color: skyblue;
+      border-radius: 20px;
+
+      .serverDesc {
+        width: 100%;
+        height: 110px;
+        line-height: 110px;
+        box-sizing: border-box;
+        padding: 0 $padding;
+        color: #333;
+        background-color: #f8f8f8;
+      }
+
+      // 票信息
+      .ticketInfo {
+        width: 100%;
+        height: 234px;
+        padding: 36px $padding;
+        box-sizing: border-box;
+        border-bottom: 1px solid #eee;
+      }
+    }
+  }
+}
+</style>

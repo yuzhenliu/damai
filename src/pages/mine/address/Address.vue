@@ -1,17 +1,39 @@
 <template>
   <div class="page" id="address">
-    <app-header title="我的订单" :hasBack="true"></app-header>
+    <app-header title="我的地址" :hasBack="true"></app-header>
     <app-scroll class="dd_center">
-      <h1>票价页面</h1>
+      <h1>{{list}}</h1>
     </app-scroll>
   </div>
 </template>
 
 <script>
-export default {};
+import mineService from "../../../services/mineService";
+export default {
+  name: "",
+  components: {},
+  props: {},
+  data() {
+    return {
+      list: []
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    async initData() {
+      const result = await mineService.requestAddressList();
+      this.list = result;
+      console.log(this.list);
+    }
+  },
+  created() {
+    this.initData();
+  }
+};
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #address {
   z-index: 90;
   background: #fff;

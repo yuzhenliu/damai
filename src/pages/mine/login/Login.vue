@@ -12,6 +12,11 @@
         </span>
         <input type="phone" placeholder="请输入手机号码" class="d-iphone" />
       </div>
+      <!-- 输入密码 -->
+      <div class="d-lojins border-bottom">
+        <span>密码 :</span>
+        <input type="number" placeholder="请输入密码" class="d-iphone" />
+      </div>
       <!-- 输入验证码框 -->
       <div class="authcode border-bottom">
         <div class="form-contrl">

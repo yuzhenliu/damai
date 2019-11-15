@@ -1,5 +1,5 @@
 <template>
-  <div class="goodItem">
+  <div class="goodItem" @click="getDetailInfo(good.id)">
     <div class="left">
       <img :src="good.picUrl" />
       <span class="flag">{{good.flag}}</span>
@@ -33,7 +33,12 @@ export default {
   },
   computed: {},
   watch: {},
-  methods: {}
+  methods: {
+    // 跳转到详情页
+    getDetailInfo(id) {
+      this.$router.push(`/all/detail/${id}`);
+    }
+  }
 };
 </script>
 

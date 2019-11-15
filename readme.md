@@ -39,7 +39,7 @@ Vue.component('组件名', {
   errorCaptured
 });
 
- name: '',
+  name: '',
   components: {},
   props: {},
   data() {
@@ -63,6 +63,9 @@ master 分支上需要修改的
     line-height: 154px;
   }
 ```
+
+$mainColor: #ff1268;
+$padding: 40px;
 
 ### api 
 ```

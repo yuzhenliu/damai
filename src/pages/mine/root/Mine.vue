@@ -13,10 +13,10 @@
         <!-- 头像部分 -->
         <div class="d-myphoto">
           <div class="d-install">
-            <div class="install">
+            <div class="install" @click="installAction">
               <van-icon name="setting-o" />
             </div>
-            <div class="massage">
+            <div class="massage" @click="massageAction">
               <van-icon name="more-o" />
             </div>
           </div>
@@ -53,6 +53,10 @@
           </div>
         </div>
       </div>
+
+      <div class="d_banner">
+        <img src="../../../assets/mine/vipCard.png" alt />
+      </div>
       <!-- 个人信息列表部分 -->
       <div class="d-adress">
         <div class="indent border-bottom" @click="btnAction">
@@ -62,35 +66,35 @@
           </div>
         </div>
         <!-- 常用观演人 -->
-        <div class="watch border-bottom" @click="btnAction">
+        <div class="watch border-bottom" @click="peAction">
           <div class="d-watch">常用观演人</div>
           <div class="indentIcont">
             <van-icon name="arrow" />
           </div>
         </div>
         <!-- 我的地址 -->
-        <div class="d-address border-bottom" @click="btnAction">
+        <div class="d-address border-bottom" @click="adAction">
           <div class="dd-address">收货地址</div>
           <div class="indentIcont">
             <van-icon name="arrow" />
           </div>
         </div>
         <!-- 在线客服 -->
-        <div class="d-service border-bottom" @click="btnAction">
+        <div class="d-service border-bottom" @click="seAction">
           <div>在线客服</div>
           <div class="indentIcont">
             <van-icon name="arrow" />
           </div>
         </div>
         <!-- 电子钱包 -->
-        <div class="d-service border-bottom" @click="btnAction">
+        <div class="d-wallet border-bottom" @click="waAction">
           <div>电子钱包</div>
           <div class="indentIcont">
             <van-icon name="arrow" />
           </div>
         </div>
         <!-- 公益三小时 -->
-        <div class="d-service border-bottom" @click="btnAction">
+        <div class="d-time border-bottom" @click="timeAction">
           <div>公益三小时</div>
           <div class="indentIcont">
             <van-icon name="arrow" />
@@ -115,25 +119,47 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    installAction() {
+      this.$router.push("/mine/install");
+    },
+    massageAction() {
+      this.$router.push("/mine/massage");
+    },
     btnAction() {
-      this.$router.push("/mine/address");
+      this.$router.push("/mine/indent");
     },
     adAction() {
       this.$router.push("/mine/address");
+    },
+    seAction() {
+      this.$router.push("/mine/service");
+    },
+    waAction() {
+      this.$router.push("/mine/purse");
+    },
+    timeAction() {
+      this.$router.push("/mine/times");
+    },
+    peAction() {
+      this.$router.push("/mine/watch");
     }
-  }
+  },
+  created() {}
 };
 </script>
 
 <style lang="scss">
 #mine {
-  height: 100%;
+  position: absolute;
+  bottom: 172px;
+  top: 0;
 }
 .d-center {
   position: absolute;
   width: 100%;
   top: 154px;
   bottom: 0px;
+  overflow: hidden;
   .d-iphoto {
     width: 100%;
     height: 660px;
@@ -209,6 +235,19 @@ export default {
       }
     }
   }
+  .d_banner {
+    margin: 100px 0;
+    padding: 0 50px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 260px;
+    border-radius: 110px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
   .indent {
     box-sizing: border-box;
     width: 100%;
@@ -240,6 +279,26 @@ export default {
     justify-content: space-between;
   }
   .d-service {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    font-size: 60px;
+    line-height: 200px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .d-wallet {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    font-size: 60px;
+    line-height: 200px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .d-time {
     box-sizing: border-box;
     width: 100%;
     height: 200px;
