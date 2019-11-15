@@ -26,7 +26,7 @@ export default {
     },
     toClassifyAction(id){
       console.log(id);
-      this.$router.push(`/all/${id}`);
+      this.$router.push(`/all`);
     }
   },
   created() {

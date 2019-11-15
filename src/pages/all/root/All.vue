@@ -14,7 +14,6 @@
           title-active-color="#ff1268"
           :swipeable="true"
           line-height="0"
-          v-model="activeIndex"
           @click="clickAction"
         >
           <van-tab
@@ -26,7 +25,7 @@
 
         <!-- 内容滚动 -->
         <app-scroll class="scrollContent">
-          <good-list :goodsListArr="goodsListArr" :classify_id="classify_id"/>
+          <good-list :goodsListArr="goodsListArr"/>
         </app-scroll>
       </div>
     </div>
@@ -50,17 +49,11 @@ export default {
     [GoodList.name]: GoodList
   },
   props: {
-    classify: {
-      type: [Number, String],
-      default: 0
-    }
-  },
+},
   data() {
     return {
       classifyArr: [],
-      goodsListArr: [],
-      classify_id: 0,
-      activeIndex: 0
+      goodsListArr: []
     };
   },
   computed: {},
@@ -89,15 +82,12 @@ export default {
     this.requestClassify();
 
     // 进来的时候，首先要判断是否带了参数，如果带了的话，需要根据参数请求，并且跳转到对应的 tag
-    this.activeIndex = this.classify;
-    console.log(this.activeIndex);
-    console.log(this.classify);
+    // this.activeIndex = this.classify;
 
 
     // 初始化商品数据
     this.requestGoodsList(
-      // this.classifyArr[0] && this.classifyArr[0].classify_id
-      this.classify
+      this.classifyArr[0] && this.classifyArr[0].classify_id
     );
   }
 };

@@ -1,6 +1,6 @@
 <template>
 <div class="goodList">
-  <app-good-item v-for="good in goodsListArr" :key="good.id" :good="good" class="app-good-item" :classify_id="classify_id"/>
+  <app-good-item v-for="good in goodsListArr" :key="good.id" :good="good" class="app-good-item"/>
 </div>
 </template>
 
@@ -15,9 +15,6 @@ export default {
     goodsListArr: {
       type: Array,
       default: [],
-    },
-    classify_id: {
-      type: [Number, String]
     }
   },
   data() {

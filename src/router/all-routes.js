@@ -1,5 +1,5 @@
 export default {
-    path: '/all/:classify',
+    path: '/all',
     props: true,
     component: () => import('../pages/all/root/All'),
     children: [{
