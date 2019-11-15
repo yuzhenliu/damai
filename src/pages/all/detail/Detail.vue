@@ -38,7 +38,7 @@
           <!-- 票信息 -->
           <ticket-info class="ticketInfo" :title="goodDetail.date" :info="goodDetail.dateDesc" />
           <ticket-info class="ticketInfo" :title="goodDetail.city" :info="goodDetail.location">
-            <van-icon name="location" slot="icon" @click="getLocation"/>
+            <van-icon name="location" slot="icon" @click="getLocation" />
           </ticket-info>
 
           <!-- 少了一个跳到歌手页面的组件和数据 -->
@@ -58,7 +58,7 @@
       </app-scroll>
 
       <!-- 固定在底部的 tabbar -->
-      <tabbar />
+      <tabbar :id="id" />
     </div>
     <!-- 子页面 -->
     <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
@@ -104,7 +104,7 @@ export default {
           name: "推荐"
         }
       ],
-      active: 0,
+      active: 0
     };
   },
   computed: {},
@@ -113,14 +113,25 @@ export default {
     // 请求数据
     async requestGoodsDetail(id) {
       const result = await allService.requestGoodsDetail(id);
-      console.log(result);
       this.goodDetail = result;
-      // this.$refs.IScroll.refresh();
+      // 设置 vuex 中正在咨询的商品
+      this.$store.commit("all/setServeGood", {
+        address: this.goodDetail.location,
+        city: this.goodDetail.city,
+        flag: this.goodDetail.tag,
+        id: this.id,
+        picUrl: this.goodDetail.imgUrl,
+        price: this.goodDetail.minPrice,
+        tags: this.goodDetail.tag,
+        time: this.goodDetail.date,
+        title: this.goodDetail.title,
+        toSeeNum: 1
+      });
     },
     // 获得地理位置
     getLocation() {
       this.$router.push(`/all/detail/${this.id}/location`);
-    },
+    }
   },
   computed: {
     // 根据this.$refs.IScroll.scroll.y 来改变 opacity

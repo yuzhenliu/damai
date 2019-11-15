@@ -11,6 +11,11 @@ export default {
             {
                 path: 'location',
                 component: () => import('../pages/all/location/Location'),
+            },
+            {
+                path: 'serve',
+                props: true,
+                component: () => import('../pages/all/serve/Serve'),
             }
         ]
         }, 

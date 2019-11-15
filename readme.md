@@ -66,6 +66,7 @@ master 分支上需要修改的
 
 $mainColor: #ff1268;
 $padding: 40px;
+border-radius: 60px 70px 70px 10px;
 
 ### api 
 ```

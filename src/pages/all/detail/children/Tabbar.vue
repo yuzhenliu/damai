@@ -1,11 +1,11 @@
 <template>
   <div class="tabbar">
-    <div class="service">
+    <div class="service" @click="serveAction">
       <van-icon name="chat-o" />
       <span>客服</span>
     </div>
-    <div class="toSee">
-      <van-icon name="like-o" />
+    <div class="toSee" @click="toSeeAction">
+      <van-icon :name="name" color="#ff1268"/>
       <span>想看</span>
     </div>
     <div class="seatPurchase">
@@ -17,14 +17,34 @@
 <script>
 export default {
   name: "tabbar",
-  components: {},
-  props: {},
-  data() {
-    return {};
+  props: {
+    id: {
+      type: [Number, String],
+      default: 0
+    }
   },
-  computed: {},
-  watch: {},
-  methods: {}
+  data() {
+    return {
+      name: 'like-o',
+    };
+  },
+  methods: {
+    // 客服
+    serveAction() {
+      this.$router.push(`/all/detail/${this.id}/serve`);
+    },
+    // 想看
+    toSeeAction() {
+      // 切换图标
+      // 发送请求
+      if(this.name == 'like-o') {
+        this.name = 'like';
+      }else {
+        this.name = 'like-o'
+      }
+      
+    },
+  },
 };
 </script>
 
