@@ -61,7 +61,7 @@ export default {
             padding:35px 45px;
             font-size: 40px;
             box-shadow: 6px 6px 12px 0px #eee;
-            margin-left:30px;
+            margin:0 30px 30px 0;
         }
     }
 }

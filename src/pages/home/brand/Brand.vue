@@ -2,7 +2,7 @@
   <div class="page-wrap">
     <div class="page subpage" id="brand">
       <brand-top></brand-top>
-      <app-scroll class="content">
+      <app-scroll class="content" :bounce='bounce'>
         <div class="brand-head" v-bind:style="{ background: backgroundImg }" @click="toBrandDetailAction">
           <div class="brand-head-info">
             <div class="brand-head-info-left">
@@ -12,7 +12,7 @@
                 <span>{{ performanceNum }}场在售演出 | {{ fansNum }}粉丝</span>
               </div>
             </div>
-            <div class="brand-head-info-right" @click="concernAction">
+            <div class="brand-head-info-right" @click.stop="concernAction">
               关注
             </div>
           </div>
@@ -20,6 +20,7 @@
 
 
         <div class="list">
+            <app-good-item v-for="(good,index) in list" :key="index" :good='good'></app-good-item>
 
         </div>
       </app-scroll>
@@ -38,10 +39,12 @@ import brandTop from "./children/brand-top";
 import brandList from "./children/brand-list";
 import homeService from "../../../services/homeService";
 import { mapMutations } from "vuex";
+import appGoodItem from '../../../components/app-good-item'
 export default {
   components: {
     [brandTop.name]: brandTop,
-    [brandList.name]: brandList
+    [brandList.name]: brandList,
+    [appGoodItem.name]:appGoodItem
   },
   data() {
     return {
@@ -56,7 +59,8 @@ export default {
       brand_id: "",
       maxprice: "",
       minprice: "",
-      detail: ""
+      detail: "",
+      bounce:false
     };
   },
   methods: {
@@ -64,9 +68,12 @@ export default {
       add: "concernListAction"
     }),
     concernAction(ev) {
-     if(ev.target.classList.contains('disable')){
+       //判断是否存在disable class
+     if(ev.target.classList.contains('disable')){ 
        return;  
      }
+
+    //  不存在保存关注数据，并修改按钮样式
       this.add({
         avarImg: this.avarImg,
         name: this.name,
@@ -80,6 +87,7 @@ export default {
       });
       ev.target.classList.add("disable");
       ev.target.innerText='已关注';
+      sessionStorage.setItem('isconcern',true);
     },
     async initData() {
       const {
@@ -91,7 +99,7 @@ export default {
         name,
         brand_id,
         maxprice,
-        minprice,
+        minproce,
         detail
       } = await homeService.searchBrandByKey(this.searchKey);
       this.avarImg = avarImg;
@@ -99,7 +107,7 @@ export default {
       this.fansNum = fansNum;
       this.name = name;
       this.maxprice = maxprice;
-      this.minprice = minprice;
+      this.minprice = minproce;
       this.detail = detail;
       this.performanceNum = performanceNum;
       this.list = list;
@@ -108,15 +116,20 @@ export default {
     toBrandDetailAction(){
         this.$router.push({
             name:'detail'
+            // params: { id: this.brand_id}
         });
     }
   },
   created() {
+    // 获取路由参数  传值请求数据
     this.searchKey = this.$route.params.key;
     this.initData();
   },
   mounted(){
-      console.log(this.backgroundImg);
+      // console.log(this.backgroundImg);
+  },
+  destroyed(){
+      sessionStorage.removeItem('isconcern');
   }
 };
 </script>
@@ -164,8 +177,6 @@ export default {
     &-right {
       position: absolute;
       right: 40px;
-      //   top:50%;
-      //   transform: translateY(-50%);
       width: 175px;
       height: 75px;
       border: 3px solid #dfe1e5;
@@ -184,6 +195,14 @@ export default {
 }
 
 .list{
-    height:30000px;
+    // height:30000px;
+    padding:80px 0 60px;
+}
+</style>
+<style lang="scss">
+#brand{
+    .goodItem{
+        margin-bottom: 77px;
+    }
 }
 </style>

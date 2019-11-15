@@ -5,7 +5,12 @@
       <van-icon name="fire" class="fire" />
     </div>
     <ul class="hot-search-list">
-      <li class="item" v-for="(item, index) in list" :key="index" @click="searchAction(item.name)">
+      <li
+        class="item"
+        v-for="(item, index) in list"
+        :key="index"
+        @click="searchAction(item.name)"
+      >
         <div class="cont">
           <div class="img">
             <div class="top">
@@ -35,8 +40,8 @@ export default {
       const { list } = await homeService.searchHotList();
       this.list = list;
     },
-    searchAction(item){
-      this.$emit('sendSearchKey',item,'');
+    searchAction(item) {
+      this.$emit("sendSearchKey", item, "");
     }
   },
   created() {
@@ -75,9 +80,9 @@ export default {
       span {
         color: #ea4479;
       }
-      .img{
+      .img {
         position: absolute;
-        left:30px;
+        left: 30px;
       }
       img {
         width: 180px;
@@ -109,7 +114,7 @@ export default {
             border-radius: 50%;
             overflow: hidden;
             display: inline-block;
-            left:0;
+            left: 0;
           }
           h3 {
             padding-left: 0;
@@ -128,6 +133,8 @@ export default {
             span {
               color: #fff;
               font-weight: bolder;
+              position: relative;
+              top: -10px;
             }
 
             &:after {

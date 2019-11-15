@@ -40,16 +40,19 @@ Mock.mock(RegExp("/api/brand/by_keyword" + ".*"), {
     backgroundImg: "@image('400x100',@color)",
     detail: '@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
     "maxprice|500-1000": 0,
-    "minproce|10-500": 0,
-    "list|5-10": [{
-      "id|+1": 0,
-      title: "@ctitle()",
-      time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city() | @ctitle",
-      tags: "@ctitle(2-3)",
-      "price|10-1000": 0,
-      picUrl: "@image('300x100',@color)"
-    }]
+    "minproce|10-500":0,
+    "list|5-10": [
+      {
+        "id|+1": 0,
+        title: "@ctitle()",
+        time: "@datetime(yyyy.MM.dd HH:mm)",
+        address: "@city() | @ctitle",
+        tags: "@ctitle(2,3)",
+        flag: "@ctitle(2,3)",
+        "price|10-1000": 0,
+        picUrl: "@image('300x300',@color)"
+      }
+    ]
   }
 });
 
@@ -59,32 +62,40 @@ Mock.mock(RegExp("/api/brand/brand_detail" + ".*"), {
   message: "ok",
   data: {
     brand_id: "@natural(10, 99)",
-    name: "@string",
+    name: "@cname",
     avarImg: "@image('200x200',@color)",
     performanceNum: "@natural(1, 99)",
     fansNum: "@natural(1, 99)",
     backgroundImg: "@image('400x100',@color)",
-    "list|5-10": [{
-      "id|+1": 0,
-      title: "@ctitle()",
-      time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city()" | "@ctitle",
-      tags: "@ctitle()",
-      "price|10-1000": 0,
-      picUrl: "@image('300x100',@color)"
-    }],
-    "commentList|5-10": [{
-      "comment_id|+1": 0,
-      user_id: "@natural(10, 99)",
-      userImg: "@image('100x100',@color)",
-      userName: "@cname()",
-      "scoreNum|1-5": 1,
-      commentCon: "@cparagraph",
-      commentDate: "@datetime(MM.dd)",
-      commentNum: "@natural(1, 99)",
-      supportNum: "@natural(1, 99)",
-      "commentImg|1-6": ["@image('300x300',@color)"]
-    }]
+    detail:'@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
+    "maxprice|500-1000": 0,
+    "minproce|10-500":0,
+    "list|5-10": [
+      {
+        "id|+1": 0,
+        title: "@ctitle()",
+        time: "@datetime(yyyy.MM.dd HH:mm)",
+        address: "@city()" | "@ctitle",
+        tags: "@ctitle(2,3)",
+        flag: "@ctitle(2,3)",
+        "price|10-1000": 0,
+        picUrl: "@image('300x300',@color)"
+      }
+    ],
+    "commentList|5-10": [
+      {
+        "comment_id|+1": 0,
+        user_id: "@natural(10, 99)",
+        userImg: "@image('100x100',@color)",
+        userName: "@cname()",
+        "scoreNum|1-5": 1,
+        commentCon: "@cparagraph",
+        commentDate: "@datetime(MM.dd)",
+        commentNum: "@natural(1, 99)",
+        supportNum: "@natural(1, 99)",
+        "commentImg|1-6": ["@image('300x300',@color)"]
+      }
+    ]
   }
 });
 
