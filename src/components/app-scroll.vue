@@ -18,6 +18,10 @@ export default {
     scrollX:{
       type:Boolean,
       default:false
+    },
+    bounce:{
+      type:Boolean,
+      default:true
     }
   },
   mounted() {
@@ -27,7 +31,8 @@ export default {
       click: true,
       scrollY:this.scrollY,
       scrollX:this.scrollX,
-      probeType: 3
+      probeType: 3,
+      bounce:this.bounce
     });
     // 如果需要滚动，先刷新滚动视图，就可以在可滚动范围内滚动
     this.scroll.on("beforeScrollStart", () => {

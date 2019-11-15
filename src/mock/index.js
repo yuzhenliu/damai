@@ -44,9 +44,10 @@ Mock.mock(RegExp("/api/brand/by_keyword" + ".*"), {
         title: "@ctitle()",
         time: "@datetime(yyyy.MM.dd HH:mm)",
         address: "@city() | @ctitle",
-        tags: "@ctitle(2-3)",
+        tags: "@ctitle(2,3)",
+        flag: "@ctitle(2,3)",
         "price|10-1000": 0,
-        picUrl: "@image('300x100',@color)"
+        picUrl: "@image('300x300',@color)"
       }
     ]
   }
@@ -58,20 +59,24 @@ Mock.mock(RegExp("/api/brand/brand_detail" + ".*"), {
   message: "ok",
   data: {
     brand_id: "@natural(10, 99)",
-    name: "@string",
+    name: "@cname",
     avarImg: "@image('200x200',@color)",
     performanceNum: "@natural(1, 99)",
     fansNum: "@natural(1, 99)",
     backgroundImg: "@image('400x100',@color)",
+    detail:'@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
+    "maxprice|500-1000": 0,
+    "minproce|10-500":0,
     "list|5-10": [
       {
         "id|+1": 0,
         title: "@ctitle()",
         time: "@datetime(yyyy.MM.dd HH:mm)",
         address: "@city()" | "@ctitle",
-        tags: "@ctitle()",
+        tags: "@ctitle(2,3)",
+        flag: "@ctitle(2,3)",
         "price|10-1000": 0,
-        picUrl: "@image('300x100',@color)"
+        picUrl: "@image('300x300',@color)"
       }
     ],
     "commentList|5-10": [
