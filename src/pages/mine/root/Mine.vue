@@ -150,9 +150,7 @@ export default {
 
 <style lang="scss">
 #mine {
-  position: absolute;
-  bottom: 172px;
-  top: 0;
+  height: 100%；;
 }
 .d-center {
   position: absolute;

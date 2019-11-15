@@ -258,25 +258,33 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
   data: null
 });
 
-Mock.mock(RegExp("/api/user/send_code" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: {
-    code: "@natural(100000-999999)"
-  }
-});
 
-Mock.mock(RegExp("/api/user/regiester" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: null
-});
 
-Mock.mock(RegExp("/api/user/login" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: null
-});
+// Mock.mock(RegExp("/api/user/send_code"+ ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: {
+//     code: '@natural(100000-999999)'
+//   }
+// });
+
+
+
+
+// Mock.mock(RegExp("/api/user/regiester" + ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: null
+// });
+
+
+
+
+// Mock.mock(RegExp("/api/user/login" + ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: null
+// });
 
 Mock.mock(RegExp("/api/user/check_login" + ".*"), {
   code: 0,
@@ -290,17 +298,21 @@ Mock.mock(RegExp("/api/user/logout" + ".*"), {
   data: null
 });
 
-Mock.mock(RegExp("/api/address/add" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: null
-});
 
-Mock.mock(RegExp("/api/address/modify" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: null
-});
+
+// Mock.mock(RegExp("/api/address/add" + ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: null
+// });
+
+
+
+// Mock.mock(RegExp("/api/address/modify" + ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: null
+// });
 
 Mock.mock(RegExp("/api/address/find_by_user" + ".*"), {
   code: 0,
