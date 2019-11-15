@@ -6,11 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    city:''
+    city:'',
+    concernList:[]
   },
   mutations: {
     selectCityAction(state,val){
       state.city=val
+    },
+    concernListAction(state,obj){
+      state.concernList.push(obj);
     }
   },
   actions: {},

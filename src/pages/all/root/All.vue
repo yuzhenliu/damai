@@ -25,7 +25,7 @@
 
         <!-- 内容滚动 -->
         <app-scroll class="scrollContent">
-          <good-list :goodsListArr="goodsListArr" />
+          <good-list :goodsListArr="goodsListArr"/>
         </app-scroll>
       </div>
     </div>
@@ -48,7 +48,8 @@ export default {
     [Tab.name]: Tab,
     [GoodList.name]: GoodList
   },
-  props: {},
+  props: {
+},
   data() {
     return {
       classifyArr: [],
@@ -73,14 +74,18 @@ export default {
 
     clickAction(classify_id) {
       // 拿到当前 tag 的 classify_id
-      this.requestGoodsList(classify_id);
+      this.requestGoodsList(classify_id);  
     }
   },
   created() {
     // 初始化分类列表
     this.requestClassify();
 
-    // 初始化商品数据 默认为全部
+    // 进来的时候，首先要判断是否带了参数，如果带了的话，需要根据参数请求，并且跳转到对应的 tag
+    // this.activeIndex = this.classify;
+
+
+    // 初始化商品数据
     this.requestGoodsList(
       this.classifyArr[0] && this.classifyArr[0].classify_id
     );

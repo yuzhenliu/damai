@@ -26,7 +26,7 @@ export default {
     good: {
       type: Object,
       default: {}
-    }
+    },
   },
   data() {
     return {};

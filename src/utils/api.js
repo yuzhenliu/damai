@@ -12,6 +12,16 @@ method： GET
 */
 const CITYLIST = "/api/citylist";
 
+
+/*
+###### 搜索页面热搜列表
+api:/api/search/hotList
+method： GET
+参数：无
+返回值： message   code   data
+*/
+const SEARCH_HOTLIST = "/api/search/hotList";
+
 /*
 ##### 搜索关键字搜索品牌
 api: /api/brand/by_keyword
@@ -222,5 +232,6 @@ export default {
   ADDRESS_LIST_API,
   ADD_ORDER_API,
   ORDER_LIST_API,
-  ORDER_MODIFY
+  ORDER_MODIFY,
+  SEARCH_HOTLIST
 };

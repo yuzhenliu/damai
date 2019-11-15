@@ -126,23 +126,27 @@ export default {
     flex: 1;
     // line-height: 200%;
     color: #289bf6;
+    transform: all 0.5s ease;
   }
   &__index_active {
     font-size: 90px;
     // padding-right: 300px;
-    transform:translateX(-300px); 
+    transform:translateX(-220px); 
+    transform: all 0.5s ease;
   }
   &__index_active_1 {
     // padding-right: 250px;
-    transform:translateX(-200px); 
+    transform:translateX(-170px); 
     font-size: 80px;
     color:#bde0fc;
+    transform: all 0.5s ease;
   }
   &__index_active_2 {
     // padding-right: 80px;
-    transform:translateX(-100px); 
+    transform:translateX(-80px); 
     font-size: 60px;
     color:#79b8ee;
+    transform: all 0.5s ease;
   }
 }
 </style>
