@@ -63,12 +63,6 @@ export default {
 </style>
 
 <style lang="scss">
-.van-toast {
-  min-width: 100px;
-  padding: 40px 60px;
-  font-size: 50px;
-  border-radius: 40px;
-}
 .mask{
   width: 100%;
   height:100%;

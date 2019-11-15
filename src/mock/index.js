@@ -211,13 +211,14 @@ Mock.mock(RegExp("/api/goods/goods_detail" + ".*"), {
     location: "@csentence",
     date: "@datetime(yyyy.MM.dd HH:mm)",
     dateDesc: "@csentence",
-    "selectOption|1-2": {
-      siteName: [{
+    "selectOption|1-3": [{
+      siteName: '@datetime(yyyy.MM.dd HH:mm)',
+      "siteNameOption|2-5": [{
         "id|+1": 0,
         "price|10-1000": 0,
-        "isSale|1-2": true
+        "isSale": '@boolean'
       }]
-    },
+    }],
     detail: '@cparagraph() @cparagraph() @cparagraph()',
     "commentList|5-10": [{
       "comment_id|+1": 0,

@@ -6,15 +6,16 @@
     </div>
     <div class="toSee" @click="toSeeAction">
       <van-icon :name="name" color="#ff1268"/>
-      <span>想看</span>
+      <span>{{toSeeText}}</span>
     </div>
-    <div class="seatPurchase">
+    <div class="seatPurchase" @click="toBuyAction">
       <span>选座购买</span>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "tabbar",
   props: {
@@ -26,7 +27,14 @@ export default {
   data() {
     return {
       name: 'like-o',
+      toSeeText: '想看'
     };
+  },
+  computed: {
+    ...mapState({
+      // 正在浏览的商品
+      goodInfo: state => state.all.serveGood
+    })
   },
   methods: {
     // 客服
@@ -36,14 +44,22 @@ export default {
     // 想看
     toSeeAction() {
       // 切换图标
-      // 发送请求
+      // 保存数据到 vuex 里面
       if(this.name == 'like-o') {
         this.name = 'like';
+        this.toSeeText = '我想看';
+        this.$toast('已添加到想看的演出列表');
       }else {
-        this.name = 'like-o'
+        this.name = 'like-o';
+        this.toSeeText = '想看';
       }
-      
+      this.$store.commit('selectCityAction', this.goodInfo);
     },
+    // 立即购买
+    toBuyAction() {
+      // 通知父组件，显示选择框
+      this.$emit('buying', true);
+    }
   },
 };
 </script>
