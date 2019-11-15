@@ -1,6 +1,25 @@
 import api from '../utils/api'
 import Http from '../utils/Http'
 
+
+
+// 搜索页热搜列表
+export const searchHotList = async () => {
+  // 发送请求
+  const {
+    data: result
+  } = await Http.get(api.SEARCH_HOTLIST);
+  // 判断请求的结果
+  if (result.code === 0) {
+    // 成功
+    return result.data
+  } else {
+    // 失败了
+    throw new Error(result.message);
+  }
+}
+
+
 // 搜索关键字搜索品牌
 export const searchBrandByKey = async (keyword) => {
   // 发送请求
@@ -89,6 +108,7 @@ export const requestMoreList = async () => {
 
 
 export default {
+  searchHotList,
   searchBrandByKey,
   requestBrandDetail,
   requestHomeBannerList,

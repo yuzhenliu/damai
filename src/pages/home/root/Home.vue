@@ -1,5 +1,5 @@
 <template>
-  <div class="page-warp">
+  <div class="page-wrap">
     <div class="page" id="home">
     <HomeTop :city='city' />
       <app-scroll class="content">

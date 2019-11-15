@@ -22,10 +22,9 @@ export default {
     async initData() {
       const { list } = await commonService.requestClassify();
       this.list = list;
-      console.log(list);
+
     },
     toClassifyAction(id){
-      console.log(id);
       this.$router.push(`/all`);
     }
   },
