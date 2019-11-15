@@ -9,7 +9,7 @@
           <p>深圳</p>
         </div>
 
-        <div class="city-list">
+        <div class="city-list" @click="citylistAction">
           <index-cell
             v-for="(item, index) in areas"
             :key="index"
@@ -28,6 +28,7 @@
 import indexBar from "./children/index-bar";
 import indexCell from "./children/index-cell";
 import commonService from "../../../services/commonService";
+import { mapMutations } from 'vuex'
 export default {
   components: {
     indexBar,
@@ -53,11 +54,21 @@ export default {
       this.indexList[0] = "热";
     },
     indexCell(data) {
-      this.scrollArr.push(data);
+      this.scrollArr.push(data);  //获取到每个index-cell的offsetTop高度保存数组
     },
     indexBar(index) {
-      this.index = index;
-      console.log(index);
+      this.index = index;  // 保存index-bar 点击的index
+    },
+    ...mapMutations({
+      selectCityAction:"selectCityAction"
+    }),
+    citylistAction(ev){
+      let target= ev.target;
+      if(target.className=='index-cell-item'){
+        let selectCity=target.getAttribute('data-city');  //事件委托保存选中的city
+        this.selectCityAction(selectCity);
+        this.$router.push('/');
+      }
     }
   },
   created() {
@@ -67,10 +78,10 @@ export default {
 
   },
   watch: {
-    index(newVal) {
+    index(newVal) {   //监听到index发生变化
       let scrollObj = this.$refs.scroll.scroll;
       let y = this.scrollArr[this.index];
-      scrollObj.scrollTo(0,-y);
+      scrollObj.scrollTo(0,-y);  //视图滚动到对应位置
     }
   }
 };
@@ -98,6 +109,7 @@ export default {
     text-align: center;
     margin: 20px;
     border-radius: 10px;
+    font-size: 49px;
   }
 }
 </style>
@@ -116,6 +128,7 @@ export default {
         text-align: center;
         margin: 20px;
         border-radius: 10px;
+        
         padding: 0;
       }
     }

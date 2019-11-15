@@ -26,6 +26,9 @@ export default {
     good: {
       type: Object,
       default: {}
+    },
+    classify_id: {
+      type: [Number, String]
     }
   },
   data() {
@@ -36,7 +39,7 @@ export default {
   methods: {
     // 跳转到详情页
     getDetailInfo(id) {
-      this.$router.push(`/all/detail/${id}`);
+      this.$router.push(`/all/${this.classify_id}/detail/${id}`);
     }
   }
 };

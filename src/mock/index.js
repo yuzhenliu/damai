@@ -29,7 +29,7 @@ Mock.mock("/api/brand/by_keyword", {
       "id|+1": 0,
       title: "@ctitle()",
       time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city() | @ctitle",
+      address: "@city()" | "@ctitle",
       tags: "@ctitle()",
       "price|10-1000": 0,
       picUrl: "@image('300x100',@color)"
@@ -51,7 +51,7 @@ Mock.mock("/api/brand/brand_detail", {
       "id|+1": 0,
       title: "@ctitle()",
       time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city() | @ctitle",
+      address: "@city()" | "@ctitle",
       tags: "@ctitle()",
       "price|10-1000": 0,
       picUrl: "@image('300x100',@color)"
@@ -130,6 +130,7 @@ Mock.mock("/api/goods/recommend_list", {
       title: "@ctitle",
       "id|+1": 0,
       "list|10": [{
+        "id|+1": 0,
         imgUrl: "@image(100x100',@color)",
         name: "@ctitle",
         "price|10-1000": 0,
@@ -153,7 +154,7 @@ Mock.mock(RegExp("/api/goods/more_list" + ".*"), {
       imgUrl: "@image(250x100',@color)",
       name: "@ctitle",
       date: "@datetime(yyyy.MM.dd - MM.dd)",
-      location: "@city() | @ctitle",
+      location: "@city()" | "@ctitle",
       toSeeNum: "@float(60, 100)",
       "price|10-1000": 0,
       tag: "@ctitle(3,4)"
@@ -170,7 +171,7 @@ Mock.mock(RegExp("/api/goods/goods_list/by_classify_id" + ".*"), {
       "id|+1": 0,
       title: "@ctitle()",
       time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city() | @ctitle",
+      address: "@city()" | "@ctitle",
       tags: "@ctitle()",
       "price|10-1000": 0,
       picUrl: "@image('300x300',@color)",
@@ -311,7 +312,9 @@ Mock.mock(RegExp("/api/address/modify" + ".*"), {
 Mock.mock(RegExp("/api/address/find_by_user" + ".*"), {
   code: 0,
   message: "ok",
-  data: null
+  data:{
+    
+  }
 });
 
 
@@ -340,5 +343,17 @@ Mock.mock(RegExp(" /api/order/modify" + ".*"), {
 Mock.mock(RegExp("/api/order/find_by_user" + ".*"), {
   code: 0,
   message: "ok",
-  data: null
+  data: {
+    "list|3-20": [{
+      "id|+1": 0,
+      "status|0-3":0,
+      title: "@ctitle()",
+      time: "@datetime(yyyy.MM.dd HH:mm)",
+      address: "@city()" | "@ctitle",
+      "price|10-1000": 0,
+      picUrl: "@image('300x300',@color)",
+      flag: '@ctitle(3,4)',
+      "num|1-6":0
+    }]
+  }
 });

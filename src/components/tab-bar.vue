@@ -14,7 +14,7 @@ export default {
     return {
       tablist: [
         { id: 1, path: "/home", title: "首页", icon: "home-o" },
-        { id: 2, path: "/all", title: "全部", icon: "description" },
+        { id: 2, path: "/all/all", title: "全部", icon: "description" },
         { id: 3, path: "/find", title: "发现", icon: "search" },
         { id: 4, path: "/wallet", title: "票夹", icon: "coupon-o" },
         { id: 5, path: "/mine", title: "我的", icon: "user-o" }

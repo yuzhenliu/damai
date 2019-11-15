@@ -3,12 +3,12 @@
     <div v-for="item in list" :key="item.id" class="parent-list">
       <h4>{{item.title}}  <a href="#" class="more">more</a></h4>
      
-      <app-scroll class="list" :scrollX="scrollX">
-        <div v-for="(subitem,index) in item.list" :key="index" class="item">
+      <app-scroll class="list" :scrollX="scrollX" :scrollY="scrollY">
+        <div v-for="(subitem,index) in item.list" :key="index" class="item" @click="toDetailAction(subitem.id)">
           <img :src="subitem.imgUrl" :alt="subitem.name" />
           <i class="tag">{{subitem.tag}}</i>
           <h4>{{subitem.name}}</h4>
-          <span class="price">￥{{subitem.price}} <i>起</i> </span>
+          <span class="price">￥{{subitem.price}} <i>起</i></span>
         </div>
       </app-scroll>
     </div>
@@ -17,20 +17,23 @@
 
 <script>
 import homeService from "../../../../services/homeService";
-// import scroll from "../../../../components/scroll"
 export default {
   components: {},
   data() {
     return {
       list: [],
-      scrollX: true
+      scrollX: true,
+      scrollY:false
     };
   },
   methods: {
     async initData() {
       const { list } = await homeService.requestRecommendList();
       this.list = list;
-      console.log(list);
+      // console.log(list);
+    },
+    toDetailAction(id){
+      this.$router.push(`/all/detail/${id}`);
     }
   },
   created() {
