@@ -1,12 +1,19 @@
 // 提供ajax请求
 // 对axios进行二次封装
 import axios from 'axios'
-import {HOST} from './api'
+import {
+  HOST
+} from './api'
+import {
+  log
+} from 'util';
 
-export default class Http{
+export default class Http {
 
-  static async request(method, url, data){
+  static async request(method, url, data) {
     // 发送请求
+    console.log(method, url, data);
+
     const response = await axios.request({
       method,
       url,
@@ -15,30 +22,34 @@ export default class Http{
       data: method === 'POST' ? data : null
     });
     // 判断是否成功
+    console.log(response);
+
+
     return this.isSuccess(response);
   };
 
   // 判断响应结果是否成功
-  static isSuccess(res){
-    if(res.status >= 200 && res.status < 300){
+  static isSuccess(res) {
+    if (res.status >= 200 && res.status < 300) {
       return res;
-    }else{
+    } else {
       this.requestExpection(res);
     }
   };
 
   // 构建失败对象
-  static requestExpection(res){
+  static requestExpection(res) {
     throw new Error(res);
   };
 
   // get便捷方法
-  static get(url, data){
+  static get(url, data) {
+    console.log(url, data);
     return this.request('GET', url, data);
   };
 
   // post便捷方法
-  static post(url, data){
+  static post(url, data) {
     return this.request('POST', url, data);
   }
 

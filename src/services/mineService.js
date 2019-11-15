@@ -1,5 +1,8 @@
 import api from '../utils/api'
-import Http from '../utils/Http'
+import Http from '../utils/Https'
+import {
+  log
+} from 'util';
 
 // 发送验证码
 export const sendCode = async (tel) => {
@@ -9,6 +12,9 @@ export const sendCode = async (tel) => {
   } = await Http.get(api.SEND_CODE_API, {
     tel
   });
+
+  // console.log(result); 
+
   // 判断请求的结果
   if (result.code === 0) {
     // 成功
@@ -40,6 +46,18 @@ export const register = async (tel, password) => {
   }
 }
 
+// export const requestRegiester = async (tel, password) => {
+//   let result = await Http.post(api.REGIESTER_API, {
+//     tel,
+//     password
+//   });
+//   if (result.data.code === 0) {
+//     return null;
+//   } else {
+//     return result.data.message;
+//   }
+// }
+
 // 登录
 export const login = async (tel, type, value) => {
   // 发送请求
@@ -47,7 +65,6 @@ export const login = async (tel, type, value) => {
     data: result
   } = await Http.post(api.LOGIN_API, {
     tel,
-    type,
     value
   });
   // 判断请求的结果

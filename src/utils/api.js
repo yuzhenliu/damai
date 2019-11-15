@@ -1,5 +1,5 @@
 // 管理api
-// export const HOST = 'http://localhost:9000';
+export const HOST = 'http://localhost:8080';
 
 // ### 首页
 
@@ -124,6 +124,8 @@ const GOODS_ORDER_SUBMIT = "/api/goods/order_submit";
 //### 我的
 
 /* 
+
+
 #### 发送验证码
 **method:** get
 **参数:** tel   
@@ -143,6 +145,9 @@ const REGIESTER_API = "/api/user/regiester";
 **参数:** tel   type('code',  'password' )  value 
 */
 const LOGIN_API = "/api/user/login";
+
+
+
 
 /*
 #### 检查登录是否过期
@@ -175,7 +180,7 @@ const ADD_ADDRESS_API = "/api/address/add";
 ####  获得地址列表接口
 methods: get
 参数： 无
-*/  
+*/
 const ADDRESS_LIST_API = "/api/address/find_by_user";
 
 // ## 订单

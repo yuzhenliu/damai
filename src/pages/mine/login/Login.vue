@@ -3,32 +3,45 @@
     <app-header title="登陆" :hasBack="true"></app-header>
     <app-scroll class="d-center">
       <div class="d-logoimgs">
-        <img src="//gw.alicdn.com/tfs/TB1QfeUQAvoK1RjSZFDXXXY3pXa-300-138.png" alt />
+        <img
+          src="//gw.alicdn.com/tfs/TB1QfeUQAvoK1RjSZFDXXXY3pXa-300-138.png"
+          alt
+        />
       </div>
-      <div class="d-lojins border-bottom">
-        <span>
-          +86
-          <van-icon name="arrow-down" />
-        </span>
-        <input type="phone" placeholder="请输入手机号码" class="d-iphone" />
-      </div>
-      <!-- 输入密码 -->
-      <div class="d-lojins border-bottom">
-        <span>密码 :</span>
-        <input type="number" placeholder="请输入密码" class="d-iphone" />
-      </div>
-      <!-- 输入验证码框 -->
-      <div class="authcode border-bottom">
-        <div class="form-contrl">
-          <input type="number" placeholder="请输入验证码" />
+      <div>
+        <div class="d-lojins border-bottom">
+          <span>
+            +86
+            <van-icon name="arrow-down" />
+          </span>
+          <input type="phone" placeholder="请输入手机号码" class="d-iphone" />
         </div>
-        <div class="contrl-right">
-          <span>获取验证码</span>
+        <!-- 输入密码 -->
+        <div class="d-lojins border-bottom">
+          <span>密码 :</span>
+          <input type="password" placeholder="请输入密码" class="d-iphone" />
+        </div>
+        <!-- 输入验证码框 -->
+        <div class="authcode border-bottom">
+          <div class="form-contrl">
+            <input type="text" placeholder="请输入验证码" />
+          </div>
+          <div class="contrl-right">
+            <span>获取验证码</span>
+          </div>
         </div>
       </div>
 
       <div class="debark">
-        <van-button round type="info" class="d-debark">登陆</van-button>
+        <van-button round type="info" class="d-debark" @click="changeAction"
+          >登陆</van-button
+        >
+      </div>
+
+      <div>
+        <p class="alert-info" @click="goRegAction">
+          没有账号，立即注册&gt;&gt;
+        </p>
       </div>
     </app-scroll>
   </div>
@@ -49,11 +62,18 @@ export default {
   },
   computed: {},
   watch: {},
-  methods: {}
+  methods: {
+    goRegAction() {
+      this.$router.push("/regiester");
+    },
+    changeAction() {
+      this.loginMethod = !this.loginMethod;
+    }
+  }
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 #d-login {
   width: 100%;
   height: 100%;
@@ -109,6 +129,17 @@ export default {
   }
 }
 .debark {
+  margin: 0 72px;
+  margin-top: 80px;
+  height: 140px;
+  .d-debark {
+    width: 100%;
+    height: 100%;
+    background: red;
+    font-size: 50px;
+  }
+}
+.debarks {
   margin: 0 72px;
   margin-top: 80px;
   height: 140px;

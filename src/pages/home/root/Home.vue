@@ -9,7 +9,10 @@
       </app-scroll>
     </div>
     <!-- 子页面 -->
-    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+    <transition
+      enter-active-class="slideInRight"
+      leave-active-class="slideOutRight"
+    >
       <router-view></router-view>
     </transition>
   </div>
@@ -30,7 +33,7 @@ export default {
   }
 };
 </script>
-  
+
 <style>
 #home .content {
   width: 1000px;
