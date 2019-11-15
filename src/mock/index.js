@@ -219,16 +219,17 @@ Mock.mock(RegExp("/api/goods/goods_detail" + ".*"), {
       "commentImg|1-6": ["@image('300x300',@color)"]
     }],
     request: '@cparagraph() @cparagraph() @cparagraph()',
-    "list|10-20": [{
+    "list|10": [{
       "id|+1": 0,
       city: "@citys",
-      imgUrl: "@image(250x100',@color)",
-      name: "@ctitle",
-      date: "@datetime(yyyy.MM.dd - MM.dd)",
-      location: "@city() | @ctitle",
-      toSeeNum: "@float(60, 100)",
+      title: "@ctitle()",
+      time: "@datetime(yyyy.MM.dd HH:mm)",
+      address: "@city()" | "@ctitle",
+      tags: "@ctitle()",
       "price|10-1000": 0,
-      tag: "@ctitle(3,4)"
+      picUrl: "@image('300x300',@color)",
+      flag: '@ctitle(3,4)',
+      toSeeNum: "@float(60, 100)",
     }]
   }
 });

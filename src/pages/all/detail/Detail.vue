@@ -19,7 +19,7 @@
             <span class="minPrice">￥{{goodDetail.minPrice}}</span>-
             <span class="maxPrice">￥{{goodDetail.maxPrice}}</span>
           </p>
-          <p class="tagsWrap" @click="getTagAction">
+          <p class="tagsWrap">
             <span class="tag" v-for="(item, index) in goodDetail.tag" :key="index">{{item}}</span>
             <span class="get">
               <i>领取</i>
@@ -29,7 +29,8 @@
         </div>
       </div>
       <!-- 滚动内容区域 -->
-      <app-scroll class="content" ref="IScroll">
+
+      <app-scroll class="scrollContent" ref="IScroll">
         <div class="mask"></div>
         <div class="detailContent">
           <p class="serverDesc">{{goodDetail.serverDesc}}</p>
@@ -37,29 +38,50 @@
           <!-- 票信息 -->
           <ticket-info class="ticketInfo" :title="goodDetail.date" :info="goodDetail.dateDesc" />
           <ticket-info class="ticketInfo" :title="goodDetail.city" :info="goodDetail.location">
-            <van-icon name="location" slot="icon"/>
+            <van-icon name="location" slot="icon" @click="getLocation"/>
           </ticket-info>
 
           <!-- 少了一个跳到歌手页面的组件和数据 -->
+          <!-- 详情 / 须知 / 推荐 -->
+          <van-tabs v-model="active" line-width="70" line-height="4" color="#ff1268" sticky>
+            <van-tab v-for="(item, index) in tablist" :title="item.name" :key="index"></van-tab>
+          </van-tabs>
+          <!-- tabCon -->
+          <div class="tabCon">
+            <div v-if="active === 0" v-html="goodDetail.detail" class="detailCon"></div>
+            <div v-else-if="active === 1" v-html="goodDetail.request" class="requestCon">须知内容</div>
+            <div v-else-if="active === 2">
+              <good-list :goodsListArr="goodDetail.list" />
+            </div>
+          </div>
         </div>
       </app-scroll>
 
       <!-- 固定在底部的 tabbar -->
       <tabbar />
     </div>
+    <!-- 子页面 -->
+    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 import commonService from "../../../services/commonService";
 import allService from "../../../services/allService";
-import Tabbar from "./children/Tabbar";
+import { Tab, Tabs } from "vant";
 import TicketInfo from "./children/TicketInfo";
+import Tabbar from "./children/Tabbar";
+import GoodList from "../../all/root/children/Good-List";
 export default {
   name: "detail",
   components: {
     [Tabbar.name]: Tabbar,
-    [TicketInfo.name]: TicketInfo
+    [TicketInfo.name]: TicketInfo,
+    [Tabs.name]: Tabs,
+    [Tab.name]: Tab,
+    [GoodList.name]: GoodList
   },
   props: {
     id: {
@@ -70,7 +92,19 @@ export default {
     return {
       goodDetail: {},
       disable: false,
-      scrollY: 0
+      scrollY: 0,
+      tablist: [
+        {
+          name: "详情"
+        },
+        {
+          name: "须知(Q&A)"
+        },
+        {
+          name: "推荐"
+        }
+      ],
+      active: 0,
     };
   },
   computed: {},
@@ -81,11 +115,12 @@ export default {
       const result = await allService.requestGoodsDetail(id);
       console.log(result);
       this.goodDetail = result;
+      // this.$refs.IScroll.refresh();
     },
-    // 点击 tag
-    getTagAction() {
-      console.log("点击了 tagWrap");
-    }
+    // 获得地理位置
+    getLocation() {
+      this.$router.push(`/all/detail/${this.id}/location`);
+    },
   },
   computed: {
     // 根据this.$refs.IScroll.scroll.y 来改变 opacity
@@ -99,22 +134,31 @@ export default {
       return 1 - this.opacity;
     }
   },
+  watch: {
+    id() {
+      this.requestGoodsDetail(this.id);
+    }
+  },
   created() {
     // 初始化数据
     this.requestGoodsDetail(this.id);
   },
   mounted() {
     // 监听滚动条的滚动事件
-    this.$refs.IScroll.scroll.on("scroll", () => {
-      this.scrollY = this.$refs.IScroll.scroll.y;
-      // 当滚动条滚动的 y 小于 0 时 disable 为 true
-      // 当滚动条滚动的 y 大于 0 时 disable 为 false
-      if (this.$refs.IScroll.scroll.y < 0) {
-        this.disable = true;
-      } else {
-        this.disable = false;
-      }
-    });
+    if (this.$refs.IScroll) {
+      this.$refs.IScroll.scroll.on("scroll", () => {
+        if (this.$refs.IScroll.scroll) {
+          this.scrollY = this.$refs.IScroll.scroll.y;
+        }
+        // 当滚动条滚动的 y 小于 0 时 disable 为 true
+        // 当滚动条滚动的 y 大于 0 时 disable 为 false
+        if (this.$refs.IScroll.scroll.y < 0) {
+          this.disable = true;
+        } else {
+          this.disable = false;
+        }
+      });
+    }
   }
 };
 </script>
@@ -207,7 +251,13 @@ $padding: 40px;
       }
     }
   }
-  .content {
+  .scrollContent {
+    position: absolute;
+    top: 154px;
+    left: 0;
+    bottom: 172px;
+    width: 100%;
+
     .mask {
       width: 100%;
       height: 566px;
@@ -215,9 +265,8 @@ $padding: 40px;
     }
     .detailContent {
       width: 100%;
-      height: 2000px;
-      background-color: skyblue;
       border-radius: 20px;
+      background-color: #f8f8f8;
 
       .serverDesc {
         width: 100%;
@@ -236,6 +285,24 @@ $padding: 40px;
         padding: 36px $padding;
         box-sizing: border-box;
         border-bottom: 1px solid #eee;
+      }
+
+      .van-tabs {
+        margin-top: 30px;
+      }
+
+      .tabCon {
+        min-height: 1000px;
+        background-color: #fff;
+
+        .detailCon,
+        .requestCon {
+          font-size: 38px;
+          color: #666;
+          box-sizing: border-box;
+          padding: $padding;
+          line-height: 60px;
+        }
       }
     }
   }

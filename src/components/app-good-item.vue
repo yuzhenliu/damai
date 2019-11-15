@@ -1,4 +1,5 @@
 <template>
+<lazy-component>
   <div class="goodItem" @click="getDetailInfo(good.id)">
     <div class="left">
       <img :src="good.picUrl" />
@@ -16,6 +17,7 @@
       </p>
     </div>
   </div>
+  </lazy-component>
 </template>
 
 <script>
