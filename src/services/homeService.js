@@ -37,11 +37,28 @@ export const searchBrandByKey = async (keyword) => {
 }
 
 // 品牌详情
-export const requestBrandDetail = async (brand_id) => {
+export const requestBrandDetail = async (key) => {
   // 发送请求
   const {
     data: result
-  } = await Http.get(api.BRAND_DETAIL, {brand_id});
+  } = await Http.get(api.BRAND_DETAIL, {key});
+  // 判断请求的结果
+  if (result.code === 0) {
+    // 成功
+    return result.data
+
+  } else {
+    // 失败了
+    throw new Error(result.message);
+  }
+}
+
+// 品牌评论详情
+export const requestBrandDetailComment = async (id) => {
+  // 发送请求
+  const {
+    data: result
+  } = await Http.get(api.COMMENT_DETAIL, {id});
   // 判断请求的结果
   if (result.code === 0) {
     // 成功
@@ -111,7 +128,8 @@ export default {
   searchHotList,
   searchBrandByKey,
   requestBrandDetail,
+  requestBrandDetailComment,
   requestHomeBannerList,
   requestRecommendList,
-  requestMoreList  
+  requestMoreList,
 }
