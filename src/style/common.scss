@@ -128,6 +128,14 @@ html, body, #app{
     width: 100%;
   }
 }
+// 自己加的
+.scrollContent {
+  position: absolute;
+  top: 154px;
+  left: 0;
+  bottom: 172px;
+  width: 100%;
+}
 .right-btn{
   position: absolute;
   right: 0;

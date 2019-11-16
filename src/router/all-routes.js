@@ -16,7 +16,17 @@ export default {
                 path: 'serve',
                 props: true,
                 component: () => import('../pages/all/serve/Serve'),
+            },
+            {
+                path: 'seat',
+                props: true,
+                component: () => import('../pages/all/seat/Seat'),
+            },
+            {
+                path: 'submitOrder',
+                component: () => import('../pages/all/submitOrder/SubmitOrder'),
             }
+            
         ]
         }, 
     ]

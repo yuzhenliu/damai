@@ -81,16 +81,26 @@
             >{{site.siteName}}</span>
           </div>
           <h6 class="ticketTitle">票档</h6>
-          <div class="ticketOption">     
+          <div class="ticketOption">
             <span
               class="ticketName"
               v-for="(item, index) in ticketArr"
               :key="item.id"
-              :class="{ticketActive: ticketActiveIndex == index, preSold: item.isSale}"
+              :class="{ticketActive: ticketActiveIndex == index, preSold: !item.isSale}"
               @click="changeTicketAction(index)"
             >{{item.price}}(内场)</span>
           </div>
         </app-scroll>
+        <!-- 底部栏 -->
+        <div class="tabbar">
+          <p v-if="ticketArr[ticketActiveIndex] && ticketArr[ticketActiveIndex].isSale">更多选项请前往选座页</p>
+          <div class="define" @click="defineAction" v-if="ticketArr[ticketActiveIndex] && ticketArr[ticketActiveIndex].isSale">
+            <span>确定</span>
+          </div>
+          <div class="define" @click="submitAction" v-else>
+            <span>提交开售提醒</span>
+          </div>
+        </div>
       </van-popup>
 
       <!-- 固定在底部的 tabbar -->
@@ -146,7 +156,7 @@ export default {
       show: false, // 显示选择框
       ticketArr: [], // 票档
       siteNameActiveIndex: 0, // 选择的场次名称
-      ticketActiveIndex: 0 // 票档的 id
+      ticketActiveIndex: 0 // 票档的 下标
     };
   },
   computed: {},
@@ -181,7 +191,6 @@ export default {
     },
     // 关闭弹出层
     closeAction() {
-      console.log("关闭弹出层");
       this.show = false;
     },
     // 切换时间
@@ -192,6 +201,24 @@ export default {
     // 切换票档
     changeTicketAction(index) {
       this.ticketActiveIndex = index;
+    },
+    // 点击了确定按钮
+    defineAction() {
+      // 点击了确定
+      // 需要拿到用户选择的场次和票档保存到 vuex 里面，进行跳转
+      let siteName = this.goodDetail.selectOption[this.siteNameActiveIndex].siteName;
+      let ticket = this.ticketArr[this.ticketActiveIndex];
+      this.$store.commit('all/setSelectedGood', {
+        siteName,
+        ticket,
+        seat: 0,
+        goodDetail: this.goodDetail
+      });
+      this.$router.push(`/all/detail/${this.id}/seat`);
+    },
+    // 提交开售提醒
+    submitAction() {
+      this.$toast('提交成功,开售前,将通过 APP通知');
     }
   },
   computed: {
@@ -379,6 +406,7 @@ $padding: 40px;
     }
   }
   .van-popup {
+
     .chooseContent {
       width: 100%;
       height: 100%;
@@ -424,7 +452,6 @@ $padding: 40px;
       .ticketOption {
         margin-top: 120px;
 
-
         .ticketName {
           padding: 50px 30px;
           color: #333;
@@ -448,6 +475,44 @@ $padding: 40px;
           left: 0;
           font-size: 30px;
           color: #333;
+        }
+      }
+    }
+    .tabbar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 172px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding: 0 $padding;
+
+      p {
+        flex: 7;
+        font-size: 33px;
+        color: #999;
+      }
+      .define {
+        height: 100%;
+        flex: 4;
+        box-sizing: border-box;
+        padding: 22px 30px;
+
+        span {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: $mainColor;
+          color: #fff;
+          text-align: center;
+          font-size: 38px;
+          line-height: 122px;
+          border-radius: 60px 70px 70px 10px;
         }
       }
     }

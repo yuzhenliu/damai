@@ -1,5 +1,5 @@
 import api from '../utils/api'
-import Http from '../utils/Https'
+import Http from '../utils/Http'
 import {
   log
 } from 'util';
