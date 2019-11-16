@@ -4,6 +4,7 @@
       <app-header title="确认订单" hasBack></app-header>
       <app-scroll class="scrollContent" ref="orderScroll">
         <div class="wrap">
+          <!-- 票价信息 -->
           <div class="ticketInfoWrap" v-if="selectedGood">
             <!-- 地址 /票档等 -->
             <div class="addressInfo border-bottom">
