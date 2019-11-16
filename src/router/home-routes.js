@@ -18,7 +18,14 @@ export default {
                 {
                     path:'detail',
                     name:'detail',
-                    component:()=>import('../pages/home/brand-detail/Detail')
+                    component:()=>import('../pages/home/brand-detail/Detail'),
+                    children:[
+                        {
+                            path:'commentDetail/:id',
+                            name:'commentDetail',
+                            component:()=>import('../pages/home/brand-detail-comment/Comment')
+                        }
+                    ]
                 }
             ]
         }

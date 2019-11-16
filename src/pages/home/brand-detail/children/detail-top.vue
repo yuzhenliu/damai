@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-top">
+  <div class="detail-top" :class="classN">
     <van-icon name="arrow-left" @click="backAction" class="back" />
     <h5 @click="backAction" >{{ name }}</h5>
     <p class="btngrounp">
@@ -22,7 +22,8 @@ export default {
   },
   props:{
     name:'',
-    topIsconcern:''
+    topIsconcern:'',
+    classN:'',
   },
   methods: {
     backAction() {
@@ -30,26 +31,40 @@ export default {
     },
     topConcernAction(){
       this.$emit('sendconcernAction');
-      sessionStorage.getItem("isconcern",'true');
       this.isconcern='true';
     }
   },
   created() {
     this.key = this.$route.params.key;
-    this.isconcern=this.topIsconcern;
+  },
+  watch:{
+    topIsconcern(newVal){
+      this.isconcern=newVal;
+    }
   }
+
 };
 </script>
 
 <style lang="scss" scoped>
 .detail-top {
   width: 100%;
-  padding: 40px;
+  padding: 30px 40px;
   display: flex;
   box-sizing: border-box;
   position:absolute;
   top:0;
   left:0;
+  opacity: 0;
+  z-index: 2;
+  background: #fff;
+  transition: all 0.2s ease;
+  &.show{
+    opacity: 1;
+  }
+  &-hide{
+    opacity: 0;
+  }
   .back {
     font-size: 55px;
     color: #333;

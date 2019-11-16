@@ -12,7 +12,7 @@ export default class Http {
 
   static async request(method, url, data) {
     // 发送请求
-    console.log(method, url, data);
+    // console.log(method, url, data);
 
     const response = await axios.request({
       method,
@@ -22,7 +22,7 @@ export default class Http {
       data: method === 'POST' ? data : null
     });
     // 判断是否成功
-    console.log(response);
+    // console.log(response);
 
 
     return this.isSuccess(response);
@@ -44,7 +44,7 @@ export default class Http {
 
   // get便捷方法
   static get(url, data) {
-    console.log(url, data);
+    // console.log(url, data);
     return this.request('GET', url, data);
   };
 

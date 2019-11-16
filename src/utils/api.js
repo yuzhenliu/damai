@@ -60,8 +60,8 @@ api: /api/brand/submit_comment
 methods: POST
 参数： comment_id, user_id,
 */
-const SUBMIT_COMMENT = "/api/brand/comment_detail";
-
+// const SUBMIT_COMMENT = "/api/brand/comment_detail";
+const SUBMMIT_COMMENT = "/api/brand/summit_comment";
 /*
 ##### 首页轮播图
 api: /api/home/banner_list
@@ -219,7 +219,7 @@ export default {
   BRAND_DETAIL,
   COMMENT_SUPPORT,
   COMMENT_DETAIL,
-  SUBMIT_COMMENT,
+  SUBMMIT_COMMENT,
   HOME_BANNER_LIST,
   HOME_CLASSIFY,
   GOODS_RECOMMEND_LIST,
