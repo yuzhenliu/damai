@@ -273,19 +273,19 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
 
 
 
-Mock.mock(RegExp("/api/user/check_login" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: null
-});
+// Mock.mock(RegExp("/api/user/check_login" + ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: null
+// });
 
 
 
-Mock.mock(RegExp("/api/user/logout" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: null
-});
+// Mock.mock(RegExp("/api/user/logout" + ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: null
+// });
 
 
 

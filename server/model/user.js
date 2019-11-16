@@ -26,9 +26,9 @@ module.exports.add = async (tel, password) => {
   }
 }
 
-// // 查询
-// module.exports.findByTel = async (tel) => {
-//   return await User.findOne({
-//     tel
-//   });
-// }
+// 查询
+module.exports.findByTel = async (tel) => {
+  return await User.findOne({
+    tel
+  });
+}
