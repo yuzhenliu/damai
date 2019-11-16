@@ -406,12 +406,15 @@ $padding: 40px;
     }
   }
   .van-popup {
+    padding-top: 60px;
+    padding-bottom: 200px;
 
     .chooseContent {
       width: 100%;
       height: 100%;
       box-sizing: border-box;
       padding: $padding;
+      overflow: auto;
 
       // 场次名称
       .siteTitle {

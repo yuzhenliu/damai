@@ -37,7 +37,7 @@
             <div v-if="observerInfo" class="observerInfo">
               <span class="name">{{observerInfo.name}}</span>
               <span class="idCard">身份证{{observerInfo.idCard}}</span>
-              <input type="checkbox" class="check" ref="check"/>
+              <input type="checkbox" class="check" ref="check" />
             </div>
 
             <div v-if="selectAddress" class="postAddr">
@@ -62,10 +62,10 @@
             <div class="contactWrap">
               <p class="tit">联系人</p>
               <p class="name">
-                <input type="text" placeholder="请填写联系人姓名" ref="name"/>
+                <input type="text" placeholder="请填写联系人姓名" ref="name" />
               </p>
               <p class="tel">
-                <input type="text" placeholder="请填写联系人电话" ref="tel"/>
+                <input type="text" placeholder="请填写联系人电话" ref="tel" />
               </p>
             </div>
 
@@ -98,7 +98,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { Cell, CellGroup } from "vant";
+import { Cell, CellGroup, Dialog } from "vant";
 export default {
   name: "submit-order",
   components: {
@@ -132,31 +132,31 @@ export default {
     submitAction() {
       // 实际观演人 / 配送方式(电子票/ 地址) / 联系人 / 支付方式
       if (!this.selectedGood) {
-        this.$toast('您还没有选中商品');
+        this.$toast("您还没有选中商品");
         return;
       }
       if (!this.observerInfo) {
-        this.$toast('实际观演人不能为空');
+        this.$toast("实际观演人不能为空");
         return;
       }
-      if(!this.$refs.check.checked) {
-        this.$toast('请选择观演人信息');
+      if (!this.$refs.check.checked) {
+        this.$toast("请选择观演人信息");
         return;
       }
-      if(!this.selectAddress) {
-        this.$toast('配送地址不能为空');
+      if (!this.selectAddress) {
+        this.$toast("配送地址不能为空");
         return;
       }
-      if(!this.$refs.name.value) {
-        console.log('1');
-        this.$toast('联系人姓名不能为空');
+      if (!this.$refs.name.value) {
+        console.log("1");
+        this.$toast("联系人姓名不能为空");
         return;
       }
-       if(!this.$refs.tel.value) {
-        this.$toast('联系人电话不能为空');
+      if (!this.$refs.tel.value) {
+        this.$toast("联系人电话不能为空");
         return;
       }
-      let payWay = this.isZHIFUBAO ? '支付宝':'微信';
+      let payWay = this.isZHIFUBAO ? "支付宝" : "微信";
       // 拿到商品的数据
       let goodOrder = {
         selectedGood: this.selectedGood,
@@ -164,12 +164,28 @@ export default {
         observerInfo: this.observerInfo,
         contactInfo: {
           name: this.$refs.name.value,
-          tel: this.$refs.tel.value,
+          tel: this.$refs.tel.value
         },
-        payWay,
+        payWay
       };
-      console.log(goodOrder);
-    }
+      // 弹出确认框，是否付款，如果点击确认显示付款成功，给商品添加状态 1 / 点击取消，给商品添加状态 0，则跳转到订单页面
+      Dialog.confirm({
+        title: "订单支付",
+        message: `${payWay}支付`
+      })
+        .then(() => {
+          this.$toast('支付成功');
+          goodOrder.status = 1;
+          this.$store.commit('all/setAllOrderList', goodOrder);
+          this.$router.push('/mine/indent');
+        })
+        .catch(() => {
+          // 未付款
+          goodOrder.status = 0;
+          this.$store.commit('all/setAllOrderList', goodOrder);
+          this.$router.push('/mine/indent');
+        });
+    },
   }
 };
 </script>
@@ -184,6 +200,7 @@ $padding: 40px;
   left: 0;
   bottom: 172px;
   width: 100%;
+  overflow: auto;
 
   .wrap {
     width: 100%;
@@ -463,6 +480,30 @@ $padding: 40px;
       font-size: 38px;
       line-height: 122px;
     }
+  }
+}
+
+</style>
+<style lang="scss">
+.van-dialog {
+  width: 80%;
+  height: 18%;
+}
+
+.van-dialog__header {
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: bold;
+  color: #333;
+}
+.van-dialog__content {
+  margin-top: 40px;
+  .van-dialog__message {
+  line-height: 60px;
+  }
+
+  .van-hairline--top {
+    font-size: 60px;
   }
 }
 </style>
