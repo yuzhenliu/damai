@@ -35,9 +35,9 @@
               <span class="tip">仅需选择1位: 入场需携带对应证件</span>
               <span class="btn" @click="addAction">新增</span>
             </div>
-            <div v-if="observerInfo" class="observerInfo">
-              <span class="name">{{observerInfo.name}}</span>
-              <span class="idCard">身份证{{observerInfo.idCard}}</span>
+            <div v-for="item in observerArr" :key="item.idCard" class="observerInfo">
+              <span class="name">{{item.name}}</span>
+              <span class="idCard">身份证{{item.idCard}}</span>
               <input type="checkbox" class="check" ref="check" />
             </div>
 
@@ -109,20 +109,19 @@ export default {
   props: {},
   data() {
     return {
-      isZHIFUBAO: true
+      isZHIFUBAO: true,
     };
   },
   computed: {
     ...mapState({
       selectedGood: state => state.all.selectedGood, // 选中的商品信息
       selectAddress: state => state.selectAddress, // 选中的地址
-      observerInfo: state => state.observerInfo // 实际观演人
+      observerArr: state => state.observerArr // 实际观演人
     })
   },
   methods: {
     // 新增观演人
     addAction() {
-      console.log("点击了新增观演人");
       this.$router.push("/mine/watch");
     },
     // 改变支付方式
@@ -136,11 +135,17 @@ export default {
         this.$toast("您还没有选中商品");
         return;
       }
-      if (!this.observerInfo) {
-        this.$toast("实际观演人不能为空");
+      if(this.observerArr.length == 0) {
+        this.$toast('观演人信息不能为空');
         return;
       }
-      if (!this.$refs.check.checked) {
+      let selectedObserveArr = [];
+      this.$refs.check.forEach((item, index) => {
+        if(item.checked) {
+          selectedObserveArr.push(this.observerArr[index]);
+        }
+      });
+      if (selectedObserveArr.length == 0) {
         this.$toast("请选择观演人信息");
         return;
       }
@@ -149,7 +154,6 @@ export default {
         return;
       }
       if (!this.$refs.name.value) {
-        console.log("1");
         this.$toast("联系人姓名不能为空");
         return;
       }
@@ -162,7 +166,7 @@ export default {
       let goodOrder = {
         selectedGood: this.selectedGood,
         selectAddress: this.selectAddress,
-        observerInfo: this.observerInfo,
+        selectedObserveArr:selectedObserveArr,
         contactInfo: {
           name: this.$refs.name.value,
           tel: this.$refs.tel.value
@@ -180,6 +184,7 @@ export default {
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
           this.$router.replace('/mine/indent');
+          console.log(goodOrder.selectedObserveArr);
         })
         .catch(() => {
           // 未付款
@@ -189,7 +194,7 @@ export default {
           this.$router.replace('/mine/indent');
         });
     },
-  }
+  },
 };
 </script>
 

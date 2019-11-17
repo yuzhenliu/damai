@@ -62,5 +62,13 @@ export default {
     font-size: 70px;
     line-height: 154px;
   }
+  .right-text {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 35px;
+    font-size: 50px;
+    line-height: 154px;
+  }
 }
 </style>

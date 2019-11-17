@@ -21,13 +21,17 @@ export default new Vuex.Store({
       tel: '13000000000',
       address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
     }],
-    // selectAddress: null,
     // 实际观演人
-    // observerInfo: null,
-    observerInfo: {
-      name: '千寻',
-      idCard: '36721561252365662'
-    },
+    observerArr: [
+      {
+        name: '千寻',
+        idCard: '36721561252365662'
+      },
+      {
+        name: '小白',
+        idCard: '36721561252365656'
+      },
+  ],
 
   },
   mutations: {
@@ -43,11 +47,17 @@ export default new Vuex.Store({
     setToSeeList(state, obj) {
       state.toSeeList.push(obj);
     },
-    // 设置实际观演人
-    setObserverInfo(state, obj) {
-      state.observerInfo = obj;
+    // 添加实际观演人
+    setobserverArr(state, obj) {
+      state.observerArr.push(obj);
     },
-
+    // 删除观演人
+    deleteobserverArr(state, idCard) {
+      let index = state.observerArr.findIndex(item => {
+        item.idCard == idCard
+      });
+      state.observerArr.splice(index, 1);
+    },
   },
   actions: {},
   modules: {

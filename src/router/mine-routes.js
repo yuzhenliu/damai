@@ -14,6 +14,10 @@ export default {
             component: () => import('../pages/mine/watch/Watch')
         },
         {
+            path: 'addWatch',
+            component: () => import('../pages/mine/addWatch/AddWatch')
+        },
+        {
             path: 'indent',
             component: () => import('../pages/mine/indent/Indent')
         },
