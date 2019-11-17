@@ -41,7 +41,7 @@ export default {
   watch: {},
   methods: {},
   created() {
-    console.log(allOrderList);
+    console.log(this.allOrderList);
   }
 }
 </script>

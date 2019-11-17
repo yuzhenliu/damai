@@ -179,14 +179,14 @@ export default {
           goodOrder.status = 1;
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
-          this.$router.push('/mine/indent');
+          this.$router.replace('/mine/indent');
         })
         .catch(() => {
           // 未付款
           goodOrder.status = 0;
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
-          this.$router.push('/mine/indent');
+          this.$router.replace('/mine/indent');
         });
     },
   }

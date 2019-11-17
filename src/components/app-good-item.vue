@@ -59,7 +59,7 @@ export default {
       type: [String, Number],
       default: '0',
     },
-    payWay: {
+    payway: {
       type: String,
       default: '支付宝'
     },
@@ -82,7 +82,7 @@ export default {
     toPayAction() {
        Dialog.confirm({
         title: "订单支付",
-        message: `${this.payWay}支付`
+        message: `${this.payway}支付`
       })
         .then(() => {
           this.$toast('支付成功');
