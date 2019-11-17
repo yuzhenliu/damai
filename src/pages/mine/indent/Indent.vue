@@ -2,25 +2,15 @@
   <div class="page-wrap">
     <div class="page subpage" id="indent">
       <app-header title="我的订单" hasBack></app-header>
-       <div class="content">
+      <div class="content">
         <!-- 头部 -->
-        <van-tabs
-          color="#ff1268"
-          title-inactive-color="#999"
-          title-active-color="#333"
-          :swipeable="true"
-          line-height="0"
-          @click="clickAction"
-        >
-          <van-tab
-            v-for="(tab, index) in tablist"
-            :title="tab.name"
-            :key="index"
-          ></van-tab>
+        <van-tabs v-model="activeIndex">
+          <van-tab :title="item.name" v-for="(item, index) in tablist" :key="index"></van-tab>
         </van-tabs>
 
         <!-- 内容滚动 -->
         <app-scroll class="scrollContent">
+            <good-list :orderType="orderType"/>
         </app-scroll>
       </div>
     </div>
@@ -28,19 +18,19 @@
 </template>
 
 <script>
-// import GoodItem from "../../../components/app-good-item";
+import GoodList from './children/GoodList'
 import { Tab, Tabs } from "vant";
 export default {
   name: "indent",
   components: {
-    // [GoodItem.name]: GoodItem,
     [Tabs.name]: Tabs,
-    [Tab.name]: Tab
+    [Tab.name]: Tab,
+    [GoodList.name]: GoodList,
   },
   props: {},
   data() {
     return {
-      active: 0,
+      activeIndex: 0,
       tablist: [
         {
           name: "全部"
@@ -51,32 +41,37 @@ export default {
         {
           name: "待收货"
         }
-      ],
+      ]
     };
   },
-  methods: {
-    clickAction() {}
-  }
+  computed: {
+    orderType() {
+      if(this.activeIndex == 0) {
+        return 'all'
+      }else if(this.activeIndex == 1) {
+        return 'toPay'
+      }else if(this.activeIndex == 2) {
+        return 'toGet'
+      }
+    }
+  },
 };
 </script>
 
 <style scoped lang="scss" scoped>
+$mainColor: #ff1268;
+$padding: 40px;
 #indent {
-.van-tabs--line .van-tabs__wrap {
-  height: 165px;
-  span {
-    height: 165px;
-    line-height: 165px;
-    font-size: 46px;
-  }
-}
 
-.scrollContent {
-  position: absolute;
-  top: 154px;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
+
+
+  .scrollContent {
+    position: absolute;
+    top: 154px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f8f8;
+  }
 }
 </style>

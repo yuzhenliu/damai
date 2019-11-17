@@ -97,3 +97,202 @@ window.addEventListener(‘touchmove’, func, { passive: false })
 2、应用 CSS 属性 touch-action: none; 这样任何触摸事件都不会产生默认行为，但是 touch 事件照样触发。
 touch-action 还有很多选项，
 ————————————————
+
+
+
+
+
+
+<template>
+<lazy-component>
+  <div class="goodItem" @click="getDetailInfo(good.id)">
+    <div class="left">
+      <img :src="(good.picUrl || good.imgUrl)" />
+      <span class="flag">{{(good.flag || good.tag[0])}}</span>
+    </div>
+    <div class="right">
+      <h3 class="title">{{good.title}}</h3>
+      <p class="time text-overflow">{{(good.time || good.date)}}</p>
+      <p class="address text-overflow">{{(good.address || good.location)}}</p>
+      <p class="tag">
+        <span>{{(good.tags || good.tag[0])}}</span>
+      </p>
+      <p class="priceWrap">
+        <i class="price">{{(good.price || good.minPrice)}}</i>起
+      </p>
+    </div>
+  </div>
+  <!-- 未付款 -->
+  <div v-if="(orderStatus == 0)" class="chooseWrap">
+    <span class="payment">{{payment}}</span>
+    <span class="button" @click="toPayAction">去付款</span>
+  </div>
+  <!-- 待收货 -->
+  <div v-else-if="(orderStatus == 1)" class="chooseWrap">
+    <span class="payment">{{payment}}</span>
+    <span class="button" @click="toGetAction">已收货</span>
+  </div>
+  </lazy-component>
+</template>
+<script>
+import { Dialog } from "vant";
+export default {
+  name: "app-good-item",
+  props: {
+    goodOrder: {
+      type: Object,
+      default: {}
+    }
+  },
+  data() {
+    return {
+      good: {},
+      payWay: '',
+      payment: '',
+      orderStatus: 0,
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    // 跳转到详情页
+    getDetailInfo(id) {
+      this.$router.push(`/all/detail/${id}`);
+    },
+    // 去付款
+    toPayAction() {
+       Dialog.confirm({
+        title: "订单支付",
+        message: `${this.payWay}支付`
+      })
+        .then(() => {
+          // 点击了付款，需要改变订单的状态
+          this.$toast('你点击了付款');
+        })
+        .catch(() => {
+          // 未付款
+        this.$toast('你点击了取消付款');
+        });
+    },
+    // 待收货
+    toGetAction() {
+
+    }
+  },
+  created() {
+    this.good = this.goodOrder.selectedGood && this.goodOrder.selectedGood.goodDetail;
+    this.payment = this.goodOrder.selectedGood && this.goodOrder.selectedGood.ticket.price;
+    this.payWay = this.goodOrder.selectedGood && this.goodOrder.payWay;
+    this.orderStatus = this.goodOrder.selectedGood && this.goodOrder.status;
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+$mainColor: #ff1268;
+$padding: 40px;
+
+.goodItem {
+  width: 100%;
+  height: 400px;
+  box-sizing: border-box;
+  padding: 0 45px;
+  display: flex;
+
+  .left {
+    width: 300px;
+    height: 400px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    .flag {
+      position: absolute;
+      right: 6px;
+      top: 8px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, .6);
+      color: #f8f8f8;
+      border-radius: 10px;
+    }
+  }
+  .right {
+    margin-left: 32px;
+
+    .title {
+      position: relative;
+      line-height: 70px;
+      font-size: 46px;
+      font-weight: bold;
+      height: 110px;
+      overflow: hidden;
+      text-align: 20px;
+      color: #111;
+    }
+    .time {
+      margin-top: 28px;
+      font-size: 30px;
+      color: #8c92a1;
+      width: 100%;
+    }
+    .address {
+      margin-top: 17px;
+      font-size: 30px;
+      color: #8c92a1;
+      width: 100%;
+
+    }
+    .tag {
+      margin-top: 20px;
+
+      span {
+        display: inline-block;
+        border: 2px solid #8c92a1;
+        padding: 12px 16px;
+        color: #6d7a97;
+        font-size: 26px;
+        border-radius: 30px;
+      }
+    }
+    .priceWrap {
+      width: 100%;
+      font-size: 34px;
+      color: #8c92a1;
+      margin-top: 34px;
+
+      .price {
+        font-size: 44px;
+        font-weight: bold;
+        color: $mainColor;
+        margin: 0 12px;
+      }
+    }
+  }
+}
+// 已收货 / 待付款的选项
+.chooseWrap {
+  width: 100%;
+  height: 160px;
+  line-height: 160px;
+  box-sizing: border-box;
+  padding: 0 $padding;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .payment {
+    font-size: 40px;
+    color: $mainColor;
+  }
+  .button {
+    background-color: $mainColor;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+  }
+}
+</style>

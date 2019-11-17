@@ -24,14 +24,10 @@ const mutations = {
   setAllOrderList(state, obj) {
     state.allOrderList.push(obj);
   },
-  // 设置待付款的订单
-  // setToPayOrderList(state, obj) {
-  //   state.toPayOrderList.push(obj);
-  // },
-  // 设置待收货的订单
-  // setToReceiveOrderList(state, obj) {
-  //   state.toReceiveOrderList.push(obj);
-  // },
+  // 设置全部订单的状态 index, status
+  setOrderStatus(state, obj) {
+    state.allOrderList[obj.index].status = obj.status;
+  }
 }
 
 const getters = {
@@ -44,8 +40,16 @@ const getters = {
     return state.allOrderList.filter(list => list.status == 1);
   }
 }
-
-const actions = {}
+// orderId status
+const actions = {
+  getOrderIndex(context, obj) {
+    let index = context.state.allOrderList.findIndex(item => item.orderId == obj.orderId);
+    context.commit('setOrderStatus', {
+      index: index,
+      status: obj.status
+    });
+  }
+}
 
 export default {
   namespaced: true,
