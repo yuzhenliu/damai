@@ -38,6 +38,10 @@ const getters = {
   // 待收货的订单
   toReceiveOrderList(state) {
     return state.allOrderList.filter(list => list.status == 1);
+  },
+  // 已完成的订单
+  finishedOrderList(state) {
+    return state.allOrderList.filter(list => list.status == 3);
   }
 }
 // orderId status

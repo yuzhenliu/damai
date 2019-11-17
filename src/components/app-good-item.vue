@@ -86,7 +86,6 @@ export default {
       })
         .then(() => {
           this.$toast('支付成功');
-          console.log('点击了支付');
           this.$store.dispatch('all/getOrderIndex', {
             orderId: this.orderId,
             status: 1
@@ -105,7 +104,6 @@ export default {
       })
         .then(() => {
           this.$toast('收货成功');
-          console.log('点击了收货');
           this.$store.dispatch('all/getOrderIndex', {
             orderId: this.orderId,
             status: 3
