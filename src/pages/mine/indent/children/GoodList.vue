@@ -40,9 +40,6 @@ export default {
   },
   watch: {},
   methods: {},
-  created() {
-    console.log(this.allOrderList);
-  }
 }
 </script>
 

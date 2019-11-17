@@ -2,7 +2,7 @@
   <div class="page-wrap">
     <div class="page subpage" id="detail">
       <app-header title="详情" hasBack :titleOpacity="titleOpacity">
-        <van-icon name="share" slot="right-btn" class="right-btn" />
+        <van-icon name="share" slot="right-btn" class="right-btn" @click="toShareAction"/>
       </app-header>
       <!-- 头部固定定位的商品详情 -->
       <div
@@ -103,6 +103,18 @@
         </div>
       </van-popup>
 
+      <!-- 如果用户点击了分享 -->
+      <van-popup
+        v-model="shareShow"
+        position="bottom"
+        :style="{ height: '24%' }"
+        >
+        <p class="shareP" >
+          <span @click="shareAction" class="shareBtn">确认分享</span>
+        </p>
+        <share-wrap />
+        </van-popup>
+
       <!-- 固定在底部的 tabbar -->
       <tabbar :id="id" @buying="toBuyAction" />
     </div>
@@ -116,11 +128,11 @@
 <script>
 import commonService from "../../../services/commonService";
 import allService from "../../../services/allService";
-import { Tab, Tabs } from "vant";
+import { Tab, Tabs, Popup } from "vant";
 import TicketInfo from "./children/TicketInfo";
 import Tabbar from "./children/Tabbar";
 import GoodList from "../../all/root/children/Good-List";
-import { Popup } from "vant";
+import ShareWrap from "./children/ShareWrap";
 export default {
   name: "detail",
   components: {
@@ -129,7 +141,8 @@ export default {
     [Tabs.name]: Tabs,
     [Tab.name]: Tab,
     [GoodList.name]: GoodList,
-    [Popup.name]: Popup
+    [Popup.name]: Popup,
+    [ShareWrap.name]: ShareWrap,
   },
   props: {
     id: {
@@ -156,7 +169,8 @@ export default {
       show: false, // 显示选择框
       ticketArr: [], // 票档
       siteNameActiveIndex: 0, // 选择的场次名称
-      ticketActiveIndex: 0 // 票档的 下标
+      ticketActiveIndex: 0, // 票档的 下标
+      shareShow: false, // 点击了分享
     };
   },
   computed: {},
@@ -219,6 +233,15 @@ export default {
     // 提交开售提醒
     submitAction() {
       this.$toast('提交成功,开售前,将通过 APP通知');
+    },
+    // 去分享
+    toShareAction() {
+      this.shareShow = true;
+    },
+    // 确认分享
+    shareAction() {
+      this.$toast('分享成功');
+      this.shareShow = false;
     }
   },
   computed: {
@@ -518,6 +541,23 @@ $padding: 40px;
           border-radius: 60px 70px 70px 10px;
         }
       }
+    }
+  }
+  .shareP {
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+
+    .shareBtn {
+      padding: 20px $padding;
+      background-color: $mainColor;
+      color: #fff;
+      font-size: 50px;
+      border-radius: 20px;
     }
   }
 }
