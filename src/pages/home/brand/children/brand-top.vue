@@ -1,23 +1,23 @@
 <template>
   <div class="brand-top">
-    <div class="background-blur">   
+    <div class="background-blur" v-show="topOpcity == 1">
+      <img :src="backgroundImg" alt="" />
     </div>
-      <div class="brand-top-search">
-        <div class="brand-top-search-inp">
-          <van-icon name="brand" class="brand-top-search-inp-icon" />
-          <input
-            placeholder="搜索明星、演出比赛、场馆"
-            v-model="inpVal"
-            @focus="toSearchAction(inpVal)"
-            type="text"
-          />
-          <van-icon name="cross" @click="toSearchAction(null)" class="cross" />
-        </div>
-        <div class="cancel" @click="backHomeAction">
-          取消
-        </div>
+    <div class="brand-top-search">
+      <div class="brand-top-search-inp">
+        <van-icon name="brand" class="brand-top-search-inp-icon" />
+        <input
+          placeholder="搜索明星、演出比赛、场馆"
+          v-model="inpVal"
+          @focus="toSearchAction(inpVal)"
+          type="text"
+        />
+        <van-icon name="cross" @click="toSearchAction(null)" class="cross" />
       </div>
-
+      <div class="cancel" @click="backHomeAction">
+        取消
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,6 +29,7 @@ export default {
       inpVal: ""
     };
   },
+  props: ["backgroundImg", "topOpcity"],
   methods: {
     toSearchAction(f) {
       if (f) {
@@ -43,16 +44,23 @@ export default {
   },
   created() {
     this.inpVal = this.$route.params.key;
+    console.log(this.topOpcity);
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.background-blur{
-  background: darkgoldenrod;
-  filter: blur(15px);
-  position:absolute;
-  z-index:-1;
+.background-blur {
+  // background: darkgoldenrod;
+  filter: blur(6px);
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  left: 0;
+  right: 0;
 }
 .brand-top {
   position: absolute;
@@ -60,7 +68,7 @@ export default {
   left: 0;
   width: 100%;
   height: 154px;
-  background: darkgoldenrod;
+  // background: darkgoldenrod;
   z-index: 100;
 }
 .brand-top-search {
@@ -68,7 +76,7 @@ export default {
   line-height: 154px;
   padding: 0 40px;
   box-sizing: border-box;
-  z-index:1;
+  z-index: 1;
   &-inp {
     flex: 1;
     height: 93px;

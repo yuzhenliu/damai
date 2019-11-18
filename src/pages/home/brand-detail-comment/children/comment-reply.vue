@@ -37,7 +37,7 @@ export default {
   name: "brand-detail-comment-reply",
   data() {
     return {
-      
+      option:{}
     };
   },
   props: {
@@ -69,6 +69,7 @@ export default {
     },
     replyOtherAction(option){
       this.$emit('sendReplyOther',option);
+      // console.log(option);
     }
   },
   created() {
@@ -124,11 +125,11 @@ export default {
           white-space: nowrap;
           overflow: hidden;
           &.PuserName{
-            font-size:50px;
+            font-size:45px;
             color:#000;
           }
           &.PcommentCon{
-            font-size: 45px;
+            font-size: 35px;
             color: #333;
           }
 

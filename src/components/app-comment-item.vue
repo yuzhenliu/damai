@@ -26,7 +26,7 @@
 
       <div class="item-icon">
         <p>转载 <van-icon name="share" class="share" /></p>
-        <p>
+        <p @click.stop="commentHandle">
           <span>{{ item.commentNum }} </span> <van-icon name="comment-o" />
         </p>
         <p @click.stop="supportAction" id="support">
@@ -71,10 +71,21 @@ export default {
       }
     },
     toCommentDetailAction(id) {
-      this.$router.push({
+      if(this.$route.name=='commentDetail'){
+        return;
+      }
+      this.$router.replace({
         name: "commentDetail",
         params: { id: id }
       });
+    },
+    commentHandle(){
+      // console.log(this.$route);
+      if(this.$route.name=='commentDetail'){
+        this.$emit('commentSelf',this.item.userName);
+      }else{
+        return;
+      }
     }
   }
 };
@@ -108,7 +119,7 @@ export default {
         flex: 1;
         .van-rate {
           padding-left: 40px;
-          font-size: 30px;
+          font-size: 35px;
         }
       }
     }
@@ -134,6 +145,7 @@ export default {
       border-radius: 50px;
       width: 31%;
       margin: 1.1%;
+      height:100%;
     }
   }
   &-icon {
