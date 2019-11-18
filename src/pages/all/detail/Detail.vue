@@ -31,7 +31,7 @@
       <!-- 滚动内容区域 -->
 
       <app-scroll class="scrollContent" ref="IScroll">
-        <div class="mask"></div>
+        <div class="yu-mask"></div>
         <div class="detailContent">
           <p class="serverDesc">{{goodDetail.serverDesc}}</p>
 
@@ -378,7 +378,7 @@ $padding: 40px;
     bottom: 172px;
     width: 100%;
 
-    .mask {
+    .yu-mask {
       width: 100%;
       height: 566px;
       background-color: transparent;
