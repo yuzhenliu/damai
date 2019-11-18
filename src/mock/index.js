@@ -40,19 +40,17 @@ Mock.mock(RegExp("/api/brand/by_keyword" + ".*"), {
     backgroundImg: "@image('400x100',@color)",
     detail: '@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
     "maxprice|500-1000": 0,
-    "minproce|10-500":0,
-    "list|5-10": [
-      {
-        "id|+1": 0,
-        title: "@ctitle()",
-        time: "@datetime(yyyy.MM.dd HH:mm)",
-        address: "@city() | @ctitle",
-        tags: "@ctitle(2,3)",
-        flag: "@ctitle(2,3)",
-        "price|10-1000": 0,
-        picUrl: "@image('300x300',@color)"
-      }
-    ]
+    "minproce|10-500": 0,
+    "list|5-10": [{
+      "id|+1": 0,
+      title: "@ctitle()",
+      time: "@datetime(yyyy.MM.dd HH:mm)",
+      address: "@city() | @ctitle",
+      tags: "@ctitle(2,3)",
+      flag: "@ctitle(2,3)",
+      "price|10-1000": 0,
+      picUrl: "@image('300x300',@color)"
+    }]
   }
 });
 
@@ -67,35 +65,31 @@ Mock.mock(RegExp("/api/brand/brand_detail" + ".*"), {
     performanceNum: "@natural(1, 99)",
     fansNum: "@natural(1, 99)",
     backgroundImg: "@image('400x400',@color)",
-    detail:'@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
+    detail: '@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
     "maxprice|500-1000": 0,
-    "minproce|10-500":0,
-    "list|5-10": [
-      {
-        "id|+1": 0,
-        title: "@ctitle()",
-        time: "@datetime(yyyy.MM.dd HH:mm)",
-        address: "@city() | @ctitle",
-        tags: "@ctitle(2,3)",
-        flag: "@ctitle(2,3)",
-        "price|10-1000": 0,
-        picUrl: "@image('300x300',@color)"
-      }
-    ],
-    "commentList|5-10": [
-      {
-        "comment_id|+1": 0,
-        user_id: "@natural(10, 99)",
-        userImg: "@image('100x100',@color)",
-        userName: "@cname()",
-        "scoreNum|1-5": 1,
-        commentCon: "@cparagraph",
-        commentDate: "@datetime(MM.dd)",
-        commentNum: "@natural(1, 99)",
-        supportNum: "@natural(1, 99)",
-        "commentImg|1-6": ["@image('300x300',@color)"]
-      }
-    ]
+    "minproce|10-500": 0,
+    "list|5-10": [{
+      "id|+1": 0,
+      title: "@ctitle()",
+      time: "@datetime(yyyy.MM.dd HH:mm)",
+      address: "@city() | @ctitle",
+      tags: "@ctitle(2,3)",
+      flag: "@ctitle(2,3)",
+      "price|10-1000": 0,
+      picUrl: "@image('300x300',@color)"
+    }],
+    "commentList|5-10": [{
+      "comment_id|+1": 0,
+      user_id: "@natural(10, 99)",
+      userImg: "@image('100x100',@color)",
+      userName: "@cname()",
+      "scoreNum|1-5": 1,
+      commentCon: "@cparagraph",
+      commentDate: "@datetime(MM.dd)",
+      commentNum: "@natural(1, 99)",
+      supportNum: "@natural(1, 99)",
+      "commentImg|1-6": ["@image('300x300',@color)"]
+    }]
   }
 });
 
@@ -111,29 +105,29 @@ Mock.mock(RegExp("/api/brand/comment_detail" + ".*"), {
   code: 0,
   message: "ok",
   data: {
-      detail:{
-        "comment_id":'@natural(10, 99)',
-        user_id: "@natural(10, 99)",
-        userImg: "@image('100x100',@color)",
-        userName: "@cname()",
-        "scoreNum|1-5": 1,
-        commentCon: "@cparagraph",
-        commentDate: "@datetime(MM.dd)",
-        commentNum: "@natural(1, 99)",
-        supportNum: "@natural(1, 99)",
-        "commentImg|1-6": ["@image('300x300',@color)"]
-      },
-      "commentItem|1-10": [{
-        userAvar: "@image('100x100',@color)",
-        user_id: "@natural(10, 99)",
-        userName: "@cname()",
-        commentCon: "@cparagraph",
-        commentTime: "@datetime(MM.dd)",
-        commentNum: "@natural(1, 99)",
-        supportNum: "@natural(1, 99)",
-        "scoreNum|1-5": 1,
-      }]
-    }
+    detail: {
+      "comment_id": '@natural(10, 99)',
+      user_id: "@natural(10, 99)",
+      userImg: "@image('100x100',@color)",
+      userName: "@cname()",
+      "scoreNum|1-5": 1,
+      commentCon: "@cparagraph",
+      commentDate: "@datetime(MM.dd)",
+      commentNum: "@natural(1, 99)",
+      supportNum: "@natural(1, 99)",
+      "commentImg|1-6": ["@image('300x300',@color)"]
+    },
+    "commentItem|1-10": [{
+      userAvar: "@image('100x100',@color)",
+      user_id: "@natural(10, 99)",
+      userName: "@cname()",
+      commentCon: "@cparagraph",
+      commentTime: "@datetime(MM.dd)",
+      commentNum: "@natural(1, 99)",
+      supportNum: "@natural(1, 99)",
+      "scoreNum|1-5": 1,
+    }]
+  }
 });
 
 Mock.mock("/api/brand/submit_comment", {
@@ -330,11 +324,11 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
 
 
 
-Mock.mock(RegExp("/api/address/add" + ".*"), {
-  code: 0,
-  message: "ok",
-  data: null
-});
+// Mock.mock(RegExp("/api/address/add" + ".*"), {
+//   code: 0,
+//   message: "ok",
+//   data: null
+// });
 
 
 

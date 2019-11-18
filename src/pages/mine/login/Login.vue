@@ -48,7 +48,6 @@ import { Toast } from "vant";
 import mineService from "../../../services/mineService";
 import Vue from "vue";
 import { Icon, Button } from "vant";
-
 Vue.use(Icon).use(Button);
 const PASSWORD_METHOD = true;
 export default {
@@ -99,7 +98,7 @@ export default {
             Toast(error);
           } else {
             //登录了
-            this.close();
+            this.$router.push("/mine");
             this.$store.dispatch("handleLoginAction", true);
           }
         } else {
@@ -119,7 +118,6 @@ export default {
       // 发送验证码
       let result = await mineService.sendCode(this.tel);
       console.log(result);
-
       if (result) {
         this.getCode = result;
         let num = 120;
