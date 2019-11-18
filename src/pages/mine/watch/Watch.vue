@@ -25,7 +25,8 @@ export default {
   },
   computed: {
     ...mapState({
-      observerArr: state => state.observerArr
+      observerArr: state => state.observerArr,
+      
     })
   },
   methods: {
@@ -33,6 +34,9 @@ export default {
     toAddObserve() {
       this.$router.push('/mine/addWatch');
     }
+  },
+  created() {
+    console.log(this.observerArr);
   }
 };
 </script>

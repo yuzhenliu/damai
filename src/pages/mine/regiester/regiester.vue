@@ -3,10 +3,7 @@
     <app-header title="注册账号" :hasBack="true"></app-header>
     <app-scroll class="d-center">
       <div class="d-logoimgs">
-        <img
-          src="//gw.alicdn.com/tfs/TB1QfeUQAvoK1RjSZFDXXXY3pXa-300-138.png"
-          alt
-        />
+        <img src="//gw.alicdn.com/tfs/TB1QfeUQAvoK1RjSZFDXXXY3pXa-300-138.png" alt />
       </div>
       <div>
         <div class="d-lojins border-bottom">
@@ -22,32 +19,21 @@
         <!-- 输入密码 -->
         <div class="d-lojins border-bottom">
           <span>密码 :</span>
-          <input
-            type="text"
-            placeholder="请输入密码"
-            class="d-iphone"
-            v-model="psd"
-          />
+          <input type="text" placeholder="请输入密码" class="d-iphone" v-model="psd" />
         </div>
         <!-- 输入验证码框 -->
         <div class="authcode border-bottom">
           <div class="form-contrl">
             <input type="text" placeholder="请输入验证码" v-model="code" />
           </div>
-          <div
-            class="contrl-right"
-            :class="{ disabled: disabled }"
-            @click="sendCodeAction"
-          >
+          <div class="contrl-right" :class="{ disabled: disabled }" @click="sendCodeAction">
             <span>{{ tip }}</span>
           </div>
         </div>
       </div>
 
       <div class="debark">
-        <van-button round type="info" class="d-debark" @click="regiesterAction"
-          >点击注册</van-button
-        >
+        <van-button round type="info" class="d-debark" @click="regiesterAction">点击注册</van-button>
       </div>
     </app-scroll>
   </div>
@@ -69,7 +55,7 @@ export default {
   data() {
     return {
       show: true,
-      tip: "获取验证码",
+      tip: "验证码",
       tel: "",
       getCode: null,
       psd: "",
@@ -129,8 +115,6 @@ export default {
         console.log(this.disabled);
         //没有过期
         if (this.getCode == this.code) {
-          // 没有问题
-          console.log("没有问题,下一步注册");
           // 验证密码
           if (!this.psd) {
             Toast("请输入完整!");
