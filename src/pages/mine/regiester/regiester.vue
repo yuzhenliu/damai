@@ -44,6 +44,7 @@ import mineService from "../../../services/mineService";
 
 import Vue from "vue";
 import { Icon, Button, Toast } from "vant";
+import { log } from "util";
 
 Vue.use(Icon).use(Button);
 export default {
@@ -119,6 +120,7 @@ export default {
           if (!this.psd) {
             Toast("请输入完整!");
           } else {
+            console.log(this.psd);
             //发送注册的请求
             let result = await mineService.register(this.tel, this.psd);
             console.log(result);
