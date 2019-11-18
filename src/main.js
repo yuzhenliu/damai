@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import plugin from './plugin'
 import 'lib-flexible/flexible'
-// import './mock'
+import './mock'
 import './style/common.scss'
 
 Vue.config.productionTip = false

@@ -289,19 +289,19 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
 
 
 
-// Mock.mock(RegExp("/api/address/add" + ".*"), {
-//   code: 0,
-//   message: "ok",
-//   data: null
-// });
+Mock.mock(RegExp("/api/address/add" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
 
 
 
-// Mock.mock(RegExp("/api/address/modify" + ".*"), {
-//   code: 0,
-//   message: "ok",
-//   data: null
-// });
+Mock.mock(RegExp("/api/address/modify" + ".*"), {
+  code: 0,
+  message: "ok",
+  data: null
+});
 
 
 Mock.mock(RegExp("/api/address/find_by_user" + ".*"), {
