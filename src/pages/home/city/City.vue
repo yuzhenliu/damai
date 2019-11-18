@@ -74,7 +74,38 @@ export default {
   created() {
     this.initData();
   },
-  mounted() {},
+  mounted() {
+    // 获得当前的位置
+    
+      let watchID = navigator.geolocation.getCurrentPosition(
+      function(position){
+        console.log(position);
+        // 时间戳
+        console.log(position.timestamp);
+        // 经度
+        console.log(position.coords.longitude);
+        // 纬度
+        console.log(position.coords.latitude);
+        // 前进方向，正北为0
+        console.log(position.coords.heading);
+        // 速度   m/s
+        console.log(position.coords.speed);
+        // 精确度
+        console.log(position.coords.accuracy);
+        // 海拔  m
+        console.log(position.coords.altitude);
+        // 海拔精确度
+        console.log(position.coords.altitudeAccuracy);
+      },
+      function(error){
+        console.log(error);
+      }
+    );
+    // 监听位置的变化
+    // navigator.geolocation.watchPosition  //使用属性参数和获得当前的位置的一样
+    // 清除监听
+    navigator.geolocation.clearWatch(watchID);
+  },
   watch: {
     index(newVal) {
       //监听到index发生变化

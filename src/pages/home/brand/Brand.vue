@@ -1,10 +1,14 @@
 <template>
   <div class="page-wrap">
     <div class="page subpage" id="brand">
-      <brand-top></brand-top>
-      <app-scroll class="content" :bounce='bounce'>
-        <div class="brand-head" v-bind:style="{ background: backgroundImg }" @click="toBrandDetailAction">
-          <div class="brand-head-info">
+      <brand-top :backgroundImg='backgroundImg' ref="top" :topOpcity='topOpcity'></brand-top>
+      <app-scroll class="content" :bounce='bounce' ref='scroll'>
+        
+        <div class="brand-head" @click="toBrandDetailAction">
+          <div class="brand-head-bg">
+            <img :src="backgroundImg" :alt="name">
+          </div>
+          <div class="brand-head-info" ref="info">
             <div class="brand-head-info-left">
               <img :src="avarImg" :alt="name" />
               <div class="text">
@@ -60,7 +64,8 @@ export default {
       maxprice: "",
       minprice: "",
       detail: "",
-      bounce:false
+      bounce:false,
+      topOpcity:0,
     };
   },
   methods: {
@@ -127,6 +132,16 @@ export default {
   },
   mounted(){
       // console.log(this.backgroundImg);
+      console.log();
+      let _this=this;
+      this.$refs.scroll.scroll.on('scroll',function(){
+        // console.log();
+        if(Math.abs(this.y)<=_this.$refs.info.clientHeight){
+          _this.topOpcity=0;
+        }else{
+          _this.topOpcity=1;
+        }
+      })
   },
   destroyed(){
       sessionStorage.removeItem('isconcern');
@@ -143,7 +158,21 @@ export default {
 .brand-head {
   height: 415px;
   width: 100%;
-  background: darkgoldenrod;
+  // background: darkgoldenrod;
+  position: relative;
+  &-bg{
+    width:100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 0;
+    transition: all 0.5s ease;
+    img{
+      width:100%;
+      height:100%;
+    }
+  }
   &-info {
     display: flex;
     padding: 190px 40px 0;

@@ -8,7 +8,7 @@
           @sendSearchKey="searchKey"
         ></search-history>
         <hot-search @sendSearchKey="searchKey"></hot-search>
-        <div class="mask" v-if="maskShow"></div>
+        <div class="hui-mask" v-if="maskShow"></div>
       </div>
     </div>
     
@@ -63,7 +63,7 @@ export default {
 </style>
 
 <style lang="scss">
-.mask{
+.hui-mask{
   width: 100%;
   height:100%;
   position: absolute;
