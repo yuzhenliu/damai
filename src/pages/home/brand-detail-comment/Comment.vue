@@ -35,7 +35,7 @@
           <input
             type="text"
             v-model="replyVal"
-            :placeholder="'回复' + detail.userName"
+            :placeholder="'回复' + userN"
             @keyup.enter="postReplyAction"
             ref="inp"
           />
@@ -92,15 +92,20 @@ export default {
           newReply.isChild=true;
       }
       this.myReplyList.push(newReply);
+      this.poption={};
     },
     replyOther(option){
         this.poption=option;
         this.$refs.inp.focus();
+        this.userN=option.PuserName;
     }
   },
   computed: {
     title() {
       return this.detail.userName + "的评价";
+    },
+    userN(){
+        return this.detail.userName;
     }
   },
   created() {
