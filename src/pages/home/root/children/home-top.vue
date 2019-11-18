@@ -1,29 +1,44 @@
 <template>
   <header class="home-top">
-       <div class="home-top-city" @click="toCityAction">
-      <van-icon name="location" class="home-top-city-icon"/>
-      <span>全国</span>
+    <div class="home-top-city" @click="toCityAction">
+      <van-icon name="location" class="home-top-city-icon" />
+      <span>{{ selectCity }}</span>
     </div>
-    <div class="home-top-inp">
-        <van-icon name="search" class="home-top-inp-icon"/>
-        <input placeholder="搜索明星、演出比赛、场馆" />
+    <div class="home-top-inp" @click="toSearchAction">
+      <van-icon name="search" class="home-top-inp-icon" />
+      <input placeholder="搜索明星、演出比赛、场馆" />
     </div>
-    <van-icon name="contact" class="home-top-userinfo" />
+    <van-icon name="contact" class="home-top-userinfo" @click="toMineAction" />
   </header>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-
-        }
-    },
-    methods:{
-        toCityAction(){
-            this.$router.push('/home/city');
-        }
+  data() {
+    return {};
+  },
+  props: {
+    city: {
+      type: String,
+      default: "全国"
     }
+  },
+  methods: {
+    toCityAction() {
+      this.$router.push("/home/city");
+    },
+    toMineAction() {
+      this.$router.push("/mine");
+    },
+    toSearchAction() {
+      this.$router.push("/home/search");
+    }
+  },
+  computed: {
+    selectCity() {
+      return this.city ? this.city : "全国";
+    }
+  }
 };
 </script>
 
@@ -37,46 +52,49 @@ export default {
   display: flex;
   line-height: 154px;
   background: #fff;
-  &-city{
-      font-size:50px;
-      width:255px;
-      text-align: center;
-      &-icon{
-          font-size: 48px;
-          padding-right:10px;
-      }
+  &-city {
+    font-size: 50px;
+    width: 255px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &-icon {
+      font-size: 48px;
+      padding-right: 10px;
+    }
   }
-  &-inp{
-      flex:1;
-      height:93px;
-      font-size:30px;
-      display: flex;
-      margin:30px 0;
-      padding-left:30px;
-      line-height: 93px;
-      background: linear-gradient(to right,#fff3e7,#ffeaf3,#f3effd);
-      border-radius:46px 46px 46px 0;
-      input{
-          height:100%;
-          flex: 1;
-          font-size: 40px;
-          color:#9c9ca4;
-          border:none;
-          background: transparent;
-      }
-      &-icon{
-          font-size: 50px;
-          color:#222;
-          display: block;
-          line-height: 93px;
-          margin-right:10px;
-      }
-  }
-  &-userinfo{
+  &-inp {
+    flex: 1;
+    height: 93px;
+    font-size: 30px;
+    display: flex;
+    margin: 30px 0;
+    padding-left: 30px;
+    line-height: 93px;
+    background: linear-gradient(to right, #fff3e7, #ffeaf3, #f3effd);
+    border-radius: 46px 46px 46px 0;
+    input {
+      height: 100%;
+      flex: 1;
+      font-size: 40px;
+      color: #9c9ca4;
+      border: none;
+      background: transparent;
+    }
+    &-icon {
+      font-size: 50px;
+      color: #222;
       display: block;
-      font-size: 55px;
-      line-height: 154px;
-      padding:0 30px;
+      line-height: 93px;
+      margin-right: 10px;
+    }
+  }
+  &-userinfo {
+    display: block;
+    font-size: 55px;
+    line-height: 154px;
+    padding: 0 30px;
   }
 }
 </style>

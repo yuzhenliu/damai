@@ -1,6 +1,6 @@
 <template>
 <div class="goodList">
-  <app-good-item v-for="good in goodsListArr" :key="good.id" :good="good" class="app-good-item" />
+  <app-good-item v-for="good in goodsListArr" :key="good.id" :good="good" class="app-good-item"/>
 </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   props: {
     goodsListArr: {
       type: Array,
-      default: []
+      default: [],
     }
   },
   data() {

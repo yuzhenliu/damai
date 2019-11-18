@@ -1,0 +1,55 @@
+<template>
+  <div class="good-list" v-if="(orderType=='all')">
+    <app-good-item :good="item.selectedGood.goodDetail" v-for="item in allOrderList" :key="item.orderId" class="good" :orderId="item.orderId" :orderStatus="item.status" :payment="item.selectedGood.ticket.price" :payway="item.payway" isOrderPage/>
+  </div>
+  <div class="good-list" v-else-if="(orderType=='toPay')">
+    <app-good-item :good="item.selectedGood.goodDetail" v-for="item in toPayOrderList" :key="item.orderId" class="good" :orderId="item.orderId" :orderStatus="item.status" :payment="item.selectedGood.ticket.price" :payway="item.payway" isOrderPage/>
+  </div>
+    <div class="good-list" v-else-if="(orderType=='toGet')">
+    <app-good-item :good="item.selectedGood.goodDetail" v-for="item in toReceiveOrderList" :key="item.orderId" class="good" :orderId="item.orderId" :orderStatus="item.status" :payment="item.selectedGood.ticket.price" :payway="item.payway" isOrderPage/>
+  </div>
+</template>
+
+<script>
+import GoodItem from "../../../../components/app-good-item";
+import { mapState, mapGetters } from 'vuex'
+export default {
+  name: 'good-list',
+  components: {
+    [GoodItem.name]: GoodItem,
+  },
+  props: {
+    orderType: {
+      type: String,
+      default: 'all'
+    }
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
+    ...mapState({
+      allOrderList: state => state.all.allOrderList,
+    }),
+
+    ...mapGetters({
+      toPayOrderList: 'all/toPayOrderList',
+      toReceiveOrderList: 'all/toReceiveOrderList'
+    }),
+  },
+  watch: {},
+  methods: {},
+}
+</script>
+
+<style lang="scss" scoped>
+.good-list {
+  .good {
+    margin: 40px;
+    background-color: #fff;
+    padding: 40px 0;
+  }
+}
+
+</style>

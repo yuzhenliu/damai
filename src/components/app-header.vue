@@ -1,7 +1,7 @@
 <template>
   <div class="app-header border-bottom">
     <van-icon v-if="hasBack" class="back-btn" name="arrow-left" @click="backAction" />
-    <h1 class="title text-overflow">{{title}}</h1>
+    <h1 class="title text-overflow" :style="{opacity: titleOpacity}">{{title}}</h1>
     <slot name="right-btn"/>
   </div>
 </template>
@@ -17,6 +17,10 @@ export default {
     hasBack: {
       type: Boolean,
       default: false
+    },
+    titleOpacity: {
+      type: Number,
+      default: 1
     }
   },
   methods: {
@@ -56,6 +60,14 @@ export default {
     top: 0;
     padding: 0 35px;
     font-size: 70px;
+    line-height: 154px;
+  }
+  .right-text {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 35px;
+    font-size: 50px;
     line-height: 154px;
   }
 }

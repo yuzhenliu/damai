@@ -482,7 +482,7 @@ methods: post
 
 **url:** /api/order/add
 
-**参数:** goodsid,   name, picUrl,  selectInfo, addressid
+**参数:** goodsid,name, picUrl,  selectInfo, addressid
 
 **返回值:** 
 

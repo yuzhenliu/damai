@@ -12,6 +12,16 @@ method： GET
 */
 const CITYLIST = "/api/citylist";
 
+
+/*
+###### 搜索页面热搜列表
+api:/api/search/hotList
+method： GET
+参数：无
+返回值： message   code   data
+*/
+const SEARCH_HOTLIST = "/api/search/hotList";
+
 /*
 ##### 搜索关键字搜索品牌
 api: /api/brand/by_keyword
@@ -50,8 +60,8 @@ api: /api/brand/submit_comment
 methods: POST
 参数： comment_id, user_id,
 */
-const SUBMIT_COMMENT = "/api/brand/comment_detail";
-
+// const SUBMIT_COMMENT = "/api/brand/comment_detail";
+const SUBMMIT_COMMENT = "/api/brand/summit_comment";
 /*
 ##### 首页轮播图
 api: /api/home/banner_list
@@ -209,7 +219,7 @@ export default {
   BRAND_DETAIL,
   COMMENT_SUPPORT,
   COMMENT_DETAIL,
-  SUBMIT_COMMENT,
+  SUBMMIT_COMMENT,
   HOME_BANNER_LIST,
   HOME_CLASSIFY,
   GOODS_RECOMMEND_LIST,
@@ -227,5 +237,6 @@ export default {
   ADDRESS_LIST_API,
   ADD_ORDER_API,
   ORDER_LIST_API,
-  ORDER_MODIFY
+  ORDER_MODIFY,
+  SEARCH_HOTLIST
 };

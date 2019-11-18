@@ -41,7 +41,7 @@ Vue.component('组件名', {
   errorCaptured
 });
 
- name: '',
+  name: '',
   components: {},
   props: {},
   data() {
@@ -53,23 +53,11 @@ Vue.component('组件名', {
 
 ```
 
-master 分支上需要修改的
+$mainColor: #ff1268;
+$padding: 40px;
+border-radius: 60px 70px 70px 10px;
 
-## 头部的样式
-
-```
- .right-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0 35px;
-    font-size: 70px;
-    line-height: 154px;
-  }
-```
-
-### api
-
+### api 
 ```
 api
 

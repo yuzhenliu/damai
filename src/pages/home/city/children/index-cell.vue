@@ -5,7 +5,7 @@
       <div
         class="index-cell-item"
         v-for="subitem in item.cities"
-        :title="subitem.name"
+        :data-city='subitem.name'
         :key="subitem.cityid"
       >
         {{ subitem.name }}

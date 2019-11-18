@@ -1,107 +1,106 @@
 <template>
-  <div class="page" id="mine">
-    <!-- 页面过度 -->
+  <div class="page-wrap">
+    <div class="page" id="mine">
+      <app-header title="个人主页"></app-header>
+      <app-scroll class="d-center">
+        <div class="d-iphoto">
+          <!-- 头像部分 -->
+          <div class="d-myphoto">
+            <div class="d-install">
+              <div class="install" @click="installAction">
+                <van-icon name="setting-o" />
+              </div>
+              <div class="massage" @click="massageAction">
+                <van-icon name="more-o" />
+              </div>
+            </div>
+
+            <!-- 头像下边部分 -->
+            <div class="d-headportrait">
+              <div class="headportrait">
+                <img src="../../../assets/mine/default.png" alt />
+              </div>
+              <div class="information">
+                <h2>麦子1dSDR</h2>
+              </div>
+            </div>
+          </div>
+          <!-- 想看的演出 -->
+          <div class="d-tab">
+            <div class="tab tab1">
+              <span>0</span>
+
+              <span>想看的演出</span>
+            </div>
+            <div class="tab tab2">
+              <span>0</span>
+              <span>关注的人</span>
+            </div>
+            <div class="tab tab3">
+              <span>0</span>
+
+              <span>待评价演出</span>
+            </div>
+            <div class="tab tab4">
+              <span>0</span>
+              <span>优惠券</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="d_banner">
+          <img src="../../../assets/mine/vipCard.png" alt />
+        </div>
+        <!-- 个人信息列表部分 -->
+        <div class="d-adress">
+          <div class="indent border-bottom" @click="btnAction">
+            <div class="d-indent">我的订单</div>
+            <div class="indentIcont">
+              <van-icon name="arrow" />
+            </div>
+          </div>
+          <!-- 常用观演人 -->
+          <div class="watch border-bottom" @click="peAction">
+            <div class="d-watch">常用观演人</div>
+            <div class="indentIcont">
+              <van-icon name="arrow" />
+            </div>
+          </div>
+          <!-- 我的地址 -->
+          <div class="d-address border-bottom" @click="adAction">
+            <div class="dd-address">收货地址</div>
+            <div class="indentIcont">
+              <van-icon name="arrow" />
+            </div>
+          </div>
+          <!-- 在线客服 -->
+          <div class="d-service border-bottom" @click="seAction">
+            <div>在线客服</div>
+            <div class="indentIcont">
+              <van-icon name="arrow" />
+            </div>
+          </div>
+          <!-- 电子钱包 -->
+          <div class="d-wallet border-bottom" @click="waAction">
+            <div>电子钱包</div>
+            <div class="indentIcont">
+              <van-icon name="arrow" />
+            </div>
+          </div>
+          <!-- 公益三小时 -->
+          <div class="d-time border-bottom" @click="timeAction">
+            <div>公益三小时</div>
+            <div class="indentIcont">
+              <van-icon name="arrow" />
+            </div>
+          </div>
+        </div>
+      </app-scroll>
+    </div>
     <!-- 子页面 -->
     <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
       <router-view></router-view>
     </transition>
-
-    <app-header title="个人主页"></app-header>
-
-    <app-scroll class="d-center">
-      <div class="d-iphoto">
-        <!-- 头像部分 -->
-        <div class="d-myphoto">
-          <div class="d-install">
-            <div class="install" @click="installAction">
-              <van-icon name="setting-o" />
-            </div>
-            <div class="massage" @click="massageAction">
-              <van-icon name="more-o" />
-            </div>
-          </div>
-
-          <!-- 头像下边部分 -->
-          <div class="d-headportrait">
-            <div class="headportrait">
-              <img src="../../../assets/mine/default.png" alt />
-            </div>
-            <div class="information">
-              <h2>麦子1dSDR</h2>
-            </div>
-          </div>
-        </div>
-        <!-- 想看的演出 -->
-        <div class="d-tab">
-          <div class="tab tab1">
-            <span>0</span>
-
-            <span>想看的演出</span>
-          </div>
-          <div class="tab tab2">
-            <span>0</span>
-            <span>关注的人</span>
-          </div>
-          <div class="tab tab3">
-            <span>0</span>
-
-            <span>待评价演出</span>
-          </div>
-          <div class="tab tab4">
-            <span>0</span>
-            <span>优惠券</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="d_banner">
-        <img src="../../../assets/mine/vipCard.png" alt />
-      </div>
-      <!-- 个人信息列表部分 -->
-      <div class="d-adress">
-        <div class="indent border-bottom" @click="btnAction">
-          <div class="d-indent">我的订单</div>
-          <div class="indentIcont">
-            <van-icon name="arrow" />
-          </div>
-        </div>
-        <!-- 常用观演人 -->
-        <div class="watch border-bottom" @click="peAction">
-          <div class="d-watch">常用观演人</div>
-          <div class="indentIcont">
-            <van-icon name="arrow" />
-          </div>
-        </div>
-        <!-- 我的地址 -->
-        <div class="d-address border-bottom" @click="adAction">
-          <div class="dd-address">收货地址</div>
-          <div class="indentIcont">
-            <van-icon name="arrow" />
-          </div>
-        </div>
-        <!-- 在线客服 -->
-        <div class="d-service border-bottom" @click="seAction">
-          <div>在线客服</div>
-          <div class="indentIcont">
-            <van-icon name="arrow" />
-          </div>
-        </div>
-        <!-- 电子钱包 -->
-        <div class="d-wallet border-bottom" @click="waAction">
-          <div>电子钱包</div>
-          <div class="indentIcont">
-            <van-icon name="arrow" />
-          </div>
-        </div>
-        <!-- 公益三小时 -->
-        <div class="d-time border-bottom" @click="timeAction">
-          <div>公益三小时</div>
-          <div class="indentIcont">
-            <van-icon name="arrow" />
-          </div>
-        </div>
-      </div>
-    </app-scroll>
   </div>
 </template>
 
