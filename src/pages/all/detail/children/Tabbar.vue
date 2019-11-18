@@ -33,16 +33,26 @@ export default {
   computed: {
     ...mapState({
       // 正在浏览的商品
-      goodInfo: state => state.all.serveGood
+      goodInfo: state => state.all.serveGood,
+      isLogin: state => state.isLogin,
     })
   },
   methods: {
     // 客服
     serveAction() {
+       if(!this.isLogin) {
+        this.$router.push('/login');
+        return;
+      }
       this.$router.push(`/all/detail/${this.id}/serve`);
     },
     // 想看
     toSeeAction() {
+      // 如果没有登录
+      if(!this.isLogin) {
+        this.$router.push('/login');
+        return;
+      }
       // 切换图标
       // 保存数据到 vuex 里面
       if(this.name == 'like-o') {
@@ -57,9 +67,13 @@ export default {
     },
     // 立即购买
     toBuyAction() {
+      if(!this.isLogin) {
+        this.$router.push('/login');
+        return;
+      }
       // 通知父组件，显示选择框
       this.$emit('buying', true);
-    }
+    },
   },
 };
 </script>

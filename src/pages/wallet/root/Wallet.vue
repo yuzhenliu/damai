@@ -85,9 +85,6 @@ export default {
       this.$router.push('/login');
     }
   },
-  created() {
-    console.log(this.isLogin);
-  }
 };
 </script>
 

@@ -173,8 +173,6 @@ export default {
       shareShow: false, // 点击了分享
     };
   },
-  computed: {},
-  watch: {},
   methods: {
     // 请求数据
     async requestGoodsDetail(id) {
@@ -242,7 +240,7 @@ export default {
     shareAction() {
       this.$toast('分享成功');
       this.shareShow = false;
-    }
+    },
   },
   computed: {
     // 根据this.$refs.IScroll.scroll.y 来改变 opacity
