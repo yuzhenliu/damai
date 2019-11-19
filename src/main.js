@@ -7,6 +7,7 @@ import 'lib-flexible/flexible'
 import './mock'
 import './style/common.scss'
 
+
 Vue.config.productionTip = false
 
 Vue.use(plugin);

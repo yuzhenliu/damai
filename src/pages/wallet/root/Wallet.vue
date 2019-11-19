@@ -48,10 +48,7 @@
         </div>
       </app-scroll>
       <!-- 子页面 -->
-      <transition
-        enter-active-class="slideInRight"
-        leave-active-class="slideOutRight"
-      >
+      <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
         <router-view></router-view>
       </transition>
     </div>
@@ -85,10 +82,10 @@ export default {
   methods: {
     // 跳转到登录页面
     toLoginInAction() {
-      this.$router.push('/login');
+      this.$router.push("/login");
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -119,8 +116,6 @@ $padding: 40px;
       margin: 40px auto;
     }
   }
-
-
 }
 </style>
 <style lang="scss">
@@ -184,9 +179,9 @@ $padding: 40px;
       bottom: 30px;
 
       .van-swipe__indicator {
-      width: 16px;
-      height: 16px;
-    }
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 
@@ -205,11 +200,6 @@ $padding: 40px;
       border-radius: 40px;
       color: #fff;
     }
-   
-   
   }
-
-
 }
-
 </style>
