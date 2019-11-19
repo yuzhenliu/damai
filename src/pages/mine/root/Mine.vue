@@ -27,7 +27,7 @@
           </div>
           <!-- 想看的演出 -->
           <div class="d-tab">
-            <div class="tab tab1">
+            <div class="tab tab1" @click="wantwatch">
               <span>0</span>
 
               <span>想看的演出</span>
@@ -98,17 +98,30 @@
       </app-scroll>
     </div>
     <!-- 子页面 -->
-    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+    <transition
+      enter-active-class="slideInRight"
+      leave-active-class="slideOutRight"
+    >
       <router-view></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import { Icon, Button } from "vant";
+// import Vue from "vue";
+// import { Icon, Button } from "vant";
 import mineService from "../../../services/mineService";
+import store from "../../../store";
 export default {
+  beforeRouteEnter(to, from, next) {
+    // 没有登录，进去登录页面
+    if (!store.state.isLogin) {
+      Vue.$router.push("/login");
+      next(false);
+    } else {
+      next();
+    }
+  },
   name: "",
   components: {},
   props: {},
@@ -118,6 +131,7 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    wantwatch() {},
     installAction() {
       this.$router.push("/mine/install");
     },

@@ -3,7 +3,12 @@
     <!-- 首页 -->
     <div class="page" id="all">
       <app-header title="全部" hasBack>
-        <van-icon name="search" slot="right-btn" class="right-btn" @click="toSearchAction"/>
+        <van-icon
+          name="search"
+          slot="right-btn"
+          class="right-btn"
+          @click="toSearchAction"
+        />
       </app-header>
 
       <div class="content">
@@ -34,10 +39,18 @@
             :style="{ height: '100%', width: '50%' }"
             closeable
           >
-          <h6 class="title">分类导航</h6>
-          <ul class="popupList">
-            <li @click="changeClassifyAction(index, classify.classify_id)" v-for="(classify, index) in classifyArr" :key="classify.classify_id" class="popupListItem" :class="{popActive: (classifyActiveIndex==index),}">{{classify.name}}</li>
-          </ul>
+            <h6 class="title">分类导航</h6>
+            <ul class="popupList">
+              <li
+                @click="changeClassifyAction(index, classify.classify_id)"
+                v-for="(classify, index) in classifyArr"
+                :key="classify.classify_id"
+                class="popupListItem"
+                :class="{ popActive: classifyActiveIndex == index }"
+              >
+                {{ classify.name }}
+              </li>
+            </ul>
           </van-popup>
         </div>
 
@@ -48,7 +61,10 @@
       </div>
     </div>
     <!-- 子页面 -->
-    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+    <transition
+      enter-active-class="slideInRight"
+      leave-active-class="slideOutRight"
+    >
       <router-view></router-view>
     </transition>
   </div>
@@ -59,13 +75,24 @@ import commonService from "../../../services/commonService";
 import allService from "../../../services/allService";
 import { Tab, Tabs, Popup } from "vant";
 import GoodList from "./children/Good-List";
+import Vue from "vue";
+import store from "../../../store";
 export default {
+  beforeRouteEnter(to, from, next) {
+    // 没有登录，进去登录页面
+    if (!store.state.isLogin) {
+      Vue.$router.push("/login");
+      next(false);
+    } else {
+      next();
+    }
+  },
   name: "all",
   components: {
     [Tabs.name]: Tabs,
     [Tab.name]: Tab,
     [GoodList.name]: GoodList,
-    [Popup.name]: Popup,
+    [Popup.name]: Popup
   },
   props: {},
   data() {
@@ -73,7 +100,7 @@ export default {
       classifyArr: [],
       goodsListArr: [],
       show: false,
-      classifyActiveIndex: 0,
+      classifyActiveIndex: 0
     };
   },
   computed: {},
@@ -91,7 +118,7 @@ export default {
       const result = await allService.requestGoodsByClassifyId(classify_id);
       this.goodsListArr = result.list;
     },
-      // 点击 tabbar 拿到分类请求数据
+    // 点击 tabbar 拿到分类请求数据
     clickAction(classify_id) {
       // 拿到当前 tag 的 classify_id
       this.requestGoodsList(classify_id);
@@ -107,7 +134,7 @@ export default {
     },
     // 跳转到搜索页面
     toSearchAction() {
-      this.$router.push('/home/search');
+      this.$router.push("/home/search");
     }
   },
   created() {
