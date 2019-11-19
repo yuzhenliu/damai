@@ -7,23 +7,25 @@
 
       <app-scroll class="content">
         <div class="cont">
-          <app-comment-item :item="detail"></app-comment-item>
+          <app-comment-item :item="detail" @commentSelf='commentSelf'></app-comment-item>
         </div>
 
         <div class="reply-cont">
-          <h4>全部回复（{{ commentList.length +myReplyList.length}}）</h4>
+          <h4>全部回复（{{ commentList.length + myReplyList.length }}）</h4>
           <div class="list">
-              <brand-detail-comment-reply
-              v-for="(item, index) in myReplyList" :key="index"
+            <brand-detail-comment-reply
+              v-for="(item, index) in myReplyList"
+              :key="index + 'c'"
               :item="item"
               :userInfo="userInfo"
             ></brand-detail-comment-reply>
 
             <brand-detail-comment-reply
-              v-for="(item, index) in commentList" :key="index"
+              v-for="(item, index) in commentList"
+              :key="index"
               :item="item"
               :userInfo="userInfo"
-              @sendReplyOther='replyOther'
+              @sendReplyOther="replyOther"
             ></brand-detail-comment-reply>
           </div>
         </div>
@@ -31,7 +33,7 @@
 
       <div class="postReply">
         <div class="cont">
-          <img :src="userInfo.userAvar" :alt="userInfo.userName" />
+          <img :src="userInfo.userAvar" :alt="userInfo.username" />
           <input
             type="text"
             v-model="replyVal"
@@ -49,7 +51,7 @@
 import homeService from "../../../services/homeService";
 import appCommentItem from "../../../components/app-comment-item";
 import commentReply from "./children/comment-reply";
-import { userInfo } from 'os';
+import { userInfo } from "os";
 export default {
   name: "brand-detail-comment",
   components: {
@@ -63,8 +65,11 @@ export default {
       commentList: [],
       userInfo: {},
       replyVal: "",
-      myReplyList:[],
-      poption:{}
+      myReplyList: [],
+      poption: {},
+      keepuserN:'',
+      createdTime:"",
+      commitTime:''
     };
   },
   methods: {
@@ -74,45 +79,87 @@ export default {
         commentItem
       } = await homeService.requestBrandDetailComment(this.id);
       this.detail = detail;
-      this.detail.commentNum = commentItem.length+this.myReplyList.length;
+      this.detail.commentNum = commentItem.length + this.myReplyList.length;
       this.commentList = commentItem;
+      //保存回复用户初始名
+      this.keepuserN=this.detail.userName;
     },
     postReplyAction() {
-    //   console.log(this.replyVal);
-      let newReply={
-          userAvar:this.userInfo.userAvar,
-          userName:this.userInfo.userName,
-          commentCon:this.replyVal,
-          commentTime:0,
-          supportNum:0,
-      }
-      if(JSON.stringify(this.poption) !== "{}"){
-          newReply.PuserName=this.poption.PuserName;
-          newReply.PcommentCon=this.poption.PcommentCon;
-          newReply.isChild=true;
+      this.commitTime=Date.now();
+      let newReply = {
+        userAvar: this.userInfo.userAvar,
+        userName: this.userInfo.username,
+        commentCon: this.replyVal,
+        commentTime: this.theData,
+        supportNum: 0
+      };
+      if (JSON.stringify(this.poption) !== "{}") {
+        newReply.PuserName = this.poption.PuserName;
+        newReply.PcommentCon = this.poption.PcommentCon;
+        newReply.isChild = true;
       }
       this.myReplyList.push(newReply);
-      this.poption={};
+      this.poption = {};
+      this.replyVal = "";
     },
-    replyOther(option){
-        this.poption=option;
-        this.$refs.inp.focus();
-        this.userN=option.PuserName;
+    replyOther(option) {
+      Object.assign(this.poption,option);  //新增属性添加setter getter
+      this.$refs.inp.focus();
+      this.userN = option.PuserName;
+      // console.log(this.poption);
+    },
+    commentSelf(selfName){
+      this.userN = selfName;
+      this.poption = {};
     }
   },
   computed: {
     title() {
-      return this.detail.userName + "的评价";
+      return this.detail.userName + "的评价";   // 标题
     },
-    userN(){
-        return this.detail.userName;
+    userN: {     
+      get: function() {
+        return this.keepuserN;
+      },
+      set: function(newValue) {
+        this.keepuserN=newValue;
+      }
+    },
+    theData(){
+      let time=this.commitTime-this.createdTime;
+    // let time=1000*60*60*24*11;   //测试表达式
+    //1分=1000毫秒*60
+    //1时=1000毫秒*60*60
+    //1天=1000毫秒*60*60*24
+      console.log(time);
+      if(time<1000*60){
+        return '刚刚';
+      }else if(time>1000*60&&time<1000*60*60){
+        return Math.floor(time/(1000*60))+'分钟前';
+      }else if(time>1000*60*60&&time<1000*60*60*24){
+         return Math.floor(time/(1000*60*60))+'小时前';
+      }else if(time>1000*60*60*24&& time<1000*60*60*24*10){
+         return Math.floor(time/(1000*60*60*24))+'天前';
+      }else if( time>1000*60*60*24*10){
+        let d=new Date();
+        return d.getMonth(this.commitTime)+'.'+d.getDate(this.commitTime);
+      }
     }
+    
   },
   created() {
     this.id = this.$route.params.id;
     this.initData();
-    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    let userInfo = JSON.parse(localStorage.getItem("userinfo"));
     this.userInfo = userInfo;
+    //设置默认头像
+    if (!userInfo.userAvar) {
+      userInfo.userAvar =
+        "https://perico.damai.cn/userheadphotos/450483/90096787_150_150.jpg?x-oss-process=image/resize,w_100,h_100,/quality,q_50/format,webp";
+    }
+
+
+    this.createdTime=Date.now();
   }
 };
 </script>
@@ -123,18 +170,17 @@ export default {
     padding: 40px;
     box-sizing: border-box;
   }
-  .reply-cont{
-
-  border-top: 1px solid #ccc;
-  padding-top: 90px;
-  margin-top: 90px;
-  padding-bottom: 190px;
-  h4 {
-    font-size: 65px;
-  }
-  .list {
-    margin-top: 65px;
-  }
+  .reply-cont {
+    border-top: 1px solid #ccc;
+    padding-top: 90px;
+    margin-top: 90px;
+    padding-bottom: 190px;
+    h4 {
+      font-size: 65px;
+    }
+    .list {
+      margin-top: 65px;
+    }
   }
   .postReply {
     width: 100%;

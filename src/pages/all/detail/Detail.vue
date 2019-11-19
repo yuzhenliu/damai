@@ -31,7 +31,7 @@
       <!-- 滚动内容区域 -->
 
       <app-scroll class="scrollContent" ref="IScroll">
-        <div class="mask"></div>
+        <div class="yu-mask"></div>
         <div class="detailContent">
           <p class="serverDesc">{{goodDetail.serverDesc}}</p>
 
@@ -173,8 +173,6 @@ export default {
       shareShow: false, // 点击了分享
     };
   },
-  computed: {},
-  watch: {},
   methods: {
     // 请求数据
     async requestGoodsDetail(id) {
@@ -242,7 +240,7 @@ export default {
     shareAction() {
       this.$toast('分享成功');
       this.shareShow = false;
-    }
+    },
   },
   computed: {
     // 根据this.$refs.IScroll.scroll.y 来改变 opacity
@@ -380,7 +378,7 @@ $padding: 40px;
     bottom: 172px;
     width: 100%;
 
-    .mask {
+    .yu-mask {
       width: 100%;
       height: 566px;
       background-color: transparent;

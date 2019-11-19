@@ -39,18 +39,12 @@
             :style="{ height: '100%', width: '50%' }"
             closeable
           >
-            <h6 class="title">分类导航</h6>
-            <ul class="popupList">
-              <li
-                @click="changeClassifyAction(index, classify.classify_id)"
-                v-for="(classify, index) in classifyArr"
-                :key="classify.classify_id"
-                class="popupListItem"
-                :class="{ popActive: classifyActiveIndex == index }"
-              >
-                {{ classify.name }}
-              </li>
-            </ul>
+          <h6 class="title">分类导航</h6>
+          <ul class="popupList">
+            <li @click="changeClassifyAction(index, classify.classify_id)" v-for="(classify, index) in classifyArr" :key="classify.classify_id" class="popupListItem" :class="{popActive: (classifyActiveIndex==index),}">
+              <span>{{classify.name}}</span>
+            </li>
+          </ul>
           </van-popup>
         </div>
 
@@ -202,17 +196,32 @@ $padding: 40px;
     color: #333;
   }
   .popupList {
-    margin-top: 50px;
+    margin-top: 60px;
 
     .popupListItem {
-      text-indent: 80px;
+      text-indent: 60px;
       margin: 50px;
-      color: #444;
-      font-size: 48px;
+    
+      span {
+        text-indent: 0;
+        display: inline-block;
+        padding: 30px;
+        background-color: #eee;
+        color: #444;
+        font-size: 48px;
+        text-align: center;
+        border-radius: 10px;
+      }
     }
     .popActive {
       color: $mainColor;
     }
+  }
+
+  .van-icon {
+    font-size: 60px;
+    top: 40px;
+    right: 40px;
   }
 }
 </style>

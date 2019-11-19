@@ -246,7 +246,7 @@ export default {
       color: #fff;
     }
     .sharebtn {
-      background: #fbe9ef82;
+      background: rgba(251, 233, 239, 0.51);;
       color: #ea416b;
       margin-left: 30px;
     }

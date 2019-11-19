@@ -3,7 +3,17 @@ export default {
     component: () => import('../pages/mine/root/Mine'),
     children: [{
             path: 'address',
-            component: () => import('../pages/mine/address/Address')
+            component: () => import('../pages/mine/address/Address'),
+            children: [{
+                    path: 'setaddress',
+                    component: () => import('../pages/mine/address/children/setAddress'),
+                },
+                {
+                    path: 'addaddress',
+                    component: () => import('../pages/mine/address/children/addAddress'),
+                },
+            ]
+
         },
         {
             path: 'service',
