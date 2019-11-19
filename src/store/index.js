@@ -25,11 +25,13 @@ export default new Vuex.Store({
     // 实际观演人
     observerArr: [{
         name: '千寻',
-        idCard: '36721561252365662'
+        idCard: '36721561252365662',
+        idCardType: '身份证'
       },
       {
         name: '小白',
-        idCard: '36721561252365656'
+        idCard: '36721561252365656',
+        idCardType: '身份证'
       },
     ],
   },

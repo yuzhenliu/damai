@@ -34,9 +34,6 @@ export default {
     toAddObserve() {
       this.$router.push('/mine/addWatch');
     }
-  },
-  created() {
-    console.log(this.observerArr);
   }
 };
 </script>
