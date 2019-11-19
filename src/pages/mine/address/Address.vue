@@ -2,7 +2,7 @@
   <div class="page" id="address">
     <app-header title="我的地址" :hasBack="true"></app-header>
     <app-scroll class="dd_center">
-      <h1>{{list}}</h1>
+      <h1>{{ list }}</h1>
     </app-scroll>
   </div>
 </template>

@@ -44,6 +44,7 @@ import mineService from "../../../services/mineService";
 
 import Vue from "vue";
 import { Icon, Button, Toast } from "vant";
+import { log } from "util";
 
 Vue.use(Icon).use(Button);
 export default {
@@ -55,7 +56,7 @@ export default {
   data() {
     return {
       show: true,
-      tip: "验证码",
+      tip: "获取验证码",
       tel: "",
       getCode: null,
       psd: "",
@@ -70,7 +71,6 @@ export default {
   watch: {},
   methods: {
     goLoginAction() {
-      this.$store.commit("isLogin", true);
       this.$router.push("/login");
     },
     checkPhone(msg) {
@@ -115,10 +115,13 @@ export default {
         console.log(this.disabled);
         //没有过期
         if (this.getCode == this.code) {
+          // 没有问题
+          console.log("没有问题,下一步注册");
           // 验证密码
           if (!this.psd) {
             Toast("请输入完整!");
           } else {
+            console.log(this.psd);
             //发送注册的请求
             let result = await mineService.register(this.tel, this.psd);
             console.log(result);

@@ -93,10 +93,6 @@ router.post('/login', (req, res) => {
         tel,
         value
     } = req.body;
-    console.log(1111);
-
-    console.log(tel, value);
-
     User.findByTel(tel)
         .then(result => {
             if (result) {

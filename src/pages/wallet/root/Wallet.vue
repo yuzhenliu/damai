@@ -4,7 +4,7 @@
       <app-header title="票夹" hasBack></app-header>
       <app-scroll class="content" v-if="isLogin">
         <!-- 如果没有 -->
-        <div v-if="(finishedOrderList.length==0)" class="none-ticket">
+        <div v-if="finishedOrderList.length == 0" class="none-ticket">
           <span>你的票夹空空哒</span>
         </div>
         <!-- 有完成的订单 / 票夹 -->
@@ -48,7 +48,10 @@
         </div>
       </app-scroll>
       <!-- 子页面 -->
-      <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+      <transition
+        enter-active-class="slideInRight"
+        leave-active-class="slideOutRight"
+      >
         <router-view></router-view>
       </transition>
     </div>
@@ -60,6 +63,15 @@ import Ticket from "./children/Ticket";
 import { mapGetters, mapState } from "vuex";
 import { Swipe, SwipeItem } from "vant";
 export default {
+  beforeRouteEnter(to, from, next) {
+    // 没有登录，进去登录页面
+    if (!store.state.isLogin) {
+      Vue.$router.push("/login");
+      next(false);
+    } else {
+      next();
+    }
+  },
   name: "wallet",
   components: {
     [Ticket.name]: Ticket,

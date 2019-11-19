@@ -13,7 +13,7 @@ export const sendCode = async (tel) => {
     tel
   });
 
-  // console.log(result); 
+  console.log(result);
 
   // 判断请求的结果
   if (result.code === 0) {
@@ -43,7 +43,6 @@ export const register = async (tel, password) => {
   } else {
     // 失败了
     throw new Error(result.message);
-
   }
 }
 
@@ -60,18 +59,14 @@ export const register = async (tel, password) => {
 // }
 
 // 登录
-export const login = async (tel, value) => {
+export const login = async (tel, type, value) => {
   // 发送请求
-  console.log(tel, value);
-
   const {
     data: result
   } = await Http.post(api.LOGIN_API, {
     tel,
     value
   });
-  console.log(result);
-
   // 判断请求的结果
   if (result.code === 0) {
     // 成功
