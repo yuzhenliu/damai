@@ -63,7 +63,7 @@ export default {
         this.name = 'like-o';
         this.toSeeText = '想看';
       }
-      this.$store.commit('selectCityAction', this.goodInfo);
+      this.$store.commit('setToSeeList', this.goodInfo);
     },
     // 立即购买
     toBuyAction() {

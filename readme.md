@@ -82,3 +82,9 @@ window.addEventListener(‘touchmove’, func, { passive: false })
 2、应用 CSS 属性 touch-action: none; 这样任何触摸事件都不会产生默认行为，但是 touch 事件照样触发。
 touch-action 还有很多选项，
 ————————————————
+
+
+
+###### 正则表达式
+- let nameReg = /^[\u4E00-\u9FA5]{2,4}$/;
+- let idCardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;  

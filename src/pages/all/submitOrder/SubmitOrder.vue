@@ -37,7 +37,7 @@
             </div>
             <div v-for="item in observerArr" :key="item.idCard" class="observerInfo">
               <span class="name">{{item.name}}</span>
-              <span class="idCard">身份证{{item.idCard}}</span>
+              <span class="idCard">{{item.idCardType}}&nbsp;&nbsp;{{item.idCard}}</span>
               <input type="checkbox" class="check" ref="check" />
             </div>
 
@@ -228,11 +228,12 @@ $padding: 40px;
         overflow: hidden;
 
         .title {
-          font-size: 50px;
+          font-size: 48px;
           color: #fff;
         }
         .info {
-          font-size: 33px;
+          margin-top: 10px;
+          font-size: 40px;
           color: #fff;
         }
       }
@@ -292,7 +293,7 @@ $padding: 40px;
         background-color: #fff;
         padding: $padding;
         box-sizing: border-box;
-        font-size: 34px;
+        font-size: 38px;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -321,7 +322,7 @@ $padding: 40px;
         background-color: #fff;
         padding: $padding;
         box-sizing: border-box;
-        font-size: 34px;
+        font-size: 42px;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -343,7 +344,7 @@ $padding: 40px;
         background-color: #fff;
         .tit {
           padding: 20px 0;
-          font-size: 30px;
+          font-size: 38px;
           color: #555;
         }
         .way {
@@ -352,8 +353,9 @@ $padding: 40px;
           color: #333;
         }
         .van-cell {
-          line-height: 100px;
+          line-height: 120px;
           vertical-align: middle;
+          font-size: 42px;
 
           .van-icon {
             position: absolute;
@@ -361,6 +363,7 @@ $padding: 40px;
             right: 0;
             transform: translateY(-50%);
             color: #222;
+            font-size: 42px;
           }
         }
       }
@@ -400,7 +403,7 @@ $padding: 40px;
         background-color: #fff;
         .tit {
           padding: 20px 0;
-          font-size: 30px;
+          font-size: 38px;
           color: #555;
         }
         .name,
@@ -432,7 +435,7 @@ $padding: 40px;
           justify-content: space-between;
           .tit {
             padding: 20px 0;
-            font-size: 30px;
+            font-size: 42px;
             color: #555;
           }
           .van-icon {

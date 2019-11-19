@@ -7,7 +7,7 @@
       <div class="content">
         <div class="van-cell">
           <label for="name">姓名</label>
-          <input type="text" id="name" placeholder="请输入姓名">
+          <input type="text" id="name" placeholder="请输入姓名" ref="name">
         </div>
         <div class="van-cell">
           <label for="idCard">证件类型</label>
@@ -18,7 +18,7 @@
         </div>
         <div class="van-cell">
           <label for="idCard">证件号码</label>
-          <input type="text" id="idCard" placeholder="请输入证件号码">
+          <input type="text" id="idCard" placeholder="请输入证件号码" ref="idCard">
         </div>
         <van-popup
           v-model="showIdCard"
@@ -70,7 +70,38 @@ export default {
   },
   methods: {
     // 保存观演人信息
-    saveAction() {},
+    saveAction() {
+      // 获取到输入的值，进行判断,是否为空
+      // 跳转到刚刚的页面
+      let name = this.$refs.name.value;
+      let idCard = this.$refs.idCard.value;
+      let idCardType = this.idCardTypeDefault;
+      let nameReg = /^[\u4E00-\u9FA5]{2,4}$/;
+      let idCardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;  
+      if(!name) {
+        this.$toast('姓名不能为空');
+        return;
+      }
+      if(!idCard) {
+        this.$toast('证件号码不能为空');
+        return;
+      }
+      if(!nameReg.test(name)){
+        this.$toast('姓名格式错误');
+        return;
+      }
+      if(!idCardReg.test(idCard)){
+        this.$toast('证件号码格式错误');
+        return;56
+      }
+      // 刘喧 360721199612111225 身份证
+      this.$store.commit('setobserverArr', {
+        name,
+        idCard,
+        idCardType
+      });
+      this.$router.back();
+    },
     // 获取身份类型
     checkIdCardAction() {
       this.showIdCard = true;
