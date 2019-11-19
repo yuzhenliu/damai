@@ -33,6 +33,9 @@ export default {
     ...mapState({
        city: state => state.city,
     })
+  },
+  created(){
+    console.log(this.city);
   }
 };
 </script>

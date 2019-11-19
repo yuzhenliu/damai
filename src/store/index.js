@@ -81,6 +81,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    all,
+    all
   }
 })

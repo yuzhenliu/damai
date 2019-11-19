@@ -40,6 +40,7 @@
 
 <script>
 import { Rate } from "vant";
+import { mapState } from "vuex";
 export default {
   name: "app-comment-item",
   components: {
@@ -49,6 +50,11 @@ export default {
     item: {
       type: Object
     }
+  },
+  computed: {
+    ...mapState({
+      isLogin: state => state.isLogin
+    })
   },
   methods: {
     supportAction(ev) {
@@ -71,19 +77,24 @@ export default {
       }
     },
     toCommentDetailAction(id) {
-      if(this.$route.name=='commentDetail'){
+      if (this.$route.name == "commentDetail") {
         return;
       }
-      this.$router.replace({
+      // 如果没有登录
+      if (!this.isLogin) {
+        this.$router.push("/login");
+        return;
+      }
+      this.$router.push({
         name: "commentDetail",
         params: { id: id }
       });
     },
-    commentHandle(){
+    commentHandle() {
       // console.log(this.$route);
-      if(this.$route.name=='commentDetail'){
-        this.$emit('commentSelf',this.item.userName);
-      }else{
+      if (this.$route.name == "commentDetail") {
+        this.$emit("commentSelf", this.item.userName);
+      } else {
         return;
       }
     }
@@ -145,7 +156,7 @@ export default {
       border-radius: 50px;
       width: 31%;
       margin: 1.1%;
-      height:100%;
+      height: 100%;
     }
   }
   &-icon {
