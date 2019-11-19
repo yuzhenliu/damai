@@ -7,9 +7,13 @@ const state = {
   allOrderList: [],
 
   // 已经选中的座位  保存位置
-  selectedPosition: [10, 16, 27],
+  selectedPosition: {
+    0: [10, 16, 27],
+  },
   // 暂时被选中的座位
-  tmpSelectedPosition: [3],
+  tmpSelectedPosition: {
+    0: [3]
+  },
 }
 
 const mutations = {
@@ -29,13 +33,22 @@ const mutations = {
   setOrderStatus(state, obj) {
     state.allOrderList[obj.index].status = obj.status;
   },
-  // 添加已经选中的座位
-  setSelectedPosition(state, arr) {
-    state.selectedPosition = state.selectedPosition.concat(arr);
+  // 添加已经选中的座位 id arr
+  setSelectedPosition(state, obj) {
+    if(state.selectedPosition[obj.id]) { // 如果 key 存在的话
+      state.selectedPosition[obj.id] = state.selectedPosition[obj.id].concat(obj.arr);
+    }else {
+      state.selectedPosition[obj.id] = obj.arr;
+    }
+    
   },
-  // 添加临时选中的位置
-  addTmpSelectedPosition(state, arr) {
-    state.tmpSelectedPosition = state.tmpSelectedPosition.concat(arr);
+  // 添加临时选中的位置 id arr
+  addTmpSelectedPosition(state, obj) {
+    if(state.tmpSelectedPosition[obj.id]) { // 如果 key 存在的话
+      state.tmpSelectedPosition[obj.id] = state.tmpSelectedPosition[obj.id].concat(obj.arr);
+    }else {
+      state.tmpSelectedPosition[obj.id] = obj.arr;
+    }
   }
 }
 

@@ -184,6 +184,10 @@ export default {
         payWay,
         allPrice: this.selectedGood.ticket.price * this.selectedGood.seat.length,
       };
+      console.log({
+          id: this.selectedGood.ticket.id,
+          arr: this.selectedGood.seat,
+      });
       // 弹出确认框，是否付款，如果点击确认显示付款成功，给商品添加状态 1 / 点击取消，给商品添加状态 0，则跳转到订单页面
       Dialog.confirm({
         title: "订单支付",
@@ -194,7 +198,10 @@ export default {
           goodOrder.status = 1;
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
-          this.$store.commit('all/setSelectedPosition', this.selectedGood.seat);
+          this.$store.commit('all/setSelectedPosition', {
+            id: this.selectedGood.ticket.id,
+            arr: this.selectedGood.seat,
+          });
           this.$router.replace('/mine/indent');
         })
         .catch(() => {
@@ -202,7 +209,10 @@ export default {
           goodOrder.status = 0;
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
-          this.$store.commit('all/addTmpSelectedPosition', this.selectedGood.seat);
+          this.$store.commit('all/addTmpSelectedPosition', {
+            id: this.selectedGood.ticket.id,
+            arr: this.selectedGood.seat,
+          });
           this.$router.replace('/mine/indent');
         });
     },

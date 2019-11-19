@@ -70,6 +70,10 @@ export default {
     seatArr: {
       type: Array,
       default: () => [],
+    },
+    goodId: {
+      type: [Number, String],
+      default: 0,
     }
   },
   data() {
@@ -90,11 +94,14 @@ export default {
       })
         .then(() => {
           this.$toast('支付成功');
-          this.$store.commit('all/setSelectedPosition', this.seatArr);
           this.$store.dispatch('all/getOrderIndex', {
             orderId: this.orderId,
             status: 1
-          })
+          });
+          this.$store.commit('all/setSelectedPosition', {
+            id: this.goodId,
+            arr: this.seatArr,
+          });
         })
         .catch(() => {
           // 未付款

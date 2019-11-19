@@ -6,7 +6,7 @@
         <ul class="seatList">
           <li
             class="seat"
-            :class="{selected: (selectedPosition.indexOf(index) != -1 || tmpSelectedPosition.indexOf(index) != -1), active: (activeArr.indexOf(index) != -1)}"
+            :class="{selected: (selectedPositionLocation.indexOf(index) != -1 || tmpSelectedPositionLocation.indexOf(index) != -1), active: (activeArr.indexOf(index) != -1)}"
             v-for="(item, index) in 40"
             :key="index"
             @click="selectAction(index)"
@@ -42,6 +42,8 @@ export default {
     return {
       activeArr: [],
       tmpArr: [],
+      selectedPositionLocation: [],
+      tmpSelectedPositionLocation: [],
     };
   },
   computed: {
@@ -51,19 +53,19 @@ export default {
       // 已经被选中的位置
       selectedPosition: state => state.all.selectedPosition,
       // 暂时被选中的位置，可能用户还没有付款
-      tmpSelectedPosition: state => state.all.tmpSelectedPosition
+      tmpSelectedPosition: state => state.all.tmpSelectedPosition,
     })
   },
   watch: {},
   methods: {
     // 选择座位
     selectAction(index) {
-      if(this.selectedPosition.indexOf(index) != -1) {
+      if(this.selectedPositionLocation.indexOf(index) != -1) {
         // 说明被人选中了
         this.$toast('亲，该位置已被选了哦');
         return;
       }
-      if(this.tmpSelectedPosition.indexOf(index) != -1) {
+      if(this.tmpSelectedPositionLocation.indexOf(index) != -1) {
         // 说明被人暂时选中了
         this.$toast('该位置已被预选，还有机会哦');
         return;
@@ -88,8 +90,11 @@ export default {
     }
   },
   created() {
-    this.tmpArr = this.tmpSelectedPosition;
-  }
+    this.selectedPositionLocation = this.selectedPosition[this.id] || [];
+    this.tmpSelectedPositionLocation = this.tmpSelectedPosition[this.id] || [];
+    console.log(this.selectedPositionLocation);
+    console.log(this.tmpSelectedPositionLocation);
+  },
 };
 </script>
 
