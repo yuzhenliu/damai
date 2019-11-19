@@ -66,6 +66,10 @@ export default {
     orderId: {
       type: [Number, String],
       default: ''
+    },
+    seatArr: {
+      type: Array,
+      default: () => [],
     }
   },
   data() {
@@ -86,6 +90,7 @@ export default {
       })
         .then(() => {
           this.$toast('支付成功');
+          this.$store.commit('all/setSelectedPosition', this.seatArr);
           this.$store.dispatch('all/getOrderIndex', {
             orderId: this.orderId,
             status: 1

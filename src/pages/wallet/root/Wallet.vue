@@ -15,7 +15,7 @@
             :key="item.orderId"
             :orderId="item.orderId"
             :payWay="item.payWay"
-            :price="item.selectedGood.ticket.price"
+            :price="item.allPrice"
             :title="item.selectedGood.goodDetail.title"
           />
         </div>
@@ -63,15 +63,6 @@ import Ticket from "./children/Ticket";
 import { mapGetters, mapState } from "vuex";
 import { Swipe, SwipeItem } from "vant";
 export default {
-  beforeRouteEnter(to, from, next) {
-    // 没有登录，进去登录页面
-    if (!store.state.isLogin) {
-      Vue.$router.push("/login");
-      next(false);
-    } else {
-      next();
-    }
-  },
   name: "wallet",
   components: {
     [Ticket.name]: Ticket,

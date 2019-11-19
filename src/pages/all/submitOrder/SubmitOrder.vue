@@ -13,8 +13,8 @@
             </div>
             <div class="ticketInfo border-bottom">
               <p class="date">{{selectedGood.goodDetail.date}}</p>
-              <p class="price">￥{{selectedGood.ticket.price}}票档 x 1张</p>
-              <p class="seat">座位号： {{selectedGood.seat}}</p>
+              <p class="price">￥{{selectedGood.ticket.price}}票档 x {{selectedGood.seat.length}}张</p>
+              <p class="seat">座位号：<span v-for="(item, index) in selectedGood.seat" :key="index">{{item + 1}}</span></p>
             </div>
             <div>
               <p class="warmTip border-bottom">
@@ -87,7 +87,7 @@
       <!-- 底部栏 -->
       <div class="tabbar border-top" v-if="selectedGood">
         <p>
-          <span class="price">￥{{selectedGood.ticket.price}}</span>
+          <span class="price">￥{{selectedGood.ticket.price * selectedGood.seat.length}}</span>
         </p>
         <div class="define" @click="submitAction">
           <span>提交订单</span>
@@ -140,6 +140,8 @@ export default {
         return;
       }
       let selectedObserveArr = [];
+      let nameReg = /^[\u4E00-\u9FA5]{2,4}$/;
+      let telReg = /^1(3|4|5|7|8)\d{9}$/;
       this.$refs.check.forEach((item, index) => {
         if(item.checked) {
           selectedObserveArr.push(this.observerArr[index]);
@@ -157,8 +159,16 @@ export default {
         this.$toast("联系人姓名不能为空");
         return;
       }
+      if(!nameReg.test(this.$refs.name.value)){
+        this.$toast('姓名格式错误');
+        return;
+      }
       if (!this.$refs.tel.value) {
         this.$toast("联系人电话不能为空");
+        return;
+      }
+      if(!telReg.test(this.$refs.tel.value)){
+        this.$toast('联系人电话格式错误');
         return;
       }
       let payWay = this.isZHIFUBAO ? "支付宝" : "微信";
@@ -171,7 +181,8 @@ export default {
           name: this.$refs.name.value,
           tel: this.$refs.tel.value
         },
-        payWay
+        payWay,
+        allPrice: this.selectedGood.ticket.price * this.selectedGood.seat.length,
       };
       // 弹出确认框，是否付款，如果点击确认显示付款成功，给商品添加状态 1 / 点击取消，给商品添加状态 0，则跳转到订单页面
       Dialog.confirm({
@@ -183,14 +194,15 @@ export default {
           goodOrder.status = 1;
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
+          this.$store.commit('all/setSelectedPosition', this.selectedGood.seat);
           this.$router.replace('/mine/indent');
-          console.log(goodOrder.selectedObserveArr);
         })
         .catch(() => {
           // 未付款
           goodOrder.status = 0;
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
+          this.$store.commit('all/addTmpSelectedPosition', this.selectedGood.seat);
           this.$router.replace('/mine/indent');
         });
     },
@@ -254,6 +266,14 @@ $padding: 40px;
         .seat {
           font-size: 33px;
           color: #fff;
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          span {
+            margin: 0 10px;
+          }
         }
       }
       .warmTip {

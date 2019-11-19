@@ -5,10 +5,11 @@ const state = {
   selectedGood: null,
   // 全部订单 1 为待收货  0 为待付款
   allOrderList: [],
-  // 待付款的订单 
-  // toPayOrderList: [],
-  // 待收货的订单 
-  // toReceiveOrderList: [],
+
+  // 已经选中的座位  保存位置
+  selectedPosition: [10, 16, 27],
+  // 暂时被选中的座位
+  tmpSelectedPosition: [3],
 }
 
 const mutations = {
@@ -27,6 +28,14 @@ const mutations = {
   // 设置全部订单的状态 index, status
   setOrderStatus(state, obj) {
     state.allOrderList[obj.index].status = obj.status;
+  },
+  // 添加已经选中的座位
+  setSelectedPosition(state, arr) {
+    state.selectedPosition = state.selectedPosition.concat(arr);
+  },
+  // 添加临时选中的位置
+  addTmpSelectedPosition(state, arr) {
+    state.tmpSelectedPosition = state.tmpSelectedPosition.concat(arr);
   }
 }
 
