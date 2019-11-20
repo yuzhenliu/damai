@@ -19,12 +19,14 @@ Mock.mock("/api/search/hotList", {
   code: 0,
   message: "ok",
   data: {
-    "list|10": [{
-      "id|+1": 0,
-      name: "@cname",
-      avarImg: "@image('200x200',@color)",
-      "tag|1": "['热','爆','','','','','']"
-    }]
+    "list|10": [
+      {
+        "id|+1": 0,
+        name: "@cname",
+        avarImg: "@image('200x200',@color)",
+        "tag|1": "['热','爆','','','','','']"
+      }
+    ]
   }
 });
 
@@ -38,22 +40,24 @@ Mock.mock(RegExp("/api/brand/by_keyword" + ".*"), {
     performanceNum: "@natural(1, 99)",
     fansNum: "@natural(1, 99)",
     backgroundImg: "@image('400x100',@color)",
-    detail: '@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
+    detail:
+      "@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle",
     "maxprice|500-1000": 0,
     "minproce|10-500": 0,
-    "list|5-10": [{
-      "id|+1": 0,
-      title: "@ctitle()",
-      time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city() | @ctitle",
-      tags: "@ctitle(2,3)",
-      flag: "@ctitle(2,3)",
-      "price|10-1000": 0,
-      picUrl: "@image('300x300',@color)"
-    }]
+    "list|5-10": [
+      {
+        "id|+1": 0,
+        title: "@ctitle()",
+        time: "@datetime(yyyy.MM.dd HH:mm)",
+        address: "@city() | @ctitle",
+        tags: "@ctitle(2,3)",
+        flag: "@ctitle(2,3)",
+        "price|10-1000": 0,
+        picUrl: "@image('300x300',@color)"
+      }
+    ]
   }
 });
-
 
 Mock.mock(RegExp("/api/brand/brand_detail" + ".*"), {
   code: 0,
@@ -65,31 +69,36 @@ Mock.mock(RegExp("/api/brand/brand_detail" + ".*"), {
     performanceNum: "@natural(1, 99)",
     fansNum: "@natural(1, 99)",
     backgroundImg: "@image('400x400',@color)",
-    detail: '@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle',
+    detail:
+      "@city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle/ @city() / @datetime(yyyy.MM.dd HH:mm)/ @ctitle",
     "maxprice|500-1000": 0,
     "minproce|10-500": 0,
-    "list|5-10": [{
-      "id|+1": 0,
-      title: "@ctitle()",
-      time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city() | @ctitle",
-      tags: "@ctitle(2,3)",
-      flag: "@ctitle(2,3)",
-      "price|10-1000": 0,
-      picUrl: "@image('300x300',@color)"
-    }],
-    "commentList|5-10": [{
-      "comment_id|+1": 0,
-      user_id: "@natural(10, 99)",
-      userImg: "@image('100x100',@color)",
-      userName: "@cname()",
-      "scoreNum|1-5": 1,
-      commentCon: "@cparagraph",
-      commentDate: "@datetime(MM.dd)",
-      commentNum: "@natural(1, 99)",
-      supportNum: "@natural(1, 99)",
-      "commentImg|1-6": ["@image('300x300',@color)"]
-    }]
+    "list|5-10": [
+      {
+        "id|+1": 0,
+        title: "@ctitle()",
+        time: "@datetime(yyyy.MM.dd HH:mm)",
+        address: "@city() | @ctitle",
+        tags: "@ctitle(2,3)",
+        flag: "@ctitle(2,3)",
+        "price|10-1000": 0,
+        picUrl: "@image('300x300',@color)"
+      }
+    ],
+    "commentList|5-10": [
+      {
+        "comment_id|+1": 0,
+        user_id: "@natural(10, 99)",
+        userImg: "@image('100x100',@color)",
+        userName: "@cname()",
+        "scoreNum|1-5": 1,
+        commentCon: "@cparagraph",
+        commentDate: "@datetime(MM.dd)",
+        commentNum: "@natural(1, 99)",
+        supportNum: "@natural(1, 99)",
+        "commentImg|1-6": ["@image('300x300',@color)"]
+      }
+    ]
   }
 });
 
@@ -99,14 +108,12 @@ Mock.mock("/api/comment/support", {
   data: null
 });
 
-
-
 Mock.mock(RegExp("/api/brand/comment_detail" + ".*"), {
   code: 0,
   message: "ok",
   data: {
     detail: {
-      "comment_id": '@natural(10, 99)',
+      comment_id: "@natural(10, 99)",
       user_id: "@natural(10, 99)",
       userImg: "@image('100x100',@color)",
       userName: "@cname()",
@@ -117,16 +124,47 @@ Mock.mock(RegExp("/api/brand/comment_detail" + ".*"), {
       supportNum: "@natural(1, 99)",
       "commentImg|1-6": ["@image('300x300',@color)"]
     },
-    "commentItem|1-10": [{
-      userAvar: "@image('100x100',@color)",
-      user_id: "@natural(10, 99)",
-      userName: "@cname()",
-      commentCon: "@cparagraph",
-      commentTime: "@datetime(MM.dd)",
-      commentNum: "@natural(1, 99)",
-      supportNum: "@natural(1, 99)",
-      "scoreNum|1-5": 1,
-    }]
+    "commentItem|1-10": [
+      {
+        userAvar: "@image('100x100',@color)",
+        'user_id|+1': 0,
+        'id|+1': 0,
+        userName: "@cname()",
+        commentCon: "@cparagraph",
+        commentTime: "@datetime(MM.dd)",
+        commentNum: "@natural(1, 99)",
+        supportNum: "@natural(1, 99)",
+        "scoreNum|1-5": 1,
+        hasChild:true,
+        "child_commentItem|0-4": [
+          {
+            'id|+1': 10,
+            userAvar: "@image('100x100',@color)",
+            'user_id|+1': 10,
+            userName: "@cname()",
+            commentCon: "@cparagraph",
+            commentTime: "@datetime(MM.dd)",
+            commentNum: "@natural(1, 99)",
+            supportNum: "@natural(1, 99)",
+            isChild:true,
+            hasChild:true,
+            "child_commentItem|0-2": [
+              {
+                'id|+1': 10,
+                userAvar: "@image('100x100',@color)",
+                'user_id|+1': 10,
+                userName: "@cname()",
+                commentCon: "@cparagraph",
+                commentTime: "@datetime(MM.dd)",
+                commentNum: "@natural(1, 99)",
+                supportNum: "@natural(1, 99)",
+                isChild:true
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 });
 
@@ -140,10 +178,12 @@ Mock.mock("/api/home/banner_list", {
   code: 0,
   message: "ok",
   data: {
-    "bannerList|8": [{
-      picUrl: "@image(250x100',@color)",
-      "id|+1": 0
-    }]
+    "bannerList|8": [
+      {
+        picUrl: "@image(250x100',@color)",
+        "id|+1": 0
+      }
+    ]
   }
 });
 
@@ -151,11 +191,13 @@ Mock.mock(RegExp("/api/home/classify" + ".*"), {
   code: 0,
   message: "ok",
   data: {
-    "list|10": [{
-      name: "@ctitle(3,4)",
-      picUrl: "@image(100x100',@color)",
-      "classify_id|+1": 0
-    }]
+    "list|10": [
+      {
+        name: "@ctitle(3,4)",
+        picUrl: "@image(100x100',@color)",
+        "classify_id|+1": 0
+      }
+    ]
   }
 });
 
@@ -163,17 +205,21 @@ Mock.mock("/api/goods/recommend_list", {
   code: 0,
   message: "ok",
   data: {
-    "list|4": [{
-      title: "@ctitle",
-      "id|+1": 0,
-      "list|10": [{
+    "list|4": [
+      {
+        title: "@ctitle",
         "id|+1": 0,
-        imgUrl: "@image(100x100',@color)",
-        name: "@ctitle",
-        "price|10-1000": 0,
-        tag: "@ctitle(3,4)"
-      }]
-    }]
+        "list|10": [
+          {
+            "id|+1": 0,
+            imgUrl: "@image(100x100',@color)",
+            name: "@ctitle",
+            "price|10-1000": 0,
+            tag: "@ctitle(3,4)"
+          }
+        ]
+      }
+    ]
   }
 });
 
@@ -183,17 +229,19 @@ Mock.mock(RegExp("/api/goods/more_list" + ".*"), {
   data: {
     title: "@ctitle",
     subTitle: "@ctitle()",
-    "list|10-20": [{
-      "id|+1": 0,
-      city: "@citys",
-      imgUrl: "@image(250x100',@color)",
-      name: "@ctitle",
-      date: "@datetime(yyyy.MM.dd - MM.dd)",
-      location: "@city()" | "@ctitle",
-      toSeeNum: "@float(60, 100)",
-      "price|10-1000": 0,
-      tag: "@ctitle(3,4)"
-    }]
+    "list|10-20": [
+      {
+        "id|+1": 0,
+        city: "@citys",
+        imgUrl: "@image(250x100',@color)",
+        name: "@ctitle",
+        date: "@datetime(yyyy.MM.dd - MM.dd)",
+        location: "@city()" | "@ctitle",
+        toSeeNum: "@float(60, 100)",
+        "price|10-1000": 0,
+        tag: "@ctitle(3,4)"
+      }
+    ]
   }
 });
 
@@ -202,16 +250,18 @@ Mock.mock(RegExp("/api/goods/goods_list/by_classify_id" + ".*"), {
   code: 0,
   message: "ok",
   data: {
-    "list|10": [{
-      "id|+1": 0,
-      title: "@ctitle()",
-      time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city()" | "@ctitle",
-      tags: "@ctitle()",
-      "price|10-1000": 0,
-      picUrl: "@image('300x300',@color)",
-      flag: "@ctitle(3,4)"
-    }]
+    "list|10": [
+      {
+        "id|+1": 0,
+        title: "@ctitle()",
+        time: "@datetime(yyyy.MM.dd HH:mm)",
+        address: "@city()" | "@ctitle",
+        tags: "@ctitle()",
+        "price|10-1000": 0,
+        picUrl: "@image('300x300',@color)",
+        flag: "@ctitle(3,4)"
+      }
+    ]
   }
 });
 
@@ -231,39 +281,47 @@ Mock.mock(RegExp("/api/goods/goods_detail" + ".*"), {
     location: "@csentence",
     date: "@datetime(yyyy.MM.dd HH:mm)",
     dateDesc: "@csentence",
-    "selectOption|1-3": [{
-      siteName: '@datetime(yyyy.MM.dd HH:mm)',
-      "siteNameOption|2-5": [{
+    "selectOption|1-3": [
+      {
+        siteName: "@datetime(yyyy.MM.dd HH:mm)",
+        "siteNameOption|2-5": [
+          {
+            "id|+1": 0,
+            "price|10-1000": 0,
+            isSale: "@boolean"
+          }
+        ]
+      }
+    ],
+    detail: "@cparagraph() @cparagraph() @cparagraph()",
+    "commentList|5-10": [
+      {
+        "comment_id|+1": 0,
+        user_id: "@natural(10, 99)",
+        userImg: "@image('100x100',@color)",
+        userName: "@cname()",
+        "scoreNum|1-5": 1,
+        commentCon: "@cparagraph",
+        commentDate: "@datetime(MM.dd)",
+        commentNum: "@natural(1, 99)",
+        supportNum: "@natural(1, 99)",
+        "commentImg|1-6": ["@image('300x300',@color)"]
+      }
+    ],
+    request: "@cparagraph() @cparagraph() @cparagraph()",
+    "list|10": [
+      {
         "id|+1": 0,
+        title: "@ctitle()",
+        time: "@datetime(yyyy.MM.dd HH:mm)",
+        address: "@city()" | "@ctitle",
+        tags: "@ctitle()",
         "price|10-1000": 0,
-        "isSale": '@boolean'
-      }]
-    }],
-    detail: '@cparagraph() @cparagraph() @cparagraph()',
-    "commentList|5-10": [{
-      "comment_id|+1": 0,
-      user_id: "@natural(10, 99)",
-      userImg: "@image('100x100',@color)",
-      userName: "@cname()",
-      "scoreNum|1-5": 1,
-      commentCon: "@cparagraph",
-      commentDate: "@datetime(MM.dd)",
-      commentNum: "@natural(1, 99)",
-      supportNum: "@natural(1, 99)",
-      "commentImg|1-6": ["@image('300x300',@color)"]
-    }],
-    request: '@cparagraph() @cparagraph() @cparagraph()',
-    "list|10": [{
-      "id|+1": 0,
-      title: "@ctitle()",
-      time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city()" | "@ctitle",
-      tags: "@ctitle()",
-      "price|10-1000": 0,
-      picUrl: "@image('300x300',@color)",
-      flag: "@ctitle(3,4)"
-    }]
-  },
+        picUrl: "@image('300x300',@color)",
+        flag: "@ctitle(3,4)"
+      }
+    ]
+  }
 });
 
 Mock.mock(RegExp("/api/goods/goods_detail/toSee" + ".*"), {
@@ -278,8 +336,6 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
   data: null
 });
 
-
-
 // Mock.mock(RegExp("/api/user/send_code"+ ".*"), {
 //   code: 0,
 //   message: "ok",
@@ -288,17 +344,11 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
 //   }
 // });
 
-
-
-
 // Mock.mock(RegExp("/api/user/regiester" + ".*"), {
 //   code: 0,
 //   message: "ok",
 //   data: null
 // });
-
-
-
 
 // Mock.mock(RegExp("/api/user/login" + ".*"), {
 //   code: 0,
@@ -306,15 +356,11 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
 //   data: null
 // });
 
-
-
 // Mock.mock(RegExp("/api/user/check_login" + ".*"), {
 //   code: 0,
 //   message: "ok",
 //   data: null
 // });
-
-
 
 // Mock.mock(RegExp("/api/user/logout" + ".*"), {
 //   code: 0,
@@ -322,15 +368,11 @@ Mock.mock(RegExp("/api/goods/order_submit" + ".*"), {
 //   data: null
 // });
 
-
-
 // Mock.mock(RegExp("/api/address/add" + ".*"), {
 //   code: 0,
 //   message: "ok",
 //   data: null
 // });
-
-
 
 Mock.mock(RegExp("/api/address/modify" + ".*"), {
   code: 0,
@@ -366,16 +408,18 @@ Mock.mock(RegExp("/api/order/find_by_user" + ".*"), {
   code: 0,
   message: "ok",
   data: {
-    "list|3-20": [{
-      "id|+1": 0,
-      "status|0-3": 0,
-      title: "@ctitle()",
-      time: "@datetime(yyyy.MM.dd HH:mm)",
-      address: "@city()" | "@ctitle",
-      "price|10-1000": 0,
-      picUrl: "@image('300x300',@color)",
-      flag: "@ctitle(3,4)",
-      "num|1-6": 0
-    }]
+    "list|3-20": [
+      {
+        "id|+1": 0,
+        "status|0-3": 0,
+        title: "@ctitle()",
+        time: "@datetime(yyyy.MM.dd HH:mm)",
+        address: "@city()" | "@ctitle",
+        "price|10-1000": 0,
+        picUrl: "@image('300x300',@color)",
+        flag: "@ctitle(3,4)",
+        "num|1-6": 0
+      }
+    ]
   }
 });

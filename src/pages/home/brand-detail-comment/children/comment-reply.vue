@@ -1,32 +1,38 @@
 <template>
   <div class="comment-reply">
     <div class="list">
-      <div class="reply-item" >
+      <div class="reply-item" v-for="(item,index) in commentList" :key="index">
         <div class="reply-item-top">
           <img :src="item.userAvar" :alt="item.userName" />
           <h4>{{ item.userName }}</h4>
-          <van-icon name="delete" class="delete" v-if="item.userName==userInfo.userName" />
+          <van-icon name="delete" class="delete"  v-if="item.userName==userInfo.userName" />
         </div>
         <div class="reply-item-cont">
           {{ item.commentCon }}
         </div>
         <div class="reply-item-parent" v-if="item.isChild">
-          <p class="PuserName">回复@{{item.PuserName}}</p>
-          <p class="PcommentCon">{{item.PcommentCon}}</p>
+          <p class="PuserName">回复@{{parentOption.PuserName}}</p>
+          <p class="PcommentCon">{{parentOption.PcommentCon}}</p>
         </div>
         <div class="reply-item-handle">
           <span class="time">
             {{ item.commentTime }}
           </span>
           <div class="item-icon">
-            <p @click="replyOtherAction({PcommentCon:item.commentCon,PuserName:item.userName})"><span>回复 </span> <van-icon name="comment-o" /></p>
+            <p @click="replyOtherAction(item.id)"><span>回复 </span> <van-icon name="comment-o" /></p>
             <p @click.stop="supportAction">
               <span>{{ item.supportNum == 0 ? "赞" : item.supportNum }}</span
               ><van-icon name="good-job-o" />
             </p>
           </div>
         </div>
+         <brand-detail-comment-reply v-if='item.hasChild'
+          :commentList='item.child_commentItem' 
+         :parentOption="{'PcommentCon':item.commentCon,'PuserName':item.userName}"
+         :userInfo="userInfo"
+         ></brand-detail-comment-reply>
       </div>
+     
     </div>
 
   </div>
@@ -37,20 +43,23 @@ export default {
   name: "brand-detail-comment-reply",
   data() {
     return {
-      option:{}
+      option:{},
+      obj:{}
     };
   },
   props: {
-    item: {
-      type: Object,
-      
-    },
     userInfo:{
+      type:Object
+    },
+    commentList:{
+      type:Array
+    },
+    parentOption:{
       type:Object
     }
   },
   methods: {
-    supportAction(ev) {
+    supportAction(ev) {  //点赞判断函数
       let target = ev.target.parentNode;
       let numN = target.childNodes[0];
       let addNum = parseInt(numN.innerText);
@@ -67,16 +76,17 @@ export default {
 
       numN.innerText = addNum;
     },
-    replyOtherAction(option){
-      this.$emit('sendReplyOther',option);
-      // console.log(option);
+    replyOtherAction(id){  
+      console.log(this);
+      this.$center.$emit('send', id); //触发祖组件发布评论方法
+      console.log(id);
     }
   },
   created() {
     
   },
   updated() {
-    
+    // console.log(this.parentOption);
   }
 };
 </script>

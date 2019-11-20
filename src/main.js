@@ -7,8 +7,10 @@ import 'lib-flexible/flexible'
 import './mock'
 import './style/common.scss'
 
-
 Vue.config.productionTip = false
+
+Vue.prototype.$center = new Vue();
+
 
 Vue.use(plugin);
 
