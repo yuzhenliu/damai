@@ -1,13 +1,8 @@
 <template>
   <div class="page" id="address">
-    <app-header title="电子钱包" :hasBack="true"></app-header>
+    <app-header title="待评价的演出" :hasBack="true"></app-header>
     <app-scroll class="dd_center">
-      <div class="d-scrollContent">
-        <van-tabs v-model="active">
-          <van-tab title="退款"></van-tab>
-          <van-tab title="退款中"></van-tab>
-        </van-tabs>
-      </div>
+      <div class="d-scrollContent"></div>
     </app-scroll>
   </div>
 </template>

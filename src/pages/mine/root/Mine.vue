@@ -32,16 +32,16 @@
 
               <span>想看的演出</span>
             </div>
-            <div class="tab tab2">
+            <div class="tab tab2" @click="wantperson">
               <span>0</span>
               <span>关注的人</span>
             </div>
-            <div class="tab tab3">
+            <div class="tab tab3" @click="waitwatch">
               <span>0</span>
 
               <span>待评价演出</span>
             </div>
-            <div class="tab tab4">
+            <div class="tab tab4" @click="sale">
               <span>0</span>
               <span>优惠券</span>
             </div>
@@ -98,10 +98,7 @@
       </app-scroll>
     </div>
     <!-- 子页面 -->
-    <transition
-      enter-active-class="slideInRight"
-      leave-active-class="slideOutRight"
-    >
+    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
       <router-view></router-view>
     </transition>
   </div>
@@ -155,6 +152,22 @@ export default {
     },
     peAction() {
       this.$router.push("/mine/watch");
+    },
+    // 想看的演出
+    wantwatch() {
+      this.$router.push("/mine/wantwatch");
+    },
+    //关注的人
+    wantperson() {
+      this.$router.push("/mine/wantperson");
+    },
+    //待评价的演出
+    waitwatch() {
+      this.$router.push("/mine/waitwatch");
+    },
+    //优惠券
+    sale() {
+      this.$router.push("/mine/sale");
     }
   },
   created() {}

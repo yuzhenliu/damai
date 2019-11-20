@@ -81,13 +81,16 @@
         </van-collapse>
       </div>
 
-      <div class="van-buttons" type="primary" size="large" color="red">退出登录</div>
+      <div class="van-buttons" type="primary" size="large" color="red" @click="logoutAction">退出登录</div>
     </app-scroll>
   </div>
 </template>
 
 <script>
 import { Collapse, CollapseItem, Button } from "vant";
+import store from "../../../store";
+import Vue from "vue";
+import mineService from "../../../services/mineService";
 export default {
   data() {
     return {
@@ -98,6 +101,18 @@ export default {
     [Collapse.name]: Collapse,
     [CollapseItem.name]: CollapseItem,
     [Button.name]: Button
+  },
+  methods: {
+    async logoutAction() {
+      // 发送退出请求
+      // let result = await mineService.loginOut();
+      //派发登录状态为false
+      this.$store.dispatch("handleLoginAction", false);
+      // 展示登录界面
+      // Vue.$center.$emit("toggleLogin", true);
+      // 跳转到首页
+      this.$router.replace("/home");
+    }
   }
 };
 </script>

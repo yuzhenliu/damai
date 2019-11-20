@@ -4,8 +4,7 @@
 
     <app-scroll class="dd_center">
       <router-view></router-view>
-
-      <van-address-list v-model="chosenAddressId" :list="list" @add="onAdd" @edit="onEdit" />
+      <van-address-list v-model="chosenAddressId" :list="addressList" @add="onAdd" @edit="onEdit" />
     </app-scroll>
   </div>
 </template>
@@ -14,35 +13,18 @@
 // import mineService, { login } from "../../../services/mineService";
 import Vue from "vue";
 import { AddressList, Toast } from "vant";
-
+import { mapState } from "vuex";
 Vue.use(AddressList).use(Toast);
 export default {
   data() {
     return {
-      chosenAddressId: "1",
-      list: [
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "2",
-          name: "李四",
-          tel: "1310000000",
-          address: "浙江省杭州市拱墅区莫干山路 50 号"
-        }
-      ],
-      disabledList: [
-        {
-          id: "3",
-          name: "王五",
-          tel: "1320000000",
-          address: "浙江省杭州市滨江区江南大道 15 号"
-        }
-      ]
+      chosenAddressId: "1"
     };
+  },
+  computed: {
+    ...mapState({
+      addressList: state => state.address.addressList
+    })
   },
 
   methods: {
@@ -64,10 +46,10 @@ export default {
   z-index: 90;
   background: #fff;
   height: 100%;
-  position: relative;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  // position: relative;
+  // left: 0;
+  // top: 0;
+  // bottom: 0;
   width: 100%;
   .dd_center {
     position: absolute;

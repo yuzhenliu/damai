@@ -6,14 +6,11 @@
       <van-address-edit
         :area-list="areaList"
         show-postal
-        show-delete
-        show-set-default
         show-search-result
         :search-result="searchResult"
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
         @save="onSave"
         @delete="onDelete"
-        @change-detail="onChangeDetail"
       />
     </app-scroll>
   </div>
@@ -36,27 +33,28 @@ export default {
   },
   computed: {
     ...mapState({
-      delteAddress: state => state.address.deleteaddressArr, // 删除地址
-      setAddress: state => state.address.setaddressArr // 保存地址
+      addressList: state => state.address.addressList //地址列表,
     })
   },
 
   methods: {
-    onSave() {},
+    onSave(result) {
+      // Toast("save");
+      //新增
+      // //获取id;
+      let value = this.addressList.length;
+      const detail = `${result.province} ${result.city} ${result.county} ${result.addressDetail}`;
+      let res = {
+        id: value + 1,
+        name: result.name,
+        tel: result.tel,
+        address: detail
+      };
+      this.$store.commit("address/setaddressArr", res);
+      this.$router.back();
+    },
     onDelete() {
       Toast("delete");
-    },
-    onChangeDetail(val) {
-      if (val) {
-        this.searchResult = [
-          {
-            name: "黄龙万科中心",
-            address: "杭州市西湖区"
-          }
-        ];
-      } else {
-        this.searchResult = [];
-      }
     }
   }
 };

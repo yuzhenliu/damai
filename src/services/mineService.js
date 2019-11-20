@@ -97,19 +97,21 @@ export const checkLogin = async () => {
 
 // 登录退出
 export const loginOut = async () => {
-  // 发送请求
-  const {
-    data: result
-  } = await Http.get(api.LOGOUT_API);
-  // 判断请求的结果
-  if (result.code === 0) {
-    // 成功
-    return result.data
+  // // 发送请求
+  // const {
+  //   data: result
+  // } = await Http.get(api.LOGOUT_API);
+  // // 判断请求的结果
+  // if (result.code === 0) {
+  //   // 成功
+  //   return result.data
 
-  } else {
-    // 失败了
-    throw new Error(result.message);
-  }
+  // } else {
+  //   // 失败了
+  //   throw new Error(result.message);
+  // }
+  let result = await Http.get(api.LOGOUT_API);
+  return result.data.code;
 }
 
 // 新增地址
