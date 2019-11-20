@@ -92,8 +92,6 @@ export default {
   created() {
     this.selectedPositionLocation = this.selectedPosition[this.id] || [];
     this.tmpSelectedPositionLocation = this.tmpSelectedPosition[this.id] || [];
-    console.log(this.selectedPositionLocation);
-    console.log(this.tmpSelectedPositionLocation);
   },
 };
 </script>

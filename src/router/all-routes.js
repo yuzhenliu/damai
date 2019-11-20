@@ -24,6 +24,7 @@ export default {
             },
             {
                 path: 'submitOrder',
+                props: true,
                 component: () => import('../pages/all/submitOrder/SubmitOrder'),
             }
             

@@ -29,6 +29,7 @@ export default {
         },
         {
             path: 'indent',
+            props: true,
             component: () => import('../pages/mine/indent/Indent')
         },
         {

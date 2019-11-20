@@ -106,7 +106,12 @@ export default {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup
   },
-  props: {},
+  props: {
+    id: {
+      type: [Number, String],
+      default: 0,
+    }
+  },
   data() {
     return {
       isZHIFUBAO: true,
@@ -199,10 +204,10 @@ export default {
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
           this.$store.commit('all/setSelectedPosition', {
-            id: this.selectedGood.ticket.id,
+            id: this.id,
             arr: this.selectedGood.seat,
           });
-          this.$router.replace('/mine/indent');
+          this.$router.replace(`/mine/indent`);
         })
         .catch(() => {
           // 未付款
@@ -210,10 +215,10 @@ export default {
           goodOrder.orderId = new Date().getTime();
           this.$store.commit('all/setAllOrderList', goodOrder);
           this.$store.commit('all/addTmpSelectedPosition', {
-            id: this.selectedGood.ticket.id,
+            id: this.id,
             arr: this.selectedGood.seat,
           });
-          this.$router.replace('/mine/indent');
+          this.$router.replace(`/mine/indent`);
         });
     },
   },
