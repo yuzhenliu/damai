@@ -49,7 +49,16 @@ const mutations = {
     }else {
       state.tmpSelectedPosition[obj.id] = obj.arr;
     }
-  }
+  },
+  // 删除临时选中的位置 id arr
+  deleteTmpSelectedPosition(state, obj) {
+    if(state.tmpSelectedPosition[obj.id]) { // 如果 key 存在的话
+      state.tmpSelectedPosition[obj.id] = state.tmpSelectedPosition[obj.id].filter((item) => !obj.arr.some((items) => item === items));
+      console.log(state.tmpSelectedPosition[obj.id]);
+    }else {
+      return;
+    }
+  },
 }
 
 const getters = {

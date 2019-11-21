@@ -10,7 +10,7 @@
 
         <!-- 内容滚动 -->
         <app-scroll class="scrollContent">
-            <good-list :orderType="orderType"/>
+            <good-list :orderType="orderType" :id="id"/>
         </app-scroll>
       </div>
     </div>
@@ -27,7 +27,12 @@ export default {
     [Tab.name]: Tab,
     [GoodList.name]: GoodList,
   },
-  props: {},
+  props: {
+    id: {
+      type: [Number, String],
+      default: 0,
+    }
+  },
   data() {
     return {
       activeIndex: 0,

@@ -4,7 +4,9 @@
     <app-scroll class="dd_center">
       <div class="d-scrollContent">
         <van-tabs v-model="active">
-          <van-tab title="演出"></van-tab>
+          <van-tab title="演出">
+            <div class="want-list"></div>
+          </van-tab>
           <van-tab title="合集"></van-tab>
         </van-tabs>
       </div>
@@ -14,10 +16,12 @@
 
 <script>
 import { Tab, Tabs } from "vant";
+import { mapState } from "vuex";
 export default {
   components: {
     [Tabs.name]: Tabs,
-    [Tab.name]: Tab
+    [Tab.name]: Tab,
+    List: state => state.address.addressList //地址列表,
   },
   data() {
     return {

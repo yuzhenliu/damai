@@ -71,7 +71,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    goodId: {
+    id: {
       type: [Number, String],
       default: 0,
     }
@@ -99,7 +99,15 @@ export default {
             status: 1
           });
           this.$store.commit('all/setSelectedPosition', {
-            id: this.goodId,
+            id: this.id,
+            arr: this.seatArr,
+          });
+          this.$store.commit('all/deleteTmpSelectedPosition', {
+            id: this.id,
+            arr: this.seatArr,
+          });
+          console.log({
+            id: this.id,
             arr: this.seatArr,
           });
         })
