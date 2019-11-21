@@ -34,6 +34,10 @@ export default {
     // 滚动一定距离
     scrollBy(x, y) {
       this.scroll.scrollBy(x, y, 1, 'linear');
+    },
+    // 滚动到最大高度哪里
+    scrollToYMax() {
+      this.scroll.scrollTo(0, this.scroll.maxScrollY, 1, 'linear');
     }
   },
   mounted() {

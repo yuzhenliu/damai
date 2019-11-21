@@ -1,5 +1,5 @@
 <template>
-  <div class="search-history">
+  <div class="search-history" v-show="historyList.length">
     <div class="search-history-head">
       <span>搜索历史</span>
       <van-icon name="delete" class="delete" @click="deleteHistory" />
@@ -28,7 +28,8 @@ export default {
   },
   data() {
     return {
-      DhistoryList: this.historyList
+      DhistoryList: this.historyList,
+      // historyShow:true
     };
   },
   components: {
@@ -45,9 +46,8 @@ export default {
           // on confirm
           localStorage.removeItem('searchKey');
           this.$emit('sendhistoryHanle');
-          console.log(this.historyList);
-          this.historyList=this.DhistoryList;
-
+          // console.log(this.historyList);
+          // this.historyList=this.DhistoryList;
         })
         .catch(() => {
           // on cancel

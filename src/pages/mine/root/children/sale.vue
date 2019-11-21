@@ -1,11 +1,12 @@
 <template>
   <div class="page" id="address">
-    <app-header title="电子钱包" :hasBack="true"></app-header>
+    <app-header title="优惠券" :hasBack="true"></app-header>
     <app-scroll class="dd_center">
-      <div class="d-scrollContent">
+      <div class="dd-scrollContent">
         <van-tabs v-model="active">
-          <van-tab title="退款"></van-tab>
-          <van-tab title="退款中"></van-tab>
+          <van-tab title="未使用"></van-tab>
+          <van-tab title="已过期"></van-tab>
+          <van-tab title="已使用"></van-tab>
         </van-tabs>
       </div>
     </app-scroll>
@@ -42,7 +43,7 @@ export default {
   bottom: 0;
   width: 100%;
 }
-.d-scrollContent {
+.dd-scrollContent {
   position: absolute;
   top: 154px;
   left: 0;

@@ -21,6 +21,7 @@
 <script>
 import { AddressEdit, Toast } from "vant";
 import areaList from "../../../../utils/city";
+import { mapState } from "vuex";
 export default {
   components: {
     [AddressEdit.name]: AddressEdit,
@@ -29,29 +30,56 @@ export default {
   data() {
     return {
       areaList,
-      searchResult: []
+      searchResult: [],
+      // 地址初始值
+      defaultValue: {}
     };
+  },
+  computed: {
+    ...mapState({
+      addressList: state => state.address.addressList
+    })
   },
 
   methods: {
-    onSave() {
-      Toast("save");
+    onSave(result) {
+      // Toast("save");
+      //新增
+      //获取id;
+      let value = this.addressList[index];
+      const detail = `${result.province} ${result.city} ${result.county} ${result.addressDetail}`;
+      let res = {
+        id: value.id,
+        name: result.name,
+        tel: result.tel,
+        address: detail
+      };
+      console.log(1);
+      console.log(res);
+      // this.$router.back();
     },
     onDelete() {
       Toast("delete");
-    },
-    onChangeDetail(val) {
-      if (val) {
-        this.searchResult = [
-          {
-            name: "黄龙万科中心",
-            address: "杭州市西湖区"
-          }
-        ];
-      } else {
-        this.searchResult = [];
-      }
     }
+  },
+  created() {
+    // 取得当前的地址
+    let index = this.$route.query.flag;
+    let value = this.addressList[index];
+    console.log(value);
+    // let arr = value.address.split(' ');
+    console.log(arr);
+    this.defaultValue = {
+      id: value.id,
+      name: value.name,
+      province: arr[0],
+      city: arr[1],
+      county: arr[2],
+      addressDetail: arr[3],
+      postalCode: value.code,
+      tel: value.tel,
+      areaCode: value.areaCode
+    };
   }
 };
 </script>

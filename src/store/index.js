@@ -16,12 +16,14 @@ export default new Vuex.Store({
     // 想看的列表
     toSeeList: [],
     // 默认第一个为选中的地址
-    selectAddress: [{
-      id: '1',
-      name: '千寻',
-      tel: '13000000000',
-      address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
-    }],
+    selectAddress: [
+      {
+        id: '1',
+        name: '千寻',
+        tel: '13000000000',
+        address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
+      }
+    ],
     // 实际观演人
     observerArr: [{
         name: '千寻',

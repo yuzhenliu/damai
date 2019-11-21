@@ -1,23 +1,118 @@
 <template>
-  <div class="page" id="find">
-    <h1>发现</h1>
+  <div class="page-wrap">
+    <!-- 首页 -->
+    <div class="page" id="all">
+      <app-header title="发现" hasBack />
+      <app-scroll class="content">
+        <!-- 轮播图的内容 -->
+        <div class="swiperCon">
+          <van-swipe :autoplay="3000" indicator-color="white">
+            <van-swipe-item>
+              <img src="../../../assets/find/qianxun.jpeg" />
+            </van-swipe-item>
+            <van-swipe-item>
+              <img src="../../../assets/find/7.jpg" />
+            </van-swipe-item>
+            <van-swipe-item>
+              <img src="../../../assets/find/9.jpg" />
+            </van-swipe-item>
+            <van-swipe-item>
+              <img src="../../../assets/find/xiamu.jpeg" />
+            </van-swipe-item>
+          </van-swipe>
+        </div>
+        <div class="list" v-for="(item, index) in videoArr" :key="index">
+          <video-list :title="item.title" :btnInfo="item.btnInfo"/>
+        </div>
+      </app-scroll>
+    </div>
+     <!-- 子页面 -->
+    <transition
+      enter-active-class="slideInRight"
+      leave-active-class="slideOutRight"
+    >
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import store from "../../../store";
+import { Swipe, SwipeItem } from "vant";
+import VideoList from './children/Video-List'
 export default {
-  beforeRouteEnter(to, from, next) {
-    // 没有登录，进去登录页面
-    if (!store.state.isLogin) {
-      Vue.$router.push("/login");
-      next(false);
-    } else {
-      next();
-    }
-  }
+  name: "find",
+  components: {
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem,
+    [VideoList.name]:VideoList
+  },
+  props: {},
+  data() {
+    return {
+      videoArr: [
+        {
+          title: '先睹为快',
+          btnInfo: '看视频'
+        },
+        {
+          title: '冠岩热评',
+          btnInfo: '看评论'
+        },
+        {
+          title: '变身怪医',
+          btnInfo: '看医生'
+        }
+      ]
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {}
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+$mainColor: #ff1268;
+$padding: 40px;
+
+#all {
+  .content {
+    // 轮播图
+    .swiperCon {
+      width: 100%;
+      height: 700px;
+      padding: $padding;
+      box-sizing: border-box;
+
+      .van-swipe {
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+
+        .van-swipe-item {
+          width: 100%;
+          height: 100%;
+          border-radius: 30px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+          }
+        }
+      }
+    }
+
+    .list {
+      margin-top: 30px;
+    }
+  }
+}
+</style>
+<style>
+.van-swipe__indicator {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+}
+</style>

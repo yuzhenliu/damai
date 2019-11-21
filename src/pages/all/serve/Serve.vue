@@ -59,7 +59,7 @@ export default {
     // input 抬起事件
     async keyUpAction() {
       this.msgRight(this.$refs.ipt.value);
-      this.$refs.IScroll.scrollBy(0, -100);
+      this.$refs.IScroll.scrollToYMax();
       let self = this;
       axios
         .get(
@@ -68,7 +68,7 @@ export default {
         )
         .then(function(response) {
           self.msgLeft(response.data.text);
-          self.$refs.IScroll.scrollBy(0, -100);
+          self.$refs.IScroll.scrollToYMax();
         })
         .catch(function(error) {
           console.log("请求图灵机器人出错:" + error);

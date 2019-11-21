@@ -9,8 +9,13 @@
     </div>
 
     <div class="list">
-     <app-comment-item v-for="(item, index) in commentList"
-      :key="index" :item='item'></app-comment-item>
+      <div v-show="!index"><app-comment-item v-for="(item, index) in commentList"
+      :key="index" :item='item' ></app-comment-item></div>
+
+      <div class="enty" v-show="index">
+        <span>哎呀！只有这么多啦（-.-）</span>
+      </div>
+      
     </div>
   </div>
 </template>
@@ -30,13 +35,15 @@ export default {
   },
   data() {
     return {
-      value: Number
+      index: 0,
+      list:[]
     };
   },
   methods: {
     toggleAction(ev) {
-      var target = ev.target;
+      let target = ev.target;
       let index = parseInt(target.getAttribute("data-index"));
+      this.index=index;
       this.$refs.block.style.left = target.clientWidth * index + "px";
       target.parentNode.childNodes.forEach(element => {
         element.classList.remove("active");
@@ -85,5 +92,14 @@ export default {
   }
 
 
+}
+.enty{
+  width:100%;
+  // height:200px;
+  padding:100px 40px;
+  box-sizing: border-box;
+  font-size: 40px;
+  color:#aaa;
+  text-align: center;
 }
 </style>

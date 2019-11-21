@@ -154,6 +154,7 @@ export default {
   },
   mounted() {
      let _this=this;
+     console.log(_this.$refs.list.offsetTop);
     this.$refs.scroll.scroll.on("scroll", function(pos) {
       if(Math.abs(pos.y)>_this.$refs.list.offsetTop){
         _this.classN='show';

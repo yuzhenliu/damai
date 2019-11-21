@@ -66,21 +66,21 @@ export default {
 
     },
     barDrag(ev) {
-      var _this = this;
-      var $index_bar = this.$refs.bar_index;
-      var $barIndexH = $index_bar[0].clientHeight;
+      let _this = this;
+      let $index_bar = this.$refs.bar_index;
+      let $barIndexH = $index_bar[0].clientHeight;
 
-      var touch = ev.changedTouches[0];
+      let touch = ev.changedTouches[0];
 
-      var beginIndex = touch.target.getAttribute("data-index"); //获取起始的index
-      var beginY = touch.clientY;   //其实y的位置
+      let beginIndex = touch.target.getAttribute("data-index"); //获取起始的index
+      let beginY = touch.clientY;   //其实y的位置
 
       this.$emit("indexBarHandel", beginIndex);
 
       function moveEvent(ev) {
-        var touch = ev.changedTouches[0];
+        let touch = ev.changedTouches[0];
 
-        var nowIndex = Math.round((touch.clientY - beginY) / $barIndexH) +parseInt(beginIndex);  //计算手指拖动到哪个位置
+        let nowIndex = Math.round((touch.clientY - beginY) / $barIndexH) +parseInt(beginIndex);  //计算手指拖动到哪个位置
 
         _this.indexBarLen= $index_bar.length;
         

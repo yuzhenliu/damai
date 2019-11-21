@@ -4,9 +4,9 @@
       <app-header title="城市选择" :hasBack="hasBack"></app-header>
 
       <app-scroll class="content" ref="scroll">
-        <div class="currentCity">
+        <div class="currentCity" @click="citylistAction">
           <span>当前定位城市</span>
-          <p>深圳</p>
+          <p class="index-cell-item" :data-city="currentCity">{{currentCity}}</p>
         </div>
 
         <div class="city-list" @click="citylistAction">
@@ -40,7 +40,8 @@ export default {
       indexList: [],
       areas: [],
       scrollArr: [],
-      index: -1
+      index: -1,
+      currentCity:'定位中..'
     };
   },
   methods: {
@@ -75,36 +76,19 @@ export default {
     this.initData();
   },
   mounted() {
-    // 获得当前的位置
-    
-      let watchID = navigator.geolocation.getCurrentPosition(
-      function(position){
-        console.log(position);
-        // 时间戳
-        console.log(position.timestamp);
-        // 经度
-        console.log(position.coords.longitude);
-        // 纬度
-        console.log(position.coords.latitude);
-        // 前进方向，正北为0
-        console.log(position.coords.heading);
-        // 速度   m/s
-        console.log(position.coords.speed);
-        // 精确度
-        console.log(position.coords.accuracy);
-        // 海拔  m
-        console.log(position.coords.altitude);
-        // 海拔精确度
-        console.log(position.coords.altitudeAccuracy);
-      },
-      function(error){
-        console.log(error);
+    //获取当前城市
+    let geolocation = new BMap.Geolocation();
+    let _this=this;
+    geolocation.getCurrentPosition(function(r) {
+      if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+        let lat = r.address.lat; //当前经度
+        let lng = r.address.lng; //当前纬度
+        let province = r.address.province; //返回当前省份
+        let city = r.address.city; //返回当前城市
+        city=city.substr(0,city.length-1);
+        _this.currentCity=city;
       }
-    );
-    // 监听位置的变化
-    // navigator.geolocation.watchPosition  //使用属性参数和获得当前的位置的一样
-    // 清除监听
-    navigator.geolocation.clearWatch(watchID);
+    });
   },
   watch: {
     index(newVal) {
@@ -123,7 +107,6 @@ export default {
   height: 100%;
   background: #f2f3f4;
 }
-
 
 .currentCity {
   span {
@@ -166,6 +149,4 @@ export default {
     }
   }
 }
-
-
 </style>

@@ -41,7 +41,7 @@
               <input type="checkbox" class="check" ref="check" />
             </div>
 
-            <div v-if="selectAddress" class="postAddr">
+            <div v-if="selectAddress.length!= 0" class="postAddr">
               <!-- 有配送地址 -->
               <p class="tit">配送方式</p>
               <p class="way">快递</p>
@@ -56,7 +56,7 @@
               <!-- 无配送地址 -->
               <p class="tit">配送方式</p>
               <p class="way">快递</p>
-              <van-cell title="新增收货地址" is-link />
+              <van-cell title="新增收货地址" is-link @click="addAddress"/>
             </div>
 
             <!-- 联系人 -->
@@ -221,6 +221,11 @@ export default {
           this.$router.replace(`/mine/indent`);
         });
     },
+    // 新增收货地址
+    addAddress() {
+      this.$router.push(`/mine/address/addaddress`);
+    },
+    // 设置收货地址
   },
 };
 </script>
@@ -364,8 +369,14 @@ $padding: 40px;
         color: #333;
 
         .name {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
         .idCard {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
         .check {
           border: 1px solid #ccc;
@@ -533,7 +544,6 @@ $padding: 40px;
 <style lang="scss">
 .van-dialog {
   width: 80%;
-  height: 18%;
 }
 
 .van-dialog__header {
@@ -541,15 +551,30 @@ $padding: 40px;
   line-height: 60px;
   font-weight: bold;
   color: #333;
+  width: 100%;
+  height: 100px;
 }
 .van-dialog__content {
-  margin-top: 40px;
+  margin-top: 10px;
+  width: 100%;
   .van-dialog__message {
-  line-height: 60px;
+    line-height: 60px;
   }
+}
 
-  .van-hairline--top {
-    font-size: 60px;
+.van-button--large {
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  margin-top: 20px;
+
+  .van-button {
+    height: 100px;
+    line-height: 100px;
+
+    .van-button__text {
+      font-size: 60px;
+    }
   }
 }
 </style>

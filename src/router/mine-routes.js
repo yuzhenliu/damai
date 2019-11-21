@@ -14,6 +14,20 @@ export default {
                 },
             ]
 
+        }, {
+            path: 'wantwatch',
+            component: () => import('../pages/mine/root/children/wantwatch')
+        },
+        {
+            path: 'sale',
+            component: () => import('../pages/mine/root/children/sale')
+        }, {
+            path: 'wantperson',
+            component: () => import('../pages/mine/root/children/wantperson')
+        },
+        {
+            path: 'waitwatch',
+            component: () => import('../pages/mine/root/children/aitwatch')
         },
         {
             path: 'service',

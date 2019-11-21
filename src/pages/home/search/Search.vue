@@ -48,8 +48,11 @@ export default {
     },
     historyHanle() {
       var keylist = JSON.parse(localStorage.getItem("searchKey"));
+      console.log(1);
       if (keylist) {
         this.searchKeyList = keylist;
+      }else{
+        this.searchKeyList=[];
       }
     }
   },
