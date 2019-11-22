@@ -142,6 +142,11 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 90;
+  input{
+    border:none;
+    height: 80px;
+    line-height: 80px;
+  }
 }
 .d-logoimgs {
   width: 100%;
@@ -187,7 +192,7 @@ export default {
     }
   }
   .contrl-right {
-    width: 200px;
+    width: 260px;
     height: 80px;
     line-height: 80px;
   }

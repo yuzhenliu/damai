@@ -131,7 +131,8 @@ export default {
       // console.log(commentList);
     },
     concernAction() {
-      this.add({
+     if(localStorage.getItem('isLogin')=='true'){
+        this.add({
         avarImg: this.avarImg,
         name: this.name,
         performanceNum: this.performanceNum,
@@ -144,6 +145,11 @@ export default {
       });
       sessionStorage.setItem("isconcern", "true");
       this.isconcern = "true";
+     }else{
+       this.$router.push({
+         name:'login'
+       });
+     }
     }
   },
   created() {

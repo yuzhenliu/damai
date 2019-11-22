@@ -1,7 +1,7 @@
 <template>
   <div class="recommend-list">
     <div v-for="item in list" :key="item.id" class="parent-list">
-      <h4>{{ item.title }} <a href="#" class="more">more</a></h4>
+      <h4>{{ item.title }} <router-link to="./all" class="more">more</router-link></h4>
 
       <app-scroll class="list" :scrollX="scrollX" :scrollY="scrollY">
         <div

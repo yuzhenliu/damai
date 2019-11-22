@@ -58,22 +58,28 @@ export default {
   },
   methods: {
     supportAction(ev) {
-      let target = ev.target.parentNode;
-      if (target.id == "support") {
-        let numN = target.childNodes[0];
-        let addNum = parseInt(numN.innerText);
-        if (!target.classList.contains("clicked")) {
-          addNum += 1;
-          if (isNaN(addNum)) {
-            addNum = 1;
+      if (localStorage.getItem("isLogin") == "true") {
+        let target = ev.target.parentNode;
+        if (target.id == "support") {
+          let numN = target.childNodes[0];
+          let addNum = parseInt(numN.innerText);
+          if (!target.classList.contains("clicked")) {
+            addNum += 1;
+            if (isNaN(addNum)) {
+              addNum = 1;
+            }
+            target.classList.add("clicked");
+          } else {
+            target.classList.remove("clicked");
+            addNum -= 1;
           }
-          target.classList.add("clicked");
-        } else {
-          target.classList.remove("clicked");
-          addNum -= 1;
-        }
 
-        numN.innerText = addNum;
+          numN.innerText = addNum;
+        }
+      } else {
+        this.$router.push({
+          name: "login"
+        });
       }
     },
     toCommentDetailAction(id) {

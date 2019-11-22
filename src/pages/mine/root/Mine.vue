@@ -105,7 +105,7 @@
 </template>
 
 <script>
-// import Vue from "vue";
+import Vue from "vue";
 // import { Icon, Button } from "vant";
 import mineService from "../../../services/mineService";
 import store from "../../../store";
@@ -113,8 +113,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     // 没有登录，进去登录页面
     if (!store.state.isLogin) {
-      Vue.$router.push("/login");
-      next(false);
+      next('/login');
     } else {
       next();
     }

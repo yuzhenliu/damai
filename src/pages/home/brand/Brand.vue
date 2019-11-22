@@ -73,7 +73,8 @@ export default {
       add: "concernListAction"
     }),
     concernAction(ev) {
-       //判断是否存在disable class
+     if(localStorage.getItem('isLogin')=='true'){
+         //判断是否存在disable class
      if(ev.target.classList.contains('disable')){ 
        return;  
      }
@@ -93,6 +94,11 @@ export default {
       ev.target.classList.add("disable");
       ev.target.innerText='已关注';
       sessionStorage.setItem('isconcern',true);
+     }else{
+      this.$router.push({
+         name:'login'
+       });
+     }
     },
     async initData() {
       const {
