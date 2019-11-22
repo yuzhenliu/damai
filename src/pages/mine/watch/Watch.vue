@@ -4,7 +4,7 @@
       <app-header title="常用观演人" hasBack></app-header>
       <div class="content">
         <app-scroll class="watchScroll">
-          <observe-item v-for="item in observerArr" :key="observerArr.idCard" :observeInfo="item"/>
+          <observe-item v-for="item in observerArr" :key="observerArr.idCard" :observeInfo="item" />
         </app-scroll>
         <!-- 新增 -->
         <div class="addObserve" @click="toAddObserve">
@@ -16,23 +16,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Observe from './children/Observe'
+import { mapState } from "vuex";
+import Observe from "./children/Observe";
 export default {
-  name: 'watch',
+  name: "watch",
   components: {
     [Observe.name]: Observe
   },
   computed: {
     ...mapState({
-      observerArr: state => state.observerArr,
-      
+      observerArr: state => state.observerArr
     })
   },
   methods: {
     // 添加观演人
     toAddObserve() {
-      this.$router.push('/mine/addWatch');
+      this.$router.push("/mine/addWatch");
     }
   }
 };
@@ -64,20 +63,20 @@ $padding: 40px;
       box-sizing: border-box;
       padding: 20px;
       background-color: #fff;
-    
+
       span {
-      display: block;
-      margin: 0 auto;
-      width: 90%;
-      height: 100%;
-      background-image: linear-gradient(to right, #ff1199, $mainColor);
-      color: #fff;
-      text-align: center;
-      font-size: 50px;
-      line-height: 122px;
-      border-radius: 20px;
+        display: block;
+        margin: 0 auto;
+        width: 90%;
+        height: 100%;
+        background-image: linear-gradient(to right, #ff1199, $mainColor);
+        color: #fff;
+        text-align: center;
+        font-size: 50px;
+        line-height: 122px;
+        border-radius: 20px;
+      }
     }
-  }
   }
 }
 </style>

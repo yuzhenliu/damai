@@ -14,13 +14,30 @@ server.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By", ' 3.2.1');
-    res.header("Content-Type", "application/json;charset=utf-8");
+    // res.header("Content-Type", "application/json;charset=utf-8");
     next();
+});
+// 响应首页
+server.get("/", (req, res) => {
+    res.sendFile(__dirname + "/www/index.html");
+});
+server.use('/api/user', require('./routers/userRouter'));
+
+// 响应静态资源
+server.use("/js", express.static("./www/js"));
+server.use("/css", express.static("./www/css"));
+server.use("/img", express.static("./www/img"));
+server.get("/favicon.ico", (req, res) => {
+    res.sendFile(__dirname + "/www/favicon.ico");
+});
+
+server.use((req, res) => {
+    res.sendFile(__dirname + "/www/index.html");
 });
 
 
 
-server.use('/api/user', require('./routers/userRouter'));
+
 // 连接数据库
 mongoose.connect('mongodb://localhost:27017/db', {
     useNewUrlParser: true

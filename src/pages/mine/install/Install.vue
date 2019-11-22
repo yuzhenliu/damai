@@ -111,6 +111,7 @@ export default {
       // 展示登录界面
       // Vue.$center.$emit("toggleLogin", true);
       // 跳转到首页
+      localStorage.removeItem("userInfo");
       this.$router.replace("/home");
     }
   }

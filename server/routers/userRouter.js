@@ -16,6 +16,7 @@ router.get('/send_code', (req, response) => {
     //获取电话号码
 
     // new Thread().sleep(10000);
+    console.log(111);
 
     const {
         tel

@@ -73,6 +73,7 @@ export default {
   watch: {},
   methods: {
     goRegAction() {
+      localStorage.setItem("userInfo", this.tel);
       this.$router.push("/regiester");
     },
     changeAction() {

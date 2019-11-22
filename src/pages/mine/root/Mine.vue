@@ -10,9 +10,9 @@
               <div class="install" @click="installAction">
                 <van-icon name="setting-o" />
               </div>
-              <div class="massage" @click="massageAction">
+              <!-- <div class="massage" @click="massageAction">
                 <van-icon name="more-o" />
-              </div>
+              </div>-->
             </div>
 
             <!-- 头像下边部分 -->
@@ -28,12 +28,12 @@
           <!-- 想看的演出 -->
           <div class="d-tab">
             <div class="tab tab1" @click="wantwatch">
-              <span>0</span>
+              <span>{{wantList.length}}</span>
 
               <span>想看的演出</span>
             </div>
             <div class="tab tab2" @click="wantperson">
-              <span>0</span>
+              <span>{{concernList.length}}</span>
               <span>关注的人</span>
             </div>
             <div class="tab tab3" @click="waitwatch">
@@ -88,12 +88,12 @@
             </div>
           </div>
           <!-- 公益三小时 -->
-          <div class="d-time border-bottom" @click="timeAction">
+          <!-- <div class="d-time border-bottom" @click="timeAction">
             <div>公益三小时</div>
             <div class="indentIcont">
               <van-icon name="arrow" />
             </div>
-          </div>
+          </div>-->
         </div>
       </app-scroll>
     </div>
@@ -109,6 +109,7 @@
 // import { Icon, Button } from "vant";
 import mineService from "../../../services/mineService";
 import store from "../../../store";
+import { mapState } from "vuex";
 export default {
   beforeRouteEnter(to, from, next) {
     // 没有登录，进去登录页面
@@ -125,7 +126,12 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      wantList: state => state.toSeeList,
+      concernList: state => state.concernList
+    })
+  },
   watch: {},
   methods: {
     wantwatch() {},
@@ -142,7 +148,7 @@ export default {
       this.$router.push("/mine/address");
     },
     seAction() {
-      this.$router.push("/mine/service");
+      this.$router.push("/all/detail/serve/serve");
     },
     waAction() {
       this.$router.push("/mine/purse");
