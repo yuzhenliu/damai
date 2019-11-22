@@ -7,19 +7,15 @@
 
       <app-scroll class="content">
         <div class="cont">
-          <app-comment-item :item="detail" @commentSelf='commentSelf'></app-comment-item>
+          <app-comment-item
+            :item="detail"
+            @commentSelf="commentSelf"
+          ></app-comment-item>
         </div>
 
         <div class="reply-cont">
           <h4>全部回复（{{ commentList.length + myReplyList.length }}）</h4>
           <div class="list">
-            <brand-detail-comment-reply
-              v-for="(item, index) in myReplyList"
-              :key="index + 'c'"
-              :item="item"
-              :userInfo="userInfo"
-            ></brand-detail-comment-reply>
-
             <brand-detail-comment-reply
               v-for="(item, index) in commentList"
               :key="index"
@@ -67,9 +63,9 @@ export default {
       replyVal: "",
       myReplyList: [],
       poption: {},
-      keepuserN:'',
-      createdTime:"",
-      commitTime:''
+      keepuserN: "",
+      createdTime: "",
+      commitTime: ""
     };
   },
   methods: {
@@ -82,10 +78,10 @@ export default {
       this.detail.commentNum = commentItem.length + this.myReplyList.length;
       this.commentList = commentItem;
       //保存回复用户初始名
-      this.keepuserN=this.detail.userName;
+      this.keepuserN = this.detail.userName;
     },
     postReplyAction() {
-      this.commitTime=Date.now();
+      this.commitTime = Date.now();
       // 创建新的新的评论信息对象
       let newReply = {
         userAvar: this.userInfo.userAvar,
@@ -94,76 +90,80 @@ export default {
         commentTime: this.theData,
         supportNum: 0
       };
-      if (JSON.stringify(this.poption) !== "{}") {   //判断poption是否为空，不为空就是回复别人的评论，需要添加相应的属性
+      if (JSON.stringify(this.poption) !== "{}") {
+        //判断poption是否为空，不为空就是回复别人的评论，需要添加相应的属性
         newReply.PuserName = this.poption.PuserName;
         newReply.PcommentCon = this.poption.PcommentCon;
         newReply.isChild = true;
       }
-      this.myReplyList.push(newReply);   //push到新评论列表
+      this.commentList.unshift(newReply); //push到新评论列表
       // 清空缓存数据
-      this.poption = {};   
+      this.poption = {};
       this.replyVal = "";
     },
     replyOther(option) {
-      Object.assign(this.poption,option);  //新增属性添加setter getter
+      Object.assign(this.poption, option); //新增属性添加setter getter
       this.$refs.inp.focus();
       this.userN = option.PuserName;
       // console.log(this.poption);
     },
-    commentSelf(selfName){
+    commentSelf(selfName) {
       this.userN = selfName;
       this.poption = {};
     }
   },
   computed: {
     title() {
-      return this.detail.userName + "的评价";   // 标题
+      return this.detail.userName + "的评价"; // 标题
     },
-    userN: {     //  评论对象的用户名需要get和set 进行获取和修改
+    userN: {
+      //  评论对象的用户名需要get和set 进行获取和修改
       get: function() {
         return this.keepuserN;
       },
       set: function(newValue) {
-        this.keepuserN=newValue;
+        this.keepuserN = newValue;
       }
     },
-    theData(){
+    theData() {
       // 判断评论发布时间
 
-      let time=this.commitTime-this.createdTime;
-    // let time=1000*60*60*24*11;   //测试表达式
-    //1分=1000毫秒*60
-    //1时=1000毫秒*60*60
-    //1天=1000毫秒*60*60*24
+      let time = this.commitTime - this.createdTime;
+      // let time=1000*60*60*24*11;   //测试表达式
+      //1分=1000毫秒*60
+      //1时=1000毫秒*60*60
+      //1天=1000毫秒*60*60*24
       // console.log(time);
-      if(time<1000*60){
-        return '刚刚';
-      }else if(time>1000*60&&time<1000*60*60){
-        return Math.floor(time/(1000*60))+'分钟前';
-      }else if(time>1000*60*60&&time<1000*60*60*24){
-         return Math.floor(time/(1000*60*60))+'小时前';
-      }else if(time>1000*60*60*24&& time<1000*60*60*24*10){
-         return Math.floor(time/(1000*60*60*24))+'天前';
-      }else if( time>1000*60*60*24*10){
-        let d=new Date();
-        return d.getMonth(this.commitTime)+'.'+d.getDate(this.commitTime);
+      if (time < 1000 * 60) {
+        return "刚刚";
+      } else if (time > 1000 * 60 && time < 1000 * 60 * 60) {
+        return Math.floor(time / (1000 * 60)) + "分钟前";
+      } else if (time > 1000 * 60 * 60 && time < 1000 * 60 * 60 * 24) {
+        return Math.floor(time / (1000 * 60 * 60)) + "小时前";
+      } else if (
+        time > 1000 * 60 * 60 * 24 &&
+        time < 1000 * 60 * 60 * 24 * 10
+      ) {
+        return Math.floor(time / (1000 * 60 * 60 * 24)) + "天前";
+      } else if (time > 1000 * 60 * 60 * 24 * 10) {
+        let d = new Date();
+        return d.getMonth(this.commitTime) + "." + d.getDate(this.commitTime);
       }
     }
-    
   },
   created() {
     this.id = this.$route.params.id;
     this.initData();
-    let userInfo = JSON.parse(localStorage.getItem("userinfo"));
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
     this.userInfo = userInfo;
     //设置默认头像
+    console.log(userInfo.userAvar);
     if (!userInfo.userAvar) {
       userInfo.userAvar =
         "https://perico.damai.cn/userheadphotos/450483/90096787_150_150.jpg?x-oss-process=image/resize,w_100,h_100,/quality,q_50/format,webp";
     }
 
-
-    this.createdTime=Date.now();
+    this.createdTime = Date.now();
   }
 };
 </script>

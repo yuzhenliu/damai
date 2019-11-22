@@ -124,7 +124,7 @@ Mock.mock(RegExp("/api/brand/comment_detail" + ".*"), {
       supportNum: "@natural(1, 99)",
       "commentImg|1-6": ["@image('300x300',@color)"]
     },
-    "commentItem|1-10": [
+    "commentItem|1-20": [
       {
         userAvar: "@image('100x100',@color)",
         'user_id|+1': 0,
@@ -134,35 +134,7 @@ Mock.mock(RegExp("/api/brand/comment_detail" + ".*"), {
         commentTime: "@datetime(MM.dd)",
         commentNum: "@natural(1, 99)",
         supportNum: "@natural(1, 99)",
-        "scoreNum|1-5": 1,
-        hasChild:true,
-        "child_commentItem|0-4": [
-          {
-            'id|+1': 10,
-            userAvar: "@image('100x100',@color)",
-            'user_id|+1': 10,
-            userName: "@cname()",
-            commentCon: "@cparagraph",
-            commentTime: "@datetime(MM.dd)",
-            commentNum: "@natural(1, 99)",
-            supportNum: "@natural(1, 99)",
-            isChild:true,
-            hasChild:true,
-            "child_commentItem|0-2": [
-              {
-                'id|+1': 10,
-                userAvar: "@image('100x100',@color)",
-                'user_id|+1': 10,
-                userName: "@cname()",
-                commentCon: "@cparagraph",
-                commentTime: "@datetime(MM.dd)",
-                commentNum: "@natural(1, 99)",
-                supportNum: "@natural(1, 99)",
-                isChild:true
-              }
-            ]
-          }
-        ]
+        "scoreNum|1-5": 1
       }
     ]
   }
